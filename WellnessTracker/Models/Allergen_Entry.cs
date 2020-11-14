@@ -24,16 +24,12 @@ namespace WellnessTracker.Models
         [Required]
         public int EntryID { get; set; }
 
-        [ForeignKey(nameof(EntryID))]
-        [InverseProperty(nameof(Models.Entry.AllergenEntry))]
-        public virtual ICollection<Entry> Entries { get; set; }
-
         [ForeignKey(nameof(AllergenID))]
         [InverseProperty(nameof(Models.Allergen.AllergenEntries))]
         public virtual Allergen Allergen { get; set; }
 
         [ForeignKey(nameof(EntryID))]
-        [InverseProperty(nameof(Models.Entry.AllergenEntries))]
+        [InverseProperty(nameof(Models.Entry.EntryAllergens))]
         public virtual Entry Entry { get; set; }
 
 

@@ -40,6 +40,82 @@ namespace WellnessTracker.Models
 
             });
 
+            ///////////////////////
+            // Status
+            ///////////////////////
+            modelBuilder.Entity<Status>(entity => {
+
+                entity.Property(e => e.Name)
+                .HasCharSet("utf8mb4")
+                .HasCollation("utf8mb4_general_ci");
+
+            });
+
+            ///////////////////////
+            // Category
+            ///////////////////////
+            modelBuilder.Entity<Category>(entity => {
+
+                entity.Property(e => e.Name)
+                .HasCharSet("utf8mb4")
+                .HasCollation("utf8mb4_general_ci");
+
+            });
+
+            ///////////////////////
+            // ApplicationUser
+            ///////////////////////
+            modelBuilder.Entity<ApplicationUser>(entity => {
+
+                entity.Property(e => e.Username)
+                .HasCharSet("utf8mb4")
+                .HasCollation("utf8mb4_general_ci");
+
+                entity.Property(e => e.Password)
+                .HasCharSet("utf8mb4")
+                .HasCollation("utf8mb4_general_ci");
+
+                entity.Property(e => e.Username)
+                .HasCharSet("utf8mb4")
+                .HasCollation("utf8mb4_general_ci");
+            });
+
+            ///////////////////////
+            // Entry
+            ///////////////////////
+            modelBuilder.Entity<Entry>(entity => {
+
+                string categoryKeyName = "FK_" + nameof(Category) + "_" + nameof(Models.Entry);
+                string userKeyName = "FK_" + nameof(ApplicationUser) + "_" + nameof(Models.Entry);
+                string statusKeyName = "FK_" + nameof(Status) + "_" + nameof(Models.Entry);
+
+                entity.Property(e => e.Notes)
+                .HasCharSet("utf8mb4")
+                .HasCollation("utf8mb4_general_ci");
+
+                entity.HasIndex(e => e.CategoryID).HasName(categoryKeyName);
+                entity.HasOne(thisEntity => thisEntity.EntryCategory)
+                .WithMany(parent => parent.Entries)
+                .HasForeignKey(thisEntity => thisEntity.CategoryID)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName(categoryKeyName);
+
+                entity.HasIndex(e => e.UserID).HasName(userKeyName);
+                entity.HasOne(thisEntity => thisEntity.ApplicationUser)
+                .WithMany(parent => parent.Entries)
+                .HasForeignKey(thisEntity => thisEntity.UserID)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName(userKeyName);
+
+                entity.HasIndex(e => e.StatusID).HasName(statusKeyName);
+                entity.HasOne(thisEntity => thisEntity.EntryStatus)
+                .WithMany(parent => parent.Entries)
+                .HasForeignKey(thisEntity => thisEntity.StatusID)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName(statusKeyName);
+
+            });
+
 
             ///////////////////////
             // Allergen_Entry
