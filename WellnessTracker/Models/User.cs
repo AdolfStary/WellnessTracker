@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -31,9 +31,9 @@ namespace WellnessTracker.Models
         [Required]
         public DateTime Registered { get; set; }
 
-
+        [InverseProperty(nameof(Models.Entry.ApplicationUser))]
+        public virtual ICollection<Entry> Entries { get; set; }
 
 
     }
 }
-*/

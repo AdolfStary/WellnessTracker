@@ -61,8 +61,8 @@ namespace WellnessTracker.Models
         public virtual Category EntryCategory { get; set; }
 
         [ForeignKey(nameof(UserID))]
-        [InverseProperty(nameof(Models.ApplicationUser.Entries))]
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        [InverseProperty(nameof(Models.User.Entries))]
+        public virtual User ApplicationUser { get; set; }
 
 
         [InverseProperty(nameof(Models.Allergen_Entry.Entry))]

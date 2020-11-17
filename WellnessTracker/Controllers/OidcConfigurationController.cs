@@ -16,10 +16,10 @@ namespace WellnessTracker.Controllers
 
         public IClientRequestParametersProvider ClientRequestParametersProvider { get; }
 
-        [HttpGet("_configuration/{clientId}")]
+        [HttpGet("_configuration/localhost")]
         public IActionResult GetClientRequestParameters([FromRoute] string clientId)
         {
-            var parameters = ClientRequestParametersProvider.GetClientParameters(HttpContext, clientId);
+            var parameters = ClientRequestParametersProvider.GetClientParameters(HttpContext, "localhost");
             return Ok(parameters);
         }
     }

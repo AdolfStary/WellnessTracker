@@ -8,21 +8,19 @@ using System.Threading.Tasks;
 
 namespace WellnessTracker.Models
 {
-    [Table("user")]
+    //[Table("user")]
     public class ApplicationUser : IdentityUser
     {
-        [Key]
+       /* [Key]
         [Column(TypeName = "int(10)")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public override string Id { get; set; }
 
         [Column(TypeName = "varchar(30)")]
-        [Required]
-        public string Username { get; set; }
+        public override string UserName { get; set; }
 
-        [Column(TypeName = "varchar(255)")]
-        [Required]
-        public string Password { get; set; }
+        [Column(TypeName = "varchar(30)")]
+        public override string PasswordHash { get; set; }
 
         [Column(TypeName = "bool")]
         [Required]
@@ -33,7 +31,7 @@ namespace WellnessTracker.Models
         public DateTime Registered { get; set; }
 
         [InverseProperty(nameof(Models.Entry.ApplicationUser))]
-        public virtual ICollection<Entry> Entries { get; set; }
+        public virtual ICollection<Entry> Entries { get; set; }*/
 
     }
 }

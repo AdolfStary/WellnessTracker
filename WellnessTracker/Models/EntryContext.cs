@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/*using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ namespace WellnessTracker.Models
 {
     public class EntryContext : DbContext
     {
-
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -28,6 +28,7 @@ namespace WellnessTracker.Models
             string allergenEntryKeyName = "FK_" + nameof(Allergen) + "_" + nameof(Allergen_Entry);
             string entryAllergenKeyName = "FK_" + nameof(Models.Entry) + "_" + nameof(Allergen_Entry);
             //string authorKeyName = "FK_" + nameof(Author) + "_" + nameof(Book);
+
 
             ///////////////////////
             // Allergen
@@ -63,19 +64,21 @@ namespace WellnessTracker.Models
             });
 
             ///////////////////////
-            // ApplicationUser
+            // Application User
             ///////////////////////
             modelBuilder.Entity<ApplicationUser>(entity => {
 
-                entity.Property(e => e.Username)
+                entity.Property(e => e.UserName)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
 
-                entity.Property(e => e.Password)
+
+                entity.Property(e => e.PasswordHash)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
 
-                entity.Property(e => e.Username)
+
+                entity.Property(e => e.Id)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
             });
@@ -141,8 +144,6 @@ namespace WellnessTracker.Models
             });
 
         }
-
-
-
     }
 }
+*/
