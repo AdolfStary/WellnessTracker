@@ -66,21 +66,17 @@ namespace WellnessTracker.Models
             ///////////////////////
             // Application User
             ///////////////////////
-            modelBuilder.Entity<ApplicationUser>(entity => {
+            modelBuilder.Entity<User>(entity => {
 
-                entity.Property(e => e.UserName)
+                entity.Property(e => e.Username)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
 
 
-                entity.Property(e => e.PasswordHash)
+                entity.Property(e => e.Password)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
 
-
-                entity.Property(e => e.Id)
-                .HasCharSet("utf8mb4")
-                .HasCollation("utf8mb4_general_ci");
             });
 
             ///////////////////////
@@ -89,7 +85,7 @@ namespace WellnessTracker.Models
             modelBuilder.Entity<Entry>(entity => {
 
                 string categoryKeyName = "FK_" + nameof(Category) + "_" + nameof(Models.Entry);
-                string userKeyName = "FK_" + nameof(ApplicationUser) + "_" + nameof(Models.Entry);
+                string userKeyName = "FK_" + nameof(User) + "_" + nameof(Models.Entry);
                 string statusKeyName = "FK_" + nameof(Status) + "_" + nameof(Models.Entry);
 
                 entity.Property(e => e.Notes)

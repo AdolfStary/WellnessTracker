@@ -11,7 +11,7 @@ namespace WellnessTracker.Models
     public class User
     {
         [Key]
-        [Column(TypeName = "int(10)")]
+        [Column(TypeName = "int")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
