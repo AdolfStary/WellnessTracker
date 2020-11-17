@@ -1,4 +1,4 @@
-﻿/*using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace WellnessTracker.Models
                     "server=localhost;" +
                     "port=3306;" +
                     "user=root;" +
-                    "database=wellness-tracker;";
+                    "database=wellnesstracker-data;";
                 string version = "10.4.14-MariaDB";
                 optionsBuilder.UseMySql(connection, x => x.ServerVersion(version));
             }
@@ -146,4 +146,3 @@ namespace WellnessTracker.Models
         }
     }
 }
-*/

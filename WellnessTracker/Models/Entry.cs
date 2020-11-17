@@ -43,10 +43,10 @@ namespace WellnessTracker.Models
         [Column(TypeName = "varchar(255)")]
         public string Notes { get; set; }
 
-        [Column(TypeName = "double(5)")]
+        [Column(TypeName = "double(5, 1)")]
         public double Insulin { get; set; }
 
-        [Column(TypeName = "double(5)")]
+        [Column(TypeName = "double(5, 1)")]
         public double BG { get; set; }
 
         [Column(TypeName = "bool")]
