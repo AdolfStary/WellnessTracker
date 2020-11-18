@@ -14,6 +14,9 @@ namespace WellnessTracker.Controllers
         [HttpPost("Register")]
         public ActionResult<string> RegisterUser_POST(string id, string username, string password, bool isDiabetic)
         {
+            username = username.Trim();
+            password = password.Trim();
+
             return EntryController.RegisterUser(id, username, password, isDiabetic);
         }
     }

@@ -11,6 +11,7 @@ Last Modified: Nov 12, 2020
 
 
 # Resources
+https://www.w3schools.com/bootstrap/bootstrap_alerts.asp
 
 
 # Trello

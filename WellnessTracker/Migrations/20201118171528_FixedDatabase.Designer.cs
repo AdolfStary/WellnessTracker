@@ -9,8 +9,8 @@ using WellnessTracker.Models;
 namespace WellnessTracker.Migrations
 {
     [DbContext(typeof(EntryContext))]
-    [Migration("20201117222801_ChangedUserID")]
-    partial class ChangedUserID
+    [Migration("20201118171528_FixedDatabase")]
+    partial class FixedDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -152,15 +152,14 @@ namespace WellnessTracker.Migrations
             modelBuilder.Entity("WellnessTracker.Models.User", b =>
                 {
                     b.Property<string>("ID")
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar(40)");
 
-                    b.Property<string>("IsDiabetic")
-                        .IsRequired()
+                    b.Property<bool>("IsDiabetic")
                         .HasColumnType("bool");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("varchar(64)")
                         .HasAnnotation("MySql:CharSet", "utf8mb4")
                         .HasAnnotation("MySql:Collation", "utf8mb4_general_ci");
 

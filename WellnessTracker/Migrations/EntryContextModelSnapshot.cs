@@ -150,15 +150,14 @@ namespace WellnessTracker.Migrations
             modelBuilder.Entity("WellnessTracker.Models.User", b =>
                 {
                     b.Property<string>("ID")
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar(40)");
 
-                    b.Property<string>("IsDiabetic")
-                        .IsRequired()
+                    b.Property<bool>("IsDiabetic")
                         .HasColumnType("bool");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("varchar(64)")
                         .HasAnnotation("MySql:CharSet", "utf8mb4")
                         .HasAnnotation("MySql:Collation", "utf8mb4_general_ci");
 

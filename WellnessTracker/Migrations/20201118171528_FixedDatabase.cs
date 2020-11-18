@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WellnessTracker.Migrations
 {
-    public partial class ChangedUserID : Migration
+    public partial class FixedDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,14 +58,14 @@ namespace WellnessTracker.Migrations
                 name: "user",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "varchar(36)", nullable: false),
+                    ID = table.Column<string>(type: "varchar(40)", nullable: false),
                     Username = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                         .Annotation("MySql:Collation", "utf8mb4_general_ci"),
-                    Password = table.Column<string>(type: "varchar(255)", nullable: false)
+                    Password = table.Column<string>(type: "varchar(64)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                         .Annotation("MySql:Collation", "utf8mb4_general_ci"),
-                    IsDiabetic = table.Column<string>(type: "bool", nullable: false),
+                    IsDiabetic = table.Column<bool>(type: "bool", nullable: false),
                     Registered = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>

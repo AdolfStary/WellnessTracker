@@ -11,14 +11,14 @@ namespace WellnessTracker.Models
     public class User
     {
         [Key]
-        [Column(TypeName = "varchar(36)")]
+        [Column(TypeName = "varchar(40)")]
         public string ID { get; set; }
 
         [Column(TypeName = "varchar(30)")]
         [Required]
         public string Username { get; set; }
 
-        [Column(TypeName = "varchar(255)")]
+        [Column(TypeName = "varchar(64)")]
         [Required]
         public string Password { get; set; }
 
@@ -32,6 +32,10 @@ namespace WellnessTracker.Models
 
         [InverseProperty(nameof(Models.Entry.ApplicationUser))]
         public virtual ICollection<Entry> Entries { get; set; }
+        public User()
+        {
+
+        }
 
         public User(string id, string username, string password, bool isDiabetic)
         {

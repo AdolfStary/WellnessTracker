@@ -17,14 +17,31 @@ namespace WellnessTracker.Controllers
         {
             try
             {
-                using (EntryContext context = new EntryContext())
-                {
-                    //password = SHA256.Create(password).ToString();
-                    User newUser = new User(id, username, password, isDiabetic);
-                    context.Users.Add(newUser);
 
-                    context.SaveChanges();
+                if (id.Length < 36)
+                {
+                    throw new Exception("Invalid ID.");
                 }
+                else if (GetUserByID(id) != null)
+                {
+                    throw new Exception("ID already exists in the database.");
+                }
+                else if (GetUserByName(username) != null)
+                {
+                    throw new Exception("Username already exists in the database.");
+                }
+                else
+                {
+                    using (EntryContext context = new EntryContext())
+                    {
+                        //password = SHA256.Create(password).ToString();
+                        User newUser = new User(id, username, password, isDiabetic);
+                        context.Users.Add(newUser);
+
+                        context.SaveChanges();
+                    }
+                }
+
 
                 return "Success";
             }
@@ -33,6 +50,30 @@ namespace WellnessTracker.Controllers
                 return $"Error saving new user: {e.Message}";
             }
 
+        }
+
+        public static User GetUserByID(string id)
+        {
+            User user;
+
+            using (EntryContext context = new EntryContext())
+            {
+                user = context.Users.Where(x => x.ID == id).SingleOrDefault();
+            }
+
+            return user;
+        }
+
+        public static User GetUserByName(string username)
+        {
+            User user;
+
+            using (EntryContext context = new EntryContext())
+            {
+                user = context.Users.Where(x => x.Username == username).SingleOrDefault();
+            }
+
+            return user;
         }
     }
 }
