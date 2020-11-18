@@ -8,7 +8,12 @@ namespace WellnessTracker.Models
 {
     public class EntryContext : DbContext
     {
-        
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Entry> Entries { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Status> Statuses { get; set; }
+        public virtual DbSet<Allergen> Allergens { get; set; }
+        public virtual DbSet<Allergen_Entry> Allergen_Entries { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

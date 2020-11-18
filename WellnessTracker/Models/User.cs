@@ -11,9 +11,8 @@ namespace WellnessTracker.Models
     public class User
     {
         [Key]
-        [Column(TypeName = "int")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        [Column(TypeName = "varchar(36)")]
+        public string ID { get; set; }
 
         [Column(TypeName = "varchar(30)")]
         [Required]
@@ -25,7 +24,7 @@ namespace WellnessTracker.Models
 
         [Column(TypeName = "bool")]
         [Required]
-        public string IsDiabetic { get; set; }
+        public bool IsDiabetic { get; set; }
 
         [Column(TypeName = "datetime")]
         [Required]
@@ -34,6 +33,13 @@ namespace WellnessTracker.Models
         [InverseProperty(nameof(Models.Entry.ApplicationUser))]
         public virtual ICollection<Entry> Entries { get; set; }
 
-
+        public User(string id, string username, string password, bool isDiabetic)
+        {
+            ID = id;
+            Username = username;
+            Password = password;
+            IsDiabetic = isDiabetic;
+            Registered = DateTime.Now;
+        }
     }
 }

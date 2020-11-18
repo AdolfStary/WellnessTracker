@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WellnessTracker.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class ChangedUserID : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,8 +58,7 @@ namespace WellnessTracker.Migrations
                 name: "user",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ID = table.Column<string>(type: "varchar(36)", nullable: false),
                     Username = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                         .Annotation("MySql:Collation", "utf8mb4_general_ci"),
@@ -81,7 +80,7 @@ namespace WellnessTracker.Migrations
                     ID = table.Column<int>(type: "int(10)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CategoryID = table.Column<int>(type: "int(10)", nullable: false),
-                    UserID = table.Column<int>(type: "int(10)", nullable: false),
+                    UserID = table.Column<string>(type: "varchar(36)", nullable: false),
                     StatusID = table.Column<int>(type: "int(10)", nullable: false),
                     Time = table.Column<DateTime>(type: "datetime", nullable: false),
                     Carbs = table.Column<int>(type: "int(4)", nullable: false),

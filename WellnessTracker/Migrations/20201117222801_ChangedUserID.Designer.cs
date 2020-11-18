@@ -9,8 +9,8 @@ using WellnessTracker.Models;
 namespace WellnessTracker.Migrations
 {
     [DbContext(typeof(EntryContext))]
-    [Migration("20201117190425_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20201117222801_ChangedUserID")]
+    partial class ChangedUserID
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -112,8 +112,9 @@ namespace WellnessTracker.Migrations
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int(10)");
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("ID");
 
@@ -150,9 +151,8 @@ namespace WellnessTracker.Migrations
 
             modelBuilder.Entity("WellnessTracker.Models.User", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("ID")
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("IsDiabetic")
                         .IsRequired()

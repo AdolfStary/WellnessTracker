@@ -19,9 +19,9 @@ namespace WellnessTracker.Models
         [Required]
         public int CategoryID { get; set; }
 
-        [Column(TypeName = "int(10)")]
+        [Column(TypeName = "varchar(36)")]
         [Required]
-        public int UserID { get; set; }
+        public string UserID { get; set; }
 
         [Column(TypeName = "int(10)")]
         [Required]
