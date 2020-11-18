@@ -15,9 +15,6 @@ const Register = () => {
         let userID = uuid();
         let encodedPassword = username + password;
 
-        sessionStorage.setItem('user', userID);
-        sessionStorage.setItem('password', encodedPassword);
-
         axios(
             {
                 method: 'post',

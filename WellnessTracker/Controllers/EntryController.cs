@@ -30,6 +30,14 @@ namespace WellnessTracker.Controllers
                 {
                     throw new Exception("Username already exists in the database.");
                 }
+                else if (!TestString(username))
+                {
+                    throw new Exception("Username contains forbidden characters.");
+                }
+                else if (!TestString(password))
+                {
+                    throw new Exception("Password contains forbidden characters.");
+                }
                 else
                 {
                     using (EntryContext context = new EntryContext())
@@ -43,11 +51,52 @@ namespace WellnessTracker.Controllers
                 }
 
 
-                return "Success";
+                return "Success!";
             }
             catch (Exception e)
             {
                 return $"Error saving new user: {e.Message}";
+            }
+
+        }
+
+        public static string ValidateUser(string username, string password)
+        {
+            try
+            {
+
+                if (GetUserByName(username) == null)
+                {
+                    throw new Exception("Username doesn't exist in the database.");
+                }
+                else if (!TestString(username))
+                {
+                    throw new Exception("Username contains forbidden characters.");
+                }
+                else if (!TestString(password))
+                {
+                    throw new Exception("Password contains forbidden characters.");
+                }
+                else
+                {
+                    User user;
+
+                    using (EntryContext context = new EntryContext())
+                    {
+                        user = context.Users.Where(x => x.Username == username && x.Password == password).SingleOrDefault();
+                    }
+                    if (user == null)
+                    {
+                        throw new Exception("Wrong username or password.");
+                    }
+                    else return user.ID;
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                return $"Error: {e.Message}";
             }
 
         }
@@ -74,6 +123,18 @@ namespace WellnessTracker.Controllers
             }
 
             return user;
+        }
+
+        public static bool TestString(string testString)
+        {
+            bool result = true;
+
+            if (testString.Contains("(") || testString.Contains("=") || testString.Contains(";") || testString.Contains(")"))
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }

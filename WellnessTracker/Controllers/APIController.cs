@@ -19,5 +19,14 @@ namespace WellnessTracker.Controllers
 
             return EntryController.RegisterUser(id, username, password, isDiabetic);
         }
+
+        [HttpGet("Validate")]
+        public ActionResult<string> ValidateUser_POST(string username, string password)
+        {
+            username = username.Trim();
+            password = password.Trim();
+
+            return EntryController.ValidateUser(username, password);
+        }
     }
 }
