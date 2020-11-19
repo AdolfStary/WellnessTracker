@@ -49,12 +49,75 @@ namespace WellnessTracker.Models
             ///////////////////////
             // Status
             ///////////////////////
-            modelBuilder.Entity<Status>(entity => {
+            modelBuilder.Entity<Status>(entity =>
+            {
 
                 entity.Property(e => e.Name)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
 
+                entity.HasData(
+                        new Status()
+                        {
+                            ID = -1,
+                            Name = "Normal",
+                            IsPositive = true
+                        },
+                        new Status()
+                        {
+                            ID = -2,
+                            Name = "Happy",
+                            IsPositive = true
+                        },
+                        new Status()
+                        {
+                            ID = -3,
+                            Name = "Relaxed",
+                            IsPositive = true
+                        },
+                        new Status()
+                        {
+                            ID = -4,
+                            Name = "Energetic",
+                            IsPositive = true
+                        },
+                        new Status()
+                        {
+                            ID = -5,
+                            Name = "Excited",
+                            IsPositive = true
+                        },
+                        new Status()
+                        {
+                            ID = -6,
+                            Name = "Sick",
+                            IsPositive = false
+                        }, 
+                        new Status()
+                        {
+                            ID = -7,
+                            Name = "Sad",
+                            IsPositive = false
+                        }, 
+                        new Status()
+                        {
+                            ID = -8,
+                            Name = "Stressed",
+                            IsPositive = false
+                        },
+                        new Status()
+                        {
+                            ID = -9,
+                            Name = "Anxious",
+                            IsPositive = false
+                        }, 
+                        new Status()
+                        {
+                            ID = -10,
+                            Name = "Tired",
+                            IsPositive = false
+                        }
+                    );
             });
 
             ///////////////////////
@@ -66,6 +129,32 @@ namespace WellnessTracker.Models
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
 
+                entity.HasData(
+                       new Category()
+                       {
+                           ID = -1,
+                           Name = "Meal"
+                       },
+                       new Category()
+                       {
+                           ID = -2,
+                           Name = "Exercise"
+                       },
+                       new Category()
+                       {
+                           ID = -3,
+                           Name = "Event"
+                       },
+                       new Category()
+                       {
+                           ID = -4,
+                           Name = "BG Reading"
+                       },
+                       new Category()
+                       {
+                           ID = -5,
+                           Name = "Insulin Injection"
+                       });
             });
 
             ///////////////////////

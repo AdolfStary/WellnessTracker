@@ -23,5 +23,7 @@ namespace WellnessTracker.Models
 
         [InverseProperty(nameof(Models.Entry.EntryStatus))]
         public virtual ICollection<Entry> Entries { get; set; }
+
+        public Status() { }
     }
 }

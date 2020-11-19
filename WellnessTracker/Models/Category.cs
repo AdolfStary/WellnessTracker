@@ -21,5 +21,11 @@ namespace WellnessTracker.Models
         [InverseProperty(nameof(Entry.EntryCategory))]
         public virtual ICollection<Entry> Entries { get; set; }
 
+        public Category()
+        {
+
+        }
     }
+
+
 }
