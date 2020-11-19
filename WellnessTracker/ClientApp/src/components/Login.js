@@ -27,7 +27,8 @@ const Login = () => {
             if(!res.data[0].includes("Error")){
                 
                 sessionStorage.setItem('user', res.data[1]);
-                sessionStorage.setItem('isDiabetic', res.data[2]);
+                sessionStorage.setItem('isDiabetic', res.data[2]);                
+
                 setResponse(res.data[0]);
                 setUsername("");
                 setPassword("");

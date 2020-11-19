@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import {PopUp} from './PopUp';
-import axios from 'axios';
+import React from 'react';
+
 
 const Login = () => {
 
