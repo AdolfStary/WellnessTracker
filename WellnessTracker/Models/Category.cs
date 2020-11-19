@@ -18,6 +18,9 @@ namespace WellnessTracker.Models
         [Column(TypeName = "varchar(30)")]
         public string Name { get; set; }
 
+        [Column(TypeName = "bool")]
+        public bool IsDiabetic { get; set; }
+
         [InverseProperty(nameof(Entry.EntryCategory))]
         public virtual ICollection<Entry> Entries { get; set; }
 

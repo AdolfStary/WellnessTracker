@@ -133,27 +133,32 @@ namespace WellnessTracker.Models
                        new Category()
                        {
                            ID = -5,
-                           Name = "Meal"
+                           Name = "Meal",
+                           IsDiabetic = false
                        },
                        new Category()
                        {
                            ID = -4,
-                           Name = "Exercise"
+                           Name = "Exercise",
+                           IsDiabetic = false
                        },
                        new Category()
                        {
                            ID = -3,
-                           Name = "Event"
+                           Name = "Event",
+                           IsDiabetic = false
                        },
                        new Category()
                        {
                            ID = -2,
-                           Name = "BG Reading"
+                           Name = "BG Reading",
+                           IsDiabetic = true
                        },
                        new Category()
                        {
                            ID = -1,
-                           Name = "Insulin Injection"
+                           Name = "Insulin Injection",
+                           IsDiabetic = true
                        });
             });
 

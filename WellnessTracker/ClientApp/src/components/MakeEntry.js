@@ -21,14 +21,27 @@ const MakeEntry = () => {
 
     // Runs when loaded once to load Categories and Statuses
     if (!downloadedData){
-        axios(
-            {
-                method: 'get',
-                url: 'API/GetCategories'
-            }
-        ).then((res) => {     
-            setListOfCategories(res.data);
-        });
+        if(sessionStorage.getItem('isDiabetic') == "true")
+        {
+            axios(
+                {
+                    method: 'get',
+                    url: 'API/GetCategories'
+                }
+            ).then((res) => {     
+                setListOfCategories(res.data);
+            });
+        }
+        else {
+            axios(
+                {
+                    method: 'get',
+                    url: 'API/GetCategoriesNoDia'
+                }
+            ).then((res) => {     
+                setListOfCategories(res.data);
+            });
+        }
 
         axios(
             {
@@ -38,6 +51,8 @@ const MakeEntry = () => {
         ).then((res) => {     
             setListOfStatuses(res.data);
         });
+
+
 
         setDownloadedData(true);
     }
@@ -78,7 +93,7 @@ const MakeEntry = () => {
             <p className="alert alert-danger">You do not have access to this page.</p>
         );
     }
-    else {
+    else if (sessionStorage.getItem('isDiabetic') == "true"){
         return (
             <div id="entryform">
                 <h2>Make an entry</h2>
@@ -126,8 +141,49 @@ const MakeEntry = () => {
             </div>
         );
     }
-
+        else 
+        {
+            return (
+                <div id="entryform">
+                    <h2>Make an entry</h2>
+                    {response !== "" ? <PopUp message={response} /> : ""}
+                    <form onSubmit={event => handleSubmit(event)}>
     
+                        <label htmlFor='category'>Category: </label>
+                        <select name='category' id='category' onChange={(e) => setCategory(e.target.value)}>
+                            {
+                                listOfCategories.map( (categoryItem) => <option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</option>)
+                            }
+                        </select>
+    
+                        <label htmlFor='status'>Mood: </label>
+                        <select name='status' id='status' onChange={(e) => setStatus(e.target.value)}>
+                            {
+                                listOfStatuses.map( (statusItem) => <option key={statusItem.id} value={statusItem.id}>{statusItem.name}</option>)
+                            }
+                        </select>
+    
+                        <label htmlFor='time'>Time: </label>
+                        <input id='time' name='time' type='datetime-local' onChange={(e) => setTime(e.target.value)} value={time} required />
+    
+                        <label htmlFor='carbs'>Carbs: </label>
+                        <input id='carbs' name='carbs' type='number' onChange={(e) => setCarbs(e.target.value)} value={carbs} />
+    
+                        <label htmlFor='protein'>Protein: </label>
+                        <input id='protein' name='protein' type='number' onChange={(e) => setProtein(e.target.value)} value={protein} />
+       
+                        <label htmlFor='fats'>Fats: </label>
+                        <input id='fats' name='fats' type='number' onChange={(e) => setFats(e.target.value)} value={fats} />
+    
+                        <label htmlFor='notes'>Notes: </label>
+                        <textarea id='notes' name='notes' onChange={(e) => setNotes(e.target.value)} value={notes} required />
+    
+    
+                        <input type='submit' className="btn btn-primary" value='Make Entry' />
+                    </form>
+                </div>
+            );
+        }  
 
 }
 

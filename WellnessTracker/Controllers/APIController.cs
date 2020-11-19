@@ -73,5 +73,11 @@ namespace WellnessTracker.Controllers
         {
             return EntryController.GetCategories();
         }
+
+        [HttpGet("GetCategoriesNoDia")]
+        public List<Category> GetCategoriesNoDia_GET()
+        {
+            return EntryController.GetCategoriesNoDia();
+        }
     }
 }

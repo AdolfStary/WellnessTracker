@@ -228,6 +228,14 @@ namespace WellnessTracker.Controllers
             }
         }
 
+        public static List<Category> GetCategoriesNoDia()
+        {
+            using (EntryContext context = new EntryContext())
+            {
+                return context.Categories.Where(x => x.IsDiabetic == false).ToList();
+            }
+        }
+
         public static Category GetCategoryByID(int id)
         {
             Category category;
