@@ -49,7 +49,7 @@ const Register = () => {
                     <input id='password' name='password' type='password' onChange={(e) => setPassword(e.target.value)} value={password} required />
                     <label htmlFor='isDiabetic'>Include diabetes data: </label>
                     <input id='isDiabetic' name='isDiabetic' type='checkbox' onChange={(e) => setIsDiabetic(!isDiabetic)} value={isDiabetic} />
-                    <input type='submit' value='Register' />
+                    <input type='submit' value='Register' className='btn btn-primary'/>
                 </form>
             </div>
         );

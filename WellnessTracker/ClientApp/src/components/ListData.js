@@ -11,7 +11,7 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let concatPassword = username + password;
+        let encodedPassword = username + password;
 
         axios(
             {
@@ -19,27 +19,25 @@ const Login = () => {
                 url: 'API/Validate',
                 params: {
                     username: username,
-                    password:  concatPassword
+                    password:  encodedPassword
                 }
             }
         ).then((res) => {
             
-            if(!res.data[0].includes("Error")){
-                
-                sessionStorage.setItem('user', res.data[1]);
-                sessionStorage.setItem('isDiabetic', res.data[2]);
-                setResponse(res.data[0]);
+            if(!res.data.includes("Error")){
+                sessionStorage.setItem('user', res.data);
+                setResponse("Success!");
                 setUsername("");
                 setPassword("");
-                window.location = '/';
+                
             }
-            else setResponse(res.data[0]);
+            else setResponse(res.data);
         }
         ).catch((err) => {
             setResponse(err.response.data);
         });
 
-        
+        if (sessionStorage.getItem('user') !== null || sessionStorage.getItem('user') !== "") window.location = '/';
     }
 
     
@@ -52,7 +50,7 @@ const Login = () => {
                 <input id='username' name='username' type='text' onChange={(e) => setUsername(e.target.value)} value={username} required />
                 <label htmlFor='password'>Password: </label>
                 <input id='password' name='password' type='password' onChange={(e) => setPassword(e.target.value)} value={password} required />
-                <input type='submit' value='Login' className='btn btn-primary'/>
+                <input type='submit' value='Login' />
             </form>
             Don't have an account? <Link to='/register'> Register here </Link>
         </div>

@@ -67,5 +67,24 @@ namespace WellnessTracker.Models
 
         [InverseProperty(nameof(Models.Allergen_Entry.Entry))]
         public virtual ICollection<Allergen_Entry> EntryAllergens { get; set; }
+
+        public Entry()
+        {
+
+        }
+
+        public Entry(int categoryID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg)
+        {
+            CategoryID = categoryID;
+            StatusID = statusID;
+            Time = time;
+            Carbs = carbs;
+            Protein = protein;
+            Fats = fats;
+            Notes = notes;
+            Insulin = insulin;
+            BG = bg;
+            IsArchived = false;
+        }
     }
 }
