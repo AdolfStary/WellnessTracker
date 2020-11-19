@@ -9,8 +9,8 @@ using WellnessTracker.Models;
 namespace WellnessTracker.Migrations
 {
     [DbContext(typeof(EntryContext))]
-    [Migration("20201119212528_AddedSeedData")]
-    partial class AddedSeedData
+    [Migration("20201119213332_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,33 +72,6 @@ namespace WellnessTracker.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("category");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = -5,
-                            Name = "Meal"
-                        },
-                        new
-                        {
-                            ID = -4,
-                            Name = "Exercise"
-                        },
-                        new
-                        {
-                            ID = -3,
-                            Name = "Event"
-                        },
-                        new
-                        {
-                            ID = -2,
-                            Name = "BG Reading"
-                        },
-                        new
-                        {
-                            ID = -1,
-                            Name = "Insulin Injection"
-                        });
                 });
 
             modelBuilder.Entity("WellnessTracker.Models.Entry", b =>
@@ -174,68 +147,6 @@ namespace WellnessTracker.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("status");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = -10,
-                            IsPositive = true,
-                            Name = "Normal"
-                        },
-                        new
-                        {
-                            ID = -9,
-                            IsPositive = true,
-                            Name = "Happy"
-                        },
-                        new
-                        {
-                            ID = -8,
-                            IsPositive = true,
-                            Name = "Relaxed"
-                        },
-                        new
-                        {
-                            ID = -7,
-                            IsPositive = true,
-                            Name = "Energetic"
-                        },
-                        new
-                        {
-                            ID = -6,
-                            IsPositive = true,
-                            Name = "Excited"
-                        },
-                        new
-                        {
-                            ID = -5,
-                            IsPositive = false,
-                            Name = "Sick"
-                        },
-                        new
-                        {
-                            ID = -4,
-                            IsPositive = false,
-                            Name = "Sad"
-                        },
-                        new
-                        {
-                            ID = -3,
-                            IsPositive = false,
-                            Name = "Stressed"
-                        },
-                        new
-                        {
-                            ID = -2,
-                            IsPositive = false,
-                            Name = "Anxious"
-                        },
-                        new
-                        {
-                            ID = -1,
-                            IsPositive = false,
-                            Name = "Tired"
-                        });
                 });
 
             modelBuilder.Entity("WellnessTracker.Models.User", b =>
