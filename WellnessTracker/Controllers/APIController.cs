@@ -28,7 +28,7 @@ namespace WellnessTracker.Controllers
         }
         
         [HttpPost("MakeEntry")]
-        public ActionResult<string> MakeEntry_POST(string categoryID, string statusID, string time, string carbs, string protein, string fats, string notes, string insulin, string bg)
+        public ActionResult<string> MakeEntry_POST(string categoryID, string userID, string statusID, string time, string carbs, string protein, string fats, string notes, string insulin, string bg)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace WellnessTracker.Controllers
                     int.TryParse(carbs.Trim(), out int parsedCarbs) && int.TryParse(protein.Trim(), out int parsedProtein) && int.TryParse(fats.Trim(), out int parsedFats) &&
                     double.TryParse(insulin.Trim(), out double parsedInsulin) && double.TryParse(bg.Trim(), out double parsedBG) && DateTime.TryParse(time.Trim(), out DateTime parsedTime))
                 {
-                    return EntryController.MakeEntry(parsedCategoryID, parsedStatusID, parsedTime, parsedCarbs, parsedProtein, parsedFats, notes.Trim(), parsedInsulin, parsedBG);
+                    return EntryController.MakeEntry(parsedCategoryID, userID, parsedStatusID, parsedTime, parsedCarbs, parsedProtein, parsedFats, notes.Trim(), parsedInsulin, parsedBG);
                 }
                 else throw new Exception("Invalid values were passed.");
             }

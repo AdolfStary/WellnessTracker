@@ -6,8 +6,8 @@ const MakeEntry = () => {
     
     const [response, setResponse] = useState("");
 
-    const [category, setCategory] = useState("1");
-    const [status, setStatus] = useState("1");
+    const [category, setCategory] = useState("-1");
+    const [status, setStatus] = useState("-1");
     const [time, setTime] = useState("");
     const [carbs, setCarbs] = useState(0);
     const [protein, setProtein] = useState(0);
@@ -91,7 +91,7 @@ const MakeEntry = () => {
                     <input id='bg' name='bg' type='number' onChange={(e) => setBG(e.target.value)} value={bg} />
 
                     <label htmlFor='notes'>Notes: </label>
-                    <textarea id='notes' name='notes' onChange={(e) => setNotes(e.target.value)} value={notes} />
+                    <textarea id='notes' name='notes' onChange={(e) => setNotes(e.target.value)} value={notes} required />
 
 
                     <input type='submit' className="btn btn-primary" value='Make Entry' />

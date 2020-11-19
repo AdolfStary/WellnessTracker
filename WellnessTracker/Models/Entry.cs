@@ -73,9 +73,10 @@ namespace WellnessTracker.Models
 
         }
 
-        public Entry(int categoryID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg)
+        public Entry(int categoryID, string userID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg)
         {
             CategoryID = categoryID;
+            UserID = userID;
             StatusID = statusID;
             Time = time;
             Carbs = carbs;

@@ -61,7 +61,7 @@ namespace WellnessTracker.Controllers
 
         }
 
-        public static string MakeEntry(int categoryID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg)
+        public static string MakeEntry(int categoryID, string userID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg)
         {
             try
             {
@@ -86,12 +86,20 @@ namespace WellnessTracker.Controllers
                 {
                     throw new Exception("Diabetic data is out of range.");
                 }
+                else if (userID.Length != 36)
+                {
+                    throw new Exception("User ID is invalid.");
+                }
+                else if (GetUserByID(userID) == null)
+                {
+                    throw new Exception("User doesn't exist in the database.");
+                }
                 else
                 {                    
                     using (EntryContext context = new EntryContext())
                     {
                         
-                        Entry newEntry = new Entry(categoryID, statusID, time, carbs, protein, fats, notes, insulin, bg);
+                        Entry newEntry = new Entry(categoryID, userID, statusID, time, carbs, protein, fats, notes, insulin, bg);
                         context.Entries.Add(newEntry);
 
                         context.SaveChanges();
