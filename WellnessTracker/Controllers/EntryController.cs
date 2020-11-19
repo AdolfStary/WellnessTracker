@@ -65,34 +65,29 @@ namespace WellnessTracker.Controllers
         {
             try
             {
-                /*
-                if (categoryID )
+                
+                if (GetCategoryByID(categoryID) == null)
                 {
-                    // category doesnt exist
                     throw new Exception("Category doesn't exist.");
                 }
-                else if (GetUserByID(id) != null)
+                else if (GetStatusByID(statusID) == null)
                 {
                     throw new Exception("Status doesn't exist.");
                 }
-                else if (GetUserByName(username) != null)
+                else if (carbs > 9999 || carbs < 0 || protein > 9999 || protein < 0 || fats > 9999 || fats < 0)
                 {
-                    // carbs, fats or protein > 9999 or < 0, 0 default
                     throw new Exception("Nutrition information values are out of range.");
                 }
-                else if (!TestString(username))
+                else if (!TestString(notes))
                 {
-                    // Insulin out of range
                     throw new Exception("Notes contain invalid characters.");
                 }
-                else if (!TestString(password))
+                else if (insulin < 0 || insulin > 999 || bg < 0 || bg > 999)
                 {
-                    // bg out of range
-                    throw new Exception("Password contains forbidden characters.");
+                    throw new Exception("Diabetic data is out of range.");
                 }
-                else*/
-                {
-                    
+                else
+                {                    
                     using (EntryContext context = new EntryContext())
                     {
                         
@@ -102,8 +97,6 @@ namespace WellnessTracker.Controllers
                         context.SaveChanges();
                     }
                 }
-
-
                 return "Success!";
             }
             catch (Exception e)
@@ -192,12 +185,51 @@ namespace WellnessTracker.Controllers
         {
             bool result = true;
 
-            if (testString.Contains("(") || testString.Contains("=") || testString.Contains(";") || testString.Contains(")"))
+            if (testString.Contains("*") || testString.Contains("=") || testString.Contains(";"))
             {
                 result = false;
             }
 
             return result;
+        }
+        public static Status GetStatusByID(int id)
+        {
+            Status status;
+
+            using (EntryContext context = new EntryContext())
+            {
+                status = context.Statuses.Where(x => x.ID == id).SingleOrDefault();
+            }
+
+            return status;
+        }
+
+        public static List<Status> GetStatuses()
+        {
+            using (EntryContext context = new EntryContext())
+            {
+                return context.Statuses.ToList();
+            }
+        }
+
+        public static List<Category> GetCategories()
+        {
+            using (EntryContext context = new EntryContext())
+            {
+                return context.Categories.ToList();
+            }
+        }
+
+        public static Category GetCategoryByID(int id)
+        {
+            Category category;
+
+            using (EntryContext context = new EntryContext())
+            {
+                category = context.Categories.Where(x => x.ID == id).SingleOrDefault();
+            }
+
+            return category;
         }
 
         // Borrowed code from: https://www.c-sharpcorner.com/article/hashing-passwords-in-net-core-with-tips/

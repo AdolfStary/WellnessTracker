@@ -12,6 +12,7 @@ Last Modified: Nov 12, 2020
 
 # Resources
 https://www.w3schools.com/bootstrap/bootstrap_alerts.asp
+https://www.c-sharpcorner.com/article/hashing-passwords-in-net-core-with-tips/
 
 
 # Trello

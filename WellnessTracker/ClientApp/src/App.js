@@ -5,8 +5,9 @@ import { Home } from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import Logout from './components/Logout';
-
+import MakeEntry from './components/MakeEntry';
 import './custom.css'
+
 
 export default class App extends Component {
   static displayName = App.name;
@@ -15,7 +16,8 @@ export default class App extends Component {
     return (
       <Layout>
         <Route exact path='/' component={Home} />
-        <Route path='/login' component={Login} />
+            <Route path='/login' component={Login} />
+            <Route path='/makeentry' component={MakeEntry} />
         <Route path='/register' component={Register} />
         <Route path='/logout' component={Logout} />
       </Layout>
