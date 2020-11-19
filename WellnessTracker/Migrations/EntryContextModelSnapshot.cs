@@ -74,12 +74,12 @@ namespace WellnessTracker.Migrations
                     b.HasData(
                         new
                         {
-                            ID = -1,
+                            ID = -5,
                             Name = "Meal"
                         },
                         new
                         {
-                            ID = -2,
+                            ID = -4,
                             Name = "Exercise"
                         },
                         new
@@ -89,12 +89,12 @@ namespace WellnessTracker.Migrations
                         },
                         new
                         {
-                            ID = -4,
+                            ID = -2,
                             Name = "BG Reading"
                         },
                         new
                         {
-                            ID = -5,
+                            ID = -1,
                             Name = "Insulin Injection"
                         });
                 });
@@ -176,61 +176,61 @@ namespace WellnessTracker.Migrations
                     b.HasData(
                         new
                         {
-                            ID = -1,
+                            ID = -10,
                             IsPositive = true,
                             Name = "Normal"
                         },
                         new
                         {
-                            ID = -2,
+                            ID = -9,
                             IsPositive = true,
                             Name = "Happy"
                         },
                         new
                         {
-                            ID = -3,
+                            ID = -8,
                             IsPositive = true,
                             Name = "Relaxed"
                         },
                         new
                         {
-                            ID = -4,
+                            ID = -7,
                             IsPositive = true,
                             Name = "Energetic"
                         },
                         new
                         {
-                            ID = -5,
+                            ID = -6,
                             IsPositive = true,
                             Name = "Excited"
                         },
                         new
                         {
-                            ID = -6,
+                            ID = -5,
                             IsPositive = false,
                             Name = "Sick"
                         },
                         new
                         {
-                            ID = -7,
+                            ID = -4,
                             IsPositive = false,
                             Name = "Sad"
                         },
                         new
                         {
-                            ID = -8,
+                            ID = -3,
                             IsPositive = false,
                             Name = "Stressed"
                         },
                         new
                         {
-                            ID = -9,
+                            ID = -2,
                             IsPositive = false,
                             Name = "Anxious"
                         },
                         new
                         {
-                            ID = -10,
+                            ID = -1,
                             IsPositive = false,
                             Name = "Tired"
                         });

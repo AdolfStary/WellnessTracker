@@ -59,61 +59,61 @@ namespace WellnessTracker.Models
                 entity.HasData(
                         new Status()
                         {
-                            ID = -1,
+                            ID = -10,
                             Name = "Normal",
                             IsPositive = true
                         },
                         new Status()
                         {
-                            ID = -2,
+                            ID = -9,
                             Name = "Happy",
                             IsPositive = true
                         },
                         new Status()
                         {
-                            ID = -3,
+                            ID = -8,
                             Name = "Relaxed",
                             IsPositive = true
                         },
                         new Status()
                         {
-                            ID = -4,
+                            ID = -7,
                             Name = "Energetic",
                             IsPositive = true
                         },
                         new Status()
                         {
-                            ID = -5,
+                            ID = -6,
                             Name = "Excited",
                             IsPositive = true
                         },
                         new Status()
                         {
-                            ID = -6,
+                            ID = -5,
                             Name = "Sick",
                             IsPositive = false
                         }, 
                         new Status()
                         {
-                            ID = -7,
+                            ID = -4,
                             Name = "Sad",
                             IsPositive = false
                         }, 
                         new Status()
                         {
-                            ID = -8,
+                            ID = -3,
                             Name = "Stressed",
                             IsPositive = false
                         },
                         new Status()
                         {
-                            ID = -9,
+                            ID = -2,
                             Name = "Anxious",
                             IsPositive = false
                         }, 
                         new Status()
                         {
-                            ID = -10,
+                            ID = -1,
                             Name = "Tired",
                             IsPositive = false
                         }
@@ -132,12 +132,12 @@ namespace WellnessTracker.Models
                 entity.HasData(
                        new Category()
                        {
-                           ID = -1,
+                           ID = -5,
                            Name = "Meal"
                        },
                        new Category()
                        {
-                           ID = -2,
+                           ID = -4,
                            Name = "Exercise"
                        },
                        new Category()
@@ -147,12 +147,12 @@ namespace WellnessTracker.Models
                        },
                        new Category()
                        {
-                           ID = -4,
+                           ID = -2,
                            Name = "BG Reading"
                        },
                        new Category()
                        {
-                           ID = -5,
+                           ID = -1,
                            Name = "Insulin Injection"
                        });
             });

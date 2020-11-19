@@ -5,6 +5,9 @@ import axios from 'axios';
 const MakeEntry = () => {
     
     const [response, setResponse] = useState("");
+    const [downloadedData, setDownloadedData] = useState(false);
+    const [listOfCategories, setListOfCategories] = useState([]);
+    const [listOfStatuses, setListOfStatuses] = useState([]);
 
     const [category, setCategory] = useState("-1");
     const [status, setStatus] = useState("-1");
@@ -16,6 +19,28 @@ const MakeEntry = () => {
     const [insulin, setInsulin] = useState(0);
     const [bg, setBG] = useState(0);
 
+    // Runs when loaded once to load Categories and Statuses
+    if (!downloadedData){
+        axios(
+            {
+                method: 'get',
+                url: 'API/GetCategories'
+            }
+        ).then((res) => {     
+            setListOfCategories(res.data);
+        });
+
+        axios(
+            {
+                method: 'get',
+                url: 'API/GetStatuses'
+            }
+        ).then((res) => {     
+            setListOfStatuses(res.data);
+        });
+
+        setDownloadedData(true);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -61,15 +86,17 @@ const MakeEntry = () => {
                 <form onSubmit={event => handleSubmit(event)}>
 
                     <label htmlFor='category'>Category: </label>
-                    <select name='category' id='category'>
-                        {/* map all categories, make api for getting categories */}
-                        <option value="1">1</option>
+                    <select name='category' id='category' onChange={(e) => setCategory(e.target.value)}>
+                        {
+                            listOfCategories.map( (categoryItem) => <option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</option>)
+                        }
                     </select>
 
                     <label htmlFor='status'>Mood: </label>
-                    <select name='status' id='status'>
-                        {/* map all status, make api for getting status */}
-                        <option value="1">1</option>
+                    <select name='status' id='status' onChange={(e) => setStatus(e.target.value)}>
+                        {
+                            listOfStatuses.map( (statusItem) => <option key={statusItem.id} value={statusItem.id}>{statusItem.name}</option>)
+                        }
                     </select>
 
                     <label htmlFor='time'>Time: </label>
