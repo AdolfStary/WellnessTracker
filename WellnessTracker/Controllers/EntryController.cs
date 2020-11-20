@@ -256,13 +256,17 @@ namespace WellnessTracker.Controllers
                     }
                 }
 
+                if (notesText != null)
+                {
+                    if (!TestString(notesText))
+                    {
+                        throw new Exception("Searched text contains invalid characters.");
+                    }
+                }
+
                 if (timeframe < 0 || timeframe > 180)
                 {
                     throw new Exception("Incorrect timeframe was received.");
-                }
-                else if (!TestString(notesText))
-                {
-                    throw new Exception("Searched text contains invalid characters.");
                 }
                 else if (userID.Length != 36)
                 {
@@ -277,7 +281,7 @@ namespace WellnessTracker.Controllers
                     List<Entry> listOfEntries = new List<Entry>();
                     using (EntryContext context = new EntryContext())
                     {
-                        listOfEntries = context.Entries.Where(x => x.UserID == userID).ToList();
+                        listOfEntries = context.Entries.Where(x => x.UserID == userID).Include(x => x.EntryCategory).Include(x => x.EntryStatus).ToList();
                     }
 
                     if (categoryID != 0)
@@ -295,7 +299,7 @@ namespace WellnessTracker.Controllers
                         listOfEntries = listOfEntries.Where(x => (DateTime.Now - x.Time).TotalDays <= timeframe).ToList();
                     }
 
-                    if (notesText != "")
+                    if (notesText != null && notesText != "")
                     {
                         listOfEntries = listOfEntries.Where(x => x.Notes.Contains(notesText)).ToList();
                     }

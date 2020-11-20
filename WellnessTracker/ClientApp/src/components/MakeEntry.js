@@ -21,7 +21,7 @@ const MakeEntry = () => {
 
     // Runs when loaded once to load Categories and Statuses
     if (!downloadedData){
-        if(sessionStorage.getItem('isDiabetic') == "true")
+        if(sessionStorage.getItem('isDiabetic') === "true")
         {
             axios(
                 {
@@ -128,7 +128,7 @@ const MakeEntry = () => {
                     <input id='fats' name='fats' type='number' onChange={(e) => setFats(e.target.value)} value={fats} />
                     
                     {
-                        (sessionStorage.getItem('isDiabetic') == "true") ?
+                        (sessionStorage.getItem('isDiabetic') === "true") ?
                             <div>
                                 <label htmlFor='insulin'>Insulin: </label>
                                 <input id='insulin' name='insulin' type='number' onChange={(e) => setInsulin(e.target.value)} value={insulin} />

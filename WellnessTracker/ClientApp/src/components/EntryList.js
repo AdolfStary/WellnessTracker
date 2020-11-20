@@ -9,16 +9,16 @@ const EntryList = () => {
     const [entryList, setEntryList] = useState([]);
     const [downloadedData, setDownloadedData] = useState(false);
 
-    const [category, setCategory] = useState("");
-    const [status, setStatus] = useState("");
-    const [timeframe, setTimeframe] = useState("");
-    const [notesText, setNotesText] = useState("");
+    const [category, setCategory] = useState("0");
+    const [status, setStatus] = useState("0");
+    const [timeframe, setTimeframe] = useState("0");
+    const [notesText, setNotesText] = useState(" ");
     const [listOfCategories, setListOfCategories] = useState([]);
     const [listOfStatuses, setListOfStatuses] = useState([]);
 
     // Runs when loaded once to load Categories and Statuses
     if (!downloadedData){
-        if(sessionStorage.getItem('isDiabetic') == "true")
+        if(sessionStorage.getItem('isDiabetic') === "true")
         {
             axios(
                 {
@@ -72,12 +72,13 @@ const EntryList = () => {
             
             if(!res.data.includes("Error")){
                 setEntryList(res.data);
-                setResponse("Success!");                
+                setResponse("Success!");    
+                console.log(res.data);            
             }
             else setResponse(res.data);
         }
         ).catch((err) => {
-            setResponse(err.response.data);
+            setResponse(err.response.statusText);
         });
     }
 
@@ -100,16 +101,16 @@ const EntryList = () => {
                 </select>
 
                 <label htmlFor='category'>Category: </label>
-                <select name='category' id='category' onChange={(e) => setCategory(e.target.value)}>
-                    <option value="0" selected>None</option>
+                <select name='category' defaultValue='0' id='category' onChange={(e) => setCategory(e.target.value)}>
+                    <option value="0">None</option>
                     {
                         listOfCategories.map( (categoryItem) => <option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</option>)
                     }
                 </select>
 
                 <label htmlFor='status'>Mood: </label>
-                <select name='status' id='status' onChange={(e) => setStatus(e.target.value)}>
-                    <option value="0" selected>None</option>
+                <select name='status' defaultValue='0' id='status' onChange={(e) => setStatus(e.target.value)}>
+                    <option value="0">None</option>
                     {
                         listOfStatuses.map( (statusItem) => <option key={statusItem.id} value={statusItem.id}>{statusItem.name}</option>)
                     }
@@ -121,11 +122,11 @@ const EntryList = () => {
                 <input type="submit" value="Filter" />
             </form>
             <div>
-                <ul>
+                
                     {
-                        entryList.map( (Item) => <li key={Item.id} value={Item.id}><EntryCard entry={Item} /></li>)
+                        (entryList.length !== 0) ? entryList.map( (Item) => <div key={Item.id} value={Item.id}><EntryCard entry={Item} /></div>) : <p>No matching entries found.</p>
                     }
-                </ul>
+                
             </div>
         </div>
 
