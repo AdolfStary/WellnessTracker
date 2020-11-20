@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const EntryCard = (props) => {
 
     return (
-    <Link to="/EntryDetail" onClick={/*pass ID or object to session storage so I can use it on EntryDetail*/}>
+    <Link to="/EntryDetail" /*onClick={pass ID or object to session storage so I can use it on EntryDetail}*/>
         <div className={`entry-card ${props.category.name}`}>
 
             <div className={`category ${props.category.name}`}>{props.category.name}</div>
@@ -39,5 +39,5 @@ const EntryCard = (props) => {
         </Link>
     );
 }
-export {EntryCard}
+export default EntryCard;
   
