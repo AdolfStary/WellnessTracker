@@ -62,6 +62,25 @@ namespace WellnessTracker.Controllers
             return EntryController.ValidateUser(username, password);
         }
 
+        [HttpGet("GetEntries")]
+        public ActionResult<List<Entry>> GetEntries_GET(string userID, string category, string status, string timeframe, string notesText)
+        {
+            try
+            {
+                if (int.TryParse(category.Trim(), out int parsedCategory) && int.TryParse(status.Trim(), out int parsedStatus) && int.TryParse(timeframe.Trim(), out int parsedTimeframe))
+                {
+                    return EntryController.GetEntries(userID.Trim(), parsedCategory, parsedStatus, parsedTimeframe, notesText.Trim());
+                }
+                else throw new Exception("Invalid values passed.");
+            }
+            catch (Exception e)
+            {
+                return new List<Entry>()/*$"Error getting entries: {e.Message}"*/;
+            }
+
+
+        }
+
         [HttpGet("GetStatuses")]
         public List<Status> GetStatuses_GET()
         {

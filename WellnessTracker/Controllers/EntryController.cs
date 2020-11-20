@@ -236,6 +236,79 @@ namespace WellnessTracker.Controllers
             }
         }
 
+        public static List<Entry> GetEntries(string userID, int categoryID, int statusID, int timeframe, string notesText)
+        {
+            try
+            {
+                if (categoryID != 0)
+                {
+                    if (GetCategoryByID(categoryID) == null)
+                    {
+                        throw new Exception("Category doesn't exist.");
+                    }
+                }
+
+                if (statusID != 0)
+                {
+                    if (GetStatusByID(statusID) == null)
+                    {
+                        throw new Exception("Status doesn't exist.");
+                    }
+                }
+
+                if (timeframe < 0 || timeframe > 180)
+                {
+                    throw new Exception("Incorrect timeframe was received.");
+                }
+                else if (!TestString(notesText))
+                {
+                    throw new Exception("Searched text contains invalid characters.");
+                }
+                else if (userID.Length != 36)
+                {
+                    throw new Exception("User ID is invalid.");
+                }
+                else if (GetUserByID(userID) == null)
+                {
+                    throw new Exception("User doesn't exist in the database.");
+                }
+                else
+                {
+                    List<Entry> listOfEntries = new List<Entry>();
+                    using (EntryContext context = new EntryContext())
+                    {
+                        listOfEntries = context.Entries.Where(x => x.UserID == userID).ToList();
+                    }
+
+                    if (categoryID != 0)
+                    {
+                        listOfEntries = listOfEntries.Where(x => x.CategoryID == categoryID).ToList();
+                    }
+
+                    if (statusID != 0)
+                    {
+                        listOfEntries = listOfEntries.Where(x => x.StatusID == statusID).ToList();
+                    }
+
+                    if (timeframe != 0)
+                    {
+                        listOfEntries = listOfEntries.Where(x => (DateTime.Now - x.Time).TotalDays <= timeframe).ToList();
+                    }
+
+                    if (notesText != "")
+                    {
+                        listOfEntries = listOfEntries.Where(x => x.Notes.Contains(notesText)).ToList();
+                    }
+
+                    return listOfEntries;
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<Entry>()/*$"Error making an entry: {e.Message}"*/;
+            }
+        }
+
         public static Category GetCategoryByID(int id)
         {
             Category category;

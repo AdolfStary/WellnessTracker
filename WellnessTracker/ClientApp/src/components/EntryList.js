@@ -9,8 +9,8 @@ const EntryList = () => {
     const [entryList, setEntryList] = useState([]);
     const [downloadedData, setDownloadedData] = useState(false);
 
-    const [category, setCategory] = useState("-1");
-    const [status, setStatus] = useState("-1");
+    const [category, setCategory] = useState("");
+    const [status, setStatus] = useState("");
     const [timeframe, setTimeframe] = useState("");
     const [notesText, setNotesText] = useState("");
     const [listOfCategories, setListOfCategories] = useState([]);
@@ -61,7 +61,11 @@ const EntryList = () => {
                 method: 'get',
                 url: 'API/GetEntries',
                 params: {
-                    userID: sessionStorage.getItem('user')
+                    userID: sessionStorage.getItem('user'),
+                    category: category,
+                    status: status,
+                    timeframe: timeframe,
+                    notesText: notesText
                 }
             }
         ).then((res) => {
@@ -80,14 +84,14 @@ const EntryList = () => {
     
     return (
         <div id="entry-list">
-            <h2>List of Entries</h2>
+            <h2>My Notebook</h2>
             <h4>Filter options</h4>
             {response !== "" ? <PopUp message={response} /> : ""}
             <form onSubmit={event => handleSubmit(event)}>
 
                 <label htmlFor='timeframe'>Time Frame: </label>
                 <select id='timeframe' name='timeframe'onChange={(e) => setTimeframe(e.target.value)} value={timeframe} required>
-                    <option value="todate">To date</option>
+                    <option value="0">To date</option>
                     <option value="7">Past week</option>
                     <option value="14">Past 2 weeks</option>
                     <option value="30">Past 30 days</option>
@@ -97,6 +101,7 @@ const EntryList = () => {
 
                 <label htmlFor='category'>Category: </label>
                 <select name='category' id='category' onChange={(e) => setCategory(e.target.value)}>
+                    <option value="0" selected>None</option>
                     {
                         listOfCategories.map( (categoryItem) => <option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</option>)
                     }
@@ -104,6 +109,7 @@ const EntryList = () => {
 
                 <label htmlFor='status'>Mood: </label>
                 <select name='status' id='status' onChange={(e) => setStatus(e.target.value)}>
+                    <option value="0" selected>None</option>
                     {
                         listOfStatuses.map( (statusItem) => <option key={statusItem.id} value={statusItem.id}>{statusItem.name}</option>)
                     }
@@ -111,6 +117,8 @@ const EntryList = () => {
 
                 <label htmlFor='notesText'>Text in notes:</label>
                 <input id='notesText' name='notesText' type='text' onChange={(e) => setNotesText(e.target.value)} value={notesText} />
+
+                <input type="submit" value="Filter" />
             </form>
             <div>
                 <ul>
