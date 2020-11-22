@@ -44,7 +44,60 @@ namespace WellnessTracker.Models
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
 
-                
+                entity.HasData(
+                        new Allergen()
+                        {
+                            ID = -1,
+                            Name = "Egg"
+                        }, 
+                        new Allergen()
+                        {
+                            ID = -2,
+                            Name = "Milk"
+                        }, 
+                        new Allergen()
+                        {
+                            ID = -3,
+                            Name = "Tree Nuts"
+                        }, 
+                        new Allergen()
+                        {
+                            ID = -4,
+                            Name = "Shellfish"
+                        }, 
+                        new Allergen()
+                        {
+                            ID = -5,
+                            Name = "Soy"
+                        }, 
+                        new Allergen()
+                        {
+                            ID = -6,
+                            Name = "Wheat"
+                        }, 
+                        new Allergen()
+                        {
+                            ID = -7,
+                            Name = "Peanut"
+                        }, 
+                        new Allergen()
+                        {
+                            ID = -8,
+                            Name = "Seeds"
+                        },
+                        new Allergen()
+                        {
+                            ID = -9,
+                            Name = "Fish"
+                        }, 
+                        new Allergen()
+                        {
+                            ID = -10,
+                            Name = "Gluten"
+                        }
+
+                    );
+
 
             });
 
