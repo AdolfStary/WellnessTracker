@@ -151,8 +151,6 @@ namespace WellnessTracker.Controllers
                                 );
                         }
 
-
-
                         context.SaveChanges();
                     }
                 }
@@ -348,7 +346,7 @@ namespace WellnessTracker.Controllers
                     List<Entry> listOfEntries = new List<Entry>();
                     using (EntryContext context = new EntryContext())
                     {
-                        listOfEntries = context.Entries.Where(x => x.UserID == userID).Include(x => x.EntryCategory).Include(x => x.EntryStatus).ToList();
+                        listOfEntries = context.Entries.Where(x => x.UserID == userID).Include(x => x.EntryCategory).Include(x => x.EntryStatus).Include(x => x.EntryAllergens).ThenInclude(x=> x.Allergen).ToList();
                     }
 
                     if (categoryID != 0)
