@@ -16,6 +16,35 @@ const EntryList = () => {
     const [listOfCategories, setListOfCategories] = useState([]);
     const [listOfStatuses, setListOfStatuses] = useState([]);
 
+    const handleSubmit = (event) => {
+        if (event !== undefined) event.preventDefault();
+
+        axios(
+            {
+                method: 'get',
+                url: 'API/GetEntries',
+                params: {
+                    userID: sessionStorage.getItem('user'),
+                    category: category,
+                    status: status,
+                    timeframe: timeframe,
+                    notesText: notesText
+                }
+            }
+        ).then((res) => {
+            
+            if(!res.data.includes("Error")){
+                setEntryList(res.data);
+                setResponse("Success!");    
+                console.log(res.data);            
+            }
+            else setResponse(res.data);
+        }
+        ).catch((err) => {
+            setResponse(err.response.statusText);
+        });
+    }
+
     // Runs when loaded once to load Categories and Statuses
     if (!downloadedData){
         if(sessionStorage.getItem('isDiabetic') === "true")
@@ -49,45 +78,21 @@ const EntryList = () => {
             setListOfStatuses(res.data);
         });
 
+        // Initial load of data with no filters
+        handleSubmit();
+
         setDownloadedData(true);
     }
 
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
 
-        axios(
-            {
-                method: 'get',
-                url: 'API/GetEntries',
-                params: {
-                    userID: sessionStorage.getItem('user'),
-                    category: category,
-                    status: status,
-                    timeframe: timeframe,
-                    notesText: notesText
-                }
-            }
-        ).then((res) => {
-            
-            if(!res.data.includes("Error")){
-                setEntryList(res.data);
-                setResponse("Success!");    
-                console.log(res.data);            
-            }
-            else setResponse(res.data);
-        }
-        ).catch((err) => {
-            setResponse(err.response.statusText);
-        });
-    }
 
     
     return (
         <div id="entry-list">
             <h2>My Notebook</h2>
             <h4>Filter options</h4>
-            {response !== "" ? <PopUp message={response} /> : ""}
+            {(response !== "" && response !== "Success!") ? <PopUp message={response} /> : ""}
             <form onSubmit={event => handleSubmit(event)}>
 
                 <label htmlFor='timeframe'>Time Frame: </label>
