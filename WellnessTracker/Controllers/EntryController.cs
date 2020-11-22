@@ -220,6 +220,14 @@ namespace WellnessTracker.Controllers
             }
         }
 
+        public static List<Allergen> GetAllergens()
+        {
+            using (EntryContext context = new EntryContext())
+            {
+                return context.Allergens.ToList();
+            }
+        }
+
         public static List<Category> GetCategories()
         {
             using (EntryContext context = new EntryContext())

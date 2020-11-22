@@ -8,6 +8,7 @@ const MakeEntry = () => {
     const [downloadedData, setDownloadedData] = useState(false);
     const [listOfCategories, setListOfCategories] = useState([]);
     const [listOfStatuses, setListOfStatuses] = useState([]);
+    const [listOfAllergens, setListOfAllergens] = useState([]);
 
     const [category, setCategory] = useState("-1");
     const [status, setStatus] = useState("-1");
@@ -18,6 +19,9 @@ const MakeEntry = () => {
     const [notes, setNotes] = useState("");
     const [insulin, setInsulin] = useState(0);
     const [bg, setBG] = useState(0);
+    const [allergen1, setAllergen1] = useState("0");
+    const [allergen2, setAllergen2] = useState("0");
+    const [allergen3, setAllergen3] = useState("0");
 
     // Runs when loaded once to load Categories and Statuses
     if (!downloadedData){
@@ -50,6 +54,16 @@ const MakeEntry = () => {
             }
         ).then((res) => {     
             setListOfStatuses(res.data);
+        });
+
+        axios(
+            {
+                method: 'get',
+                url: 'API/GetAllergens'
+            }
+        ).then((res) => {     
+            console.log(res.data);
+            setListOfAllergens(res.data);
         });
 
 
@@ -126,6 +140,30 @@ const MakeEntry = () => {
    
                     <label htmlFor='fats'>Fats: </label>
                     <input id='fats' name='fats' type='number' onChange={(e) => setFats(e.target.value)} value={fats} />
+
+                    <label htmlFor='allergen1'>Allergen 1: </label>
+                    <select name='allergen1' id='allergen1' onChange={(e) => setAllergen1(e.target.value)}>
+                        <option value="0">N/A</option>
+                        {
+                            listOfAllergens.map( (allergenItem) => <option key={allergenItem.id} value={allergenItem.id}>{allergenItem.name}</option>)
+                        }
+                    </select>
+
+                    <label htmlFor='allergen2'>Allergen 2: </label>
+                    <select name='allergen2' id='allergen2' onChange={(e) => setAllergen2(e.target.value)}>
+                        <option value="0">N/A</option>
+                        {
+                            listOfAllergens.map( (allergenItem) => <option key={allergenItem.id} value={allergenItem.id}>{allergenItem.name}</option>)
+                        }
+                    </select>
+
+                    <label htmlFor='allergen3'>Allergen 3: </label>
+                    <select name='allergen3' id='allergen3' onChange={(e) => setAllergen3(e.target.value)}>
+                        <option value="0">N/A</option>
+                        {
+                            listOfAllergens.map( (allergenItem) => <option key={allergenItem.id} value={allergenItem.id}>{allergenItem.name}</option>)
+                        }
+                    </select>
                     
                     {
                         (sessionStorage.getItem('isDiabetic') === "true") ?

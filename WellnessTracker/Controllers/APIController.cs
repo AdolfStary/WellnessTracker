@@ -87,6 +87,12 @@ namespace WellnessTracker.Controllers
             return EntryController.GetStatuses();
         }
 
+        [HttpGet("GetAllergens")]
+        public List<Allergen> GetAllergens_GET()
+        {
+            return EntryController.GetAllergens();
+        }
+
         [HttpGet("GetCategories")]
         public List<Category> GetCategories_GET()
         {
