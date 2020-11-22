@@ -88,7 +88,10 @@ const MakeEntry = () => {
                     fats: fats,
                     notes: notes,
                     insulin: insulin,
-                    bg: bg   
+                    bg: bg,
+                    allergen1: allergen1,
+                    allergen2: allergen2,
+                    allergen3: allergen3 
                 }
             }
         ).then((res) => {     

@@ -61,11 +61,23 @@ namespace WellnessTracker.Controllers
 
         }
 
-        public static string MakeEntry(int categoryID, string userID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg)
+        public static string MakeEntry(int categoryID, string userID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg, int allergen1, int allergen2, int allergen3)
         {
             try
             {
-                
+                if (allergen1 != 0)
+                {
+                    if (GetAllergenByID(allergen1) == null) throw new Exception("Passed allergen 1 doesn't exist.");
+                }
+                if (allergen2 != 0)
+                {
+                    if (GetAllergenByID(allergen2) == null) throw new Exception("Passed allergen 2 doesn't exist.");
+                }
+                if (allergen3 != 0)
+                {
+                    if (GetAllergenByID(allergen3) == null) throw new Exception("Passed allergen 3 doesn't exist.");
+                }
+
                 if (GetCategoryByID(categoryID) == null)
                 {
                     throw new Exception("Category doesn't exist.");
@@ -101,6 +113,45 @@ namespace WellnessTracker.Controllers
                         
                         Entry newEntry = new Entry(categoryID, userID, statusID, time, carbs, protein, fats, notes, insulin, bg);
                         context.Entries.Add(newEntry);
+                        context.SaveChanges();
+
+                        if (allergen1 != 0)
+                        {
+                            context.Allergen_Entries.Add(
+                                    new Allergen_Entry()
+                                    {
+                                        AllergenID = allergen1,
+                                        EntryID = newEntry.ID
+                                    }
+
+                                );
+                        }
+
+                        if (allergen2 != 0)
+                        {
+                            context.Allergen_Entries.Add(
+                                    new Allergen_Entry()
+                                    {
+                                        AllergenID = allergen2,
+                                        EntryID = newEntry.ID
+                                    }
+
+                                );
+                        }
+
+                        if (allergen3 != 0)
+                        {
+                            context.Allergen_Entries.Add(
+                                    new Allergen_Entry()
+                                    {
+                                        AllergenID = allergen3,
+                                        EntryID = newEntry.ID
+                                    }
+
+                                );
+                        }
+
+
 
                         context.SaveChanges();
                     }
@@ -216,7 +267,7 @@ namespace WellnessTracker.Controllers
         {
             using (EntryContext context = new EntryContext())
             {
-                return context.Statuses.ToList();
+                return context.Statuses.OrderBy(x => x.Name).ToList();
             }
         }
 
@@ -224,7 +275,15 @@ namespace WellnessTracker.Controllers
         {
             using (EntryContext context = new EntryContext())
             {
-                return context.Allergens.ToList();
+                return context.Allergens.OrderBy(x => x.Name).ToList();
+            }
+        }
+
+        public static Allergen GetAllergenByID(int allergenID)
+        {
+            using (EntryContext context = new EntryContext())
+            {
+                return context.Allergens.Where(x => x.ID == allergenID).SingleOrDefault();
             }
         }
 

@@ -32,6 +32,7 @@ namespace WellnessTracker.Models
         [InverseProperty(nameof(Models.Entry.EntryAllergens))]
         public virtual Entry Entry { get; set; }
 
+        public Allergen_Entry() { }
 
     }
 }
