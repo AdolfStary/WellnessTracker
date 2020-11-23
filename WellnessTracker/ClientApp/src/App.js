@@ -7,6 +7,7 @@ import Register from './components/Register';
 import Logout from './components/Logout';
 import MakeEntry from './components/MakeEntry';
 import EntryList from './components/EntryList';
+import EntryDetail from './components/EntryDetail';
 import './custom.css'
 
 
@@ -20,6 +21,7 @@ export default class App extends Component {
             <Route path='/login' component={Login} />
             <Route path='/makeentry' component={MakeEntry} />
             <Route path='/listentry' component={EntryList} />
+            <Route path='/EntryDetail' component={EntryDetail} />
         <Route path='/register' component={Register} />
         <Route path='/logout' component={Logout} />
       </Layout>

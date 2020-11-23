@@ -1,43 +1,63 @@
 import React from 'react';
 
 
-const EntryCard = (props) => {
+const EntryDetail = (props) => {
 
-    return (
-        <div className={`entry-card ${props.category.name}`}>
+    let entry;
+    let i = 0;
+    
 
-            <div className={`category ${props.category.name}`}>{props.category.name}</div>
+    if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === "") {
+        return (
+            <p className="alert alert-danger">You do not have access to this page.</p>
+        );
+    }
+    else if (sessionStorage.getItem('entry') === null || sessionStorage.getItem('entry') === undefined)
+    {
+        return (
+            <p className="alert alert-danger">Entry details are not available.</p>
+        );
+    }
+    else
+    {
+        
+        entry = JSON.parse(sessionStorage.getItem('entry'));        
 
-            <div className={`status ${props.status.name}`}>{props.status.name}</div>
+        return (
+            <div className={`entry-card ${entry.entryCategory.name}`}>
 
-            <div className="time">{props.time}</div>
+                <div className={`category ${entry.entryCategory.name}`}>{entry.entryCategory.name}</div>
 
-            { 
-                // If person is a diabetic and they measured blood glucose or took insulin - show diabetic data
-                (sessionStorage.getItem('isDiabetic') === true && (props.bg !== 0 || props.insulin !== 0)) ?
-                <div className="diabetes">
-                    <div className="bg">{props.bg}</div>
-                    <div className="insulin">{props.insulin}</div>
-                </div>
-                : false
-            }
-            
-            {
-                // If entry was a meal, show nutrition
-                (props.category.name == "Meal") ? 
-                    <div className="meal">
-                        <div className="fats">{props.fats}</div>
-                        <div className="carbs">{props.carbs}</div>
-                        <div className="protein">{props.protein}</div>                        
-                    </div> 
+                <div className={`status ${entry.entryStatus.name}`}>{entry.entryStatus.name}</div>
+
+                <div className="time">{entry.time}</div>
+
+                { 
+                    // If person is a diabetic and they measured blood glucose or took insulin - show diabetic data
+                    (sessionStorage.getItem('isDiabetic') === "true" && (entry.bg !== 0 || entry.insulin !== 0)) ?
+                    <div className="diabetes">
+                        <div className="bg">BG: {entry.bg}</div>
+                        <div className="insulin">Insulin Dose: {entry.insulin}</div>
+                    </div>
                     : false
-            }
+                }
+                
+                {
+                    // If entry was a meal, show nutrition
+                    (entry.entryCategory.name == "Meal") ? 
+                        <div className="meal">
+                            <div className="fats">{entry.fats}</div>
+                            <div className="carbs">{entry.carbs}</div>
+                            <div className="protein">{entry.protein}</div>                        
+                        </div> 
+                        : false
+                }
 
-            <div className="notes">{props.notes}</div>
-
-
-        </div>
-    );
+                <div className="notes">{entry.notes}</div>
+                
+            </div>
+        );
+    }
 }
-export {EntryCard}
+export default EntryDetail;
   

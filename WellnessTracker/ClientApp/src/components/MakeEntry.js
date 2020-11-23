@@ -10,8 +10,8 @@ const MakeEntry = () => {
     const [listOfStatuses, setListOfStatuses] = useState([]);
     const [listOfAllergens, setListOfAllergens] = useState([]);
 
-    const [category, setCategory] = useState("-1");
-    const [status, setStatus] = useState("-1");
+    const [category, setCategory] = useState("-5");
+    const [status, setStatus] = useState("-5");
     const [time, setTime] = useState("");
     const [carbs, setCarbs] = useState(0);
     const [protein, setProtein] = useState(0);
@@ -119,14 +119,14 @@ const MakeEntry = () => {
                 <form onSubmit={event => handleSubmit(event)}>
 
                     <label htmlFor='category'>Category: </label>
-                    <select name='category' id='category' onChange={(e) => setCategory(e.target.value)}>
+                    <select name='category' id='category' onChange={(e) => setCategory(e.target.value)} value={category}>
                         {
                             listOfCategories.map( (categoryItem) => <option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</option>)
                         }
                     </select>
 
                     <label htmlFor='status'>Mood: </label>
-                    <select name='status' id='status' onChange={(e) => setStatus(e.target.value)}>
+                    <select name='status' id='status' onChange={(e) => setStatus(e.target.value)} value={status}>
                         {
                             listOfStatuses.map( (statusItem) => <option key={statusItem.id} value={statusItem.id}>{statusItem.name}</option>)
                         }

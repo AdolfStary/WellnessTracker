@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 
 const EntryCard = (props) => {
 
+    const assignClickedEntry = () => {
+        sessionStorage.setItem('entry', JSON.stringify(props.entry))
+    }
     return (
-    <Link to="/EntryDetail" /*onClick={pass ID or object to session storage so I can use it on EntryDetail}*/>
+    <Link to="/EntryDetail" onClick={() => assignClickedEntry()}>
         <div className={`entry-card ${props.entry.categoryID}`}>
 
             <div className={`category ${props.entry.categoryID}`}>{props.entry.categoryID}</div>
