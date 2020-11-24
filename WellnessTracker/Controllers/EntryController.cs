@@ -301,6 +301,14 @@ namespace WellnessTracker.Controllers
             }
         }
 
+        public static Entry GetEntryByID(int id)
+        {
+            using (EntryContext context = new EntryContext())
+            {
+                return context.Entries.Where(x => x.ID == id).SingleOrDefault();
+            }
+        }
+
         public static List<Entry> GetEntries(string userID, int categoryID, int statusID, int timeframe, string notesText, bool showArchived = false)
         {
             try
@@ -386,26 +394,59 @@ namespace WellnessTracker.Controllers
         {
             try 
             {
-                Entry entryToBeChanged;
+                Entry entryToBeChanged = GetEntryByID(id);
+
+                if (entryToBeChanged == null)
+                {
+                    throw new Exception("Entry wasn't found.");
+                }
 
                 using (EntryContext context = new EntryContext())
                 {
                     entryToBeChanged = context.Entries.Where(x => x.ID == id).SingleOrDefault();
+                    entryToBeChanged.IsArchived = !entryToBeChanged.IsArchived;
 
-                    if (entryToBeChanged != null)
-                    {
-                        entryToBeChanged.IsArchived = !entryToBeChanged.IsArchived;
-
-                        context.SaveChanges();
-                    }
-                    else throw new Exception("Entry wasn't found.");
+                    context.SaveChanges();
                 }
 
                 return "Success!";
             }
             catch (Exception e)
             {
-                return $"Error deleting entry: {e.Message}";
+                return $"Error editing entry: {e.Message}";
+            }
+
+        }
+
+        public static string ChangeEntryNotesByID(int id, string notes)
+        {
+            try
+            {
+                Entry entryToBeChanged = GetEntryByID(id);
+
+                if (entryToBeChanged == null)
+                {
+                    throw new Exception("Entry wasn't found.");
+                }
+                else if (!TestString(notes))
+                {
+                    throw new Exception("Notes contain invalid characters.");
+                }
+
+                using (EntryContext context = new EntryContext())
+                {
+                    entryToBeChanged = context.Entries.Where(x => x.ID == id).SingleOrDefault();
+                    
+                    entryToBeChanged.Notes = notes;
+
+                    context.SaveChanges();
+                }
+
+                return "Success!";
+            }
+            catch (Exception e)
+            {
+                return $"Error editing entry: {e.Message}";
             }
 
         }

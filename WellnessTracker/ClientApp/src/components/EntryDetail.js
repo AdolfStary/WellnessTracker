@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import {PopUp} from './PopUp';
 
 const EntryDetail = (props) => {
 
@@ -8,6 +9,7 @@ const EntryDetail = (props) => {
     const [dataLoaded, setDataLoaded] = useState(false);
     const [textareaDisabled, setTextareaDisabled] = useState(true);
     const [notes, setNotes] = useState("No notes were entered.");
+    const [response, setResponse] = useState("");
 
     let time, date, entry;
 
@@ -28,7 +30,11 @@ const EntryDetail = (props) => {
                 entry.isArchived = !isArchived;
                 sessionStorage['entry'] = JSON.stringify(entry);
             }
-        });
+            setResponse(res.data);
+
+        }).catch((err) => {
+            setResponse(err.response.data);
+        });;
     }
 
     const changeNotes = () => {
@@ -47,8 +53,13 @@ const EntryDetail = (props) => {
                 entry.notes = notes;
                 sessionStorage['entry'] = JSON.stringify(entry);
                 setTextareaDisabled(true);
+                
             }
-        });
+            setResponse(res.data);
+
+        }).catch((err) => {
+            setResponse(err.response.data);
+        });;
     }
 
     const discardChange = () => {
@@ -92,7 +103,10 @@ const EntryDetail = (props) => {
 
 
         return (
+            <>
+            {response !== "" ? <PopUp message={response} /> : ""}
             <div className={`entry-card ${entry.entryCategory.name}`}>
+            {isArchived ? <p className="alert alert-danger right">Archived</p> : false }
 
                 <div className={`category ${entry.entryCategory.name}`}><strong>Category:</strong> {entry.entryCategory.name}</div>
 
@@ -126,7 +140,7 @@ const EntryDetail = (props) => {
             <div className="notes"><h4>Notes:</h4><textarea disabled={textareaDisabled} onChange={(e) => setNotes(e.target.value)} value={notes}></textarea></div>
                            
 
-                <div className="entry-details-buttons">
+                <div className="entry-details-buttons right">
                     { !textareaDisabled ? <input onClick={() => changeNotes()} className="btn btn-success" value="Submit Changes" />: false}
                     { !textareaDisabled ? <input onClick={() => discardChange()} className="btn btn-danger" value="Discard Changes" />: false}
                     { textareaDisabled ? <input onClick={() => setTextareaDisabled(!textareaDisabled)} className="btn btn-primary" value="Edit Notes" /> : false}
@@ -138,6 +152,7 @@ const EntryDetail = (props) => {
                 
 
             </div>
+            </>
         );
     }
 }

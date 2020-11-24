@@ -119,5 +119,15 @@ namespace WellnessTracker.Controllers
             }
             else return "Invalid ID was passed.";
         }
+
+        [HttpPatch("ChangeNotes")]
+        public string ChangeEntryNotes_PATCH(string id, string notes)
+        {
+            if (int.TryParse(id.Trim(), out int parsedID))
+            {
+                return EntryController.ChangeEntryNotesByID(parsedID, notes);
+            }
+            else return "Invalid ID was passed.";
+        }
     }
 }

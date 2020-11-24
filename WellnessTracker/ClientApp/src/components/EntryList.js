@@ -37,8 +37,7 @@ const EntryList = () => {
             
             if(!res.data.includes("Error")){
                 setEntryList(res.data);
-                setResponse("Success!");    
-                console.log(res.data);            
+                setResponse("Success!");                
             }
             else setResponse(res.data);
         }
