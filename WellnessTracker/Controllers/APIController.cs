@@ -105,5 +105,19 @@ namespace WellnessTracker.Controllers
         {
             return EntryController.GetCategoriesNoDia();
         }
+
+        //////////////////////////////////
+        // Patch
+        //////////////////////////////////
+
+        [HttpPatch("ChangeArchived")]
+        public string ChangeArchivedEntry_PATCH(string id)
+        {
+            if (int.TryParse(id.Trim(), out int parsedID))
+            {
+                return EntryController.ChangeArchivedEntryByID(parsedID);
+            }
+            else return "Invalid ID was passed.";
+        }
     }
 }

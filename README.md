@@ -16,6 +16,7 @@ https://www.c-sharpcorner.com/article/hashing-passwords-in-net-core-with-tips/
 https://stackoverflow.com/questions/60197270/jsonexception-a-possible-object-cycle-was-detected-which-is-not-supported-this
 https://stackoverflow.com/questions/6193574/save-javascript-objects-in-sessionstorage
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+https://stackoverflow.com/questions/263965/how-can-i-convert-a-string-to-boolean-in-javascript
 
 
 # Trello

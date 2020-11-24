@@ -382,22 +382,26 @@ namespace WellnessTracker.Controllers
             }
         }
 
-        public static string ArchiveEntryByID(int id)
+        public static string ChangeArchivedEntryByID(int id)
         {
             try 
             {
-                Entry entryToBeArchived;
+                Entry entryToBeChanged;
 
                 using (EntryContext context = new EntryContext())
                 {
-                    entryToBeArchived = context.Entries.Where(x => x.ID == id).SingleOrDefault();
+                    entryToBeChanged = context.Entries.Where(x => x.ID == id).SingleOrDefault();
 
-                    entryToBeArchived.IsArchived = true;
+                    if (entryToBeChanged != null)
+                    {
+                        entryToBeChanged.IsArchived = !entryToBeChanged.IsArchived;
 
-                    context.SaveChanges();
+                        context.SaveChanges();
+                    }
+                    else throw new Exception("Entry wasn't found.");
                 }
 
-                return "Success";
+                return "Success!";
             }
             catch (Exception e)
             {
