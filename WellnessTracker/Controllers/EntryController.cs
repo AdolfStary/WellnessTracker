@@ -301,7 +301,7 @@ namespace WellnessTracker.Controllers
             }
         }
 
-        public static List<Entry> GetEntries(string userID, int categoryID, int statusID, int timeframe, string notesText)
+        public static List<Entry> GetEntries(string userID, int categoryID, int statusID, int timeframe, string notesText, bool showArchived = false)
         {
             try
             {
@@ -348,6 +348,10 @@ namespace WellnessTracker.Controllers
                     {
                         listOfEntries = context.Entries.Where(x => x.UserID == userID).Include(x => x.EntryCategory).Include(x => x.EntryStatus).Include(x => x.EntryAllergens).ThenInclude(x=> x.Allergen).ToList();
                     }
+                    if (!showArchived)
+                    {
+                        listOfEntries = listOfEntries.Where(x => x.IsArchived == false).ToList();
+                    }
 
                     if (categoryID != 0)
                     {
@@ -376,6 +380,30 @@ namespace WellnessTracker.Controllers
             {
                 return new List<Entry>()/*$"Error making an entry: {e.Message}"*/;
             }
+        }
+
+        public static string ArchiveEntryByID(int id)
+        {
+            try 
+            {
+                Entry entryToBeArchived;
+
+                using (EntryContext context = new EntryContext())
+                {
+                    entryToBeArchived = context.Entries.Where(x => x.ID == id).SingleOrDefault();
+
+                    entryToBeArchived.IsArchived = true;
+
+                    context.SaveChanges();
+                }
+
+                return "Success";
+            }
+            catch (Exception e)
+            {
+                return $"Error deleting entry: {e.Message}";
+            }
+
         }
 
         public static Category GetCategoryByID(int id)

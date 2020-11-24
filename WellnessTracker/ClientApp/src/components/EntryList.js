@@ -15,6 +15,7 @@ const EntryList = () => {
     const [notesText, setNotesText] = useState(" ");
     const [listOfCategories, setListOfCategories] = useState([]);
     const [listOfStatuses, setListOfStatuses] = useState([]);
+    const [showArchived, setShowArchived] = useState(false);
 
     const handleSubmit = (event) => {
         if (event !== undefined) event.preventDefault();
@@ -28,7 +29,8 @@ const EntryList = () => {
                     category: category,
                     status: status,
                     timeframe: timeframe,
-                    notesText: notesText
+                    notesText: notesText,
+                    showArchived: showArchived
                 }
             }
         ).then((res) => {
@@ -128,8 +130,11 @@ const EntryList = () => {
                         }
                     </select>
 
-                    <label htmlFor='notesText'>Text in notes:</label>
+                    <label htmlFor='notesText'>Text in notes: </label>
                     <input id='notesText' name='notesText' type='text' onChange={(e) => setNotesText(e.target.value)} value={notesText} />
+
+                    <label htmlFor='showArchived'>Show Archived: </label>
+                    <input id='showArchived' name='showArchvied' type='checkbox' onChange={(e) => setShowArchived(!showArchived)} value={showArchived} />
 
                     <input type="submit" value="Filter" />
                 </form>
