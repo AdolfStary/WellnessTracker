@@ -12,3 +12,130 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+h2 {
+    padding: 1%;
+    border-bottom: 1px solid #444444;
+}
+
+#entry-list form {
+    margin: 5% auto;
+}
+
+#entry-card-list {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+.entry-card-link {
+    text-decoration: none;
+    color: #000000;
+    width: 48%;
+    height: 200px;
+    margin: 1% auto;
+}
+
+.entry-card-link:hover {
+    text-decoration: none;
+    color: #000000;
+
+}
+
+.entry-card {
+    border-radius: 5px;
+    height: 100%;
+}
+
+.entry-card:hover {
+    box-shadow: 0px 0px 5px #999999;
+}
+
+.entry-card.Meal {
+    border: 1px solid #f86d6d;
+}
+
+.entry-card.Event {
+    border: 1px solid #8ef86d;
+}
+
+.entry-card.Exercise {
+    border: 1px solid #6daef8;
+}
+
+.entry-card.Insulin.Injection{
+    border: 1px solid #f8f66d;
+}
+
+.entry-card.BG.Reading {
+    border: 1px solid #f8bc6d;
+}
+.entry-card div {
+    width: 100%;
+}
+
+
+
+.card-head {
+    padding: 3%;
+    font-weight: bold;
+}
+
+.card-head.Meal {
+    background-color: #f86d6d;
+}
+
+.card-head.Event {
+    background-color: #8ef86d;
+}
+
+.card-head.Exercise {
+    background-color: #6daef8;
+}
+
+.card-head.Insulin.Injection{
+    background-color: #e3f86d;
+}
+
+.card-head.BG.Reading {
+    background-color: #f8bc6d;
+}
+
+.card-head .time {
+    font-weight: normal;
+}
+
+.status {
+    margin: auto auto;
+    height: 30%;
+}
+
+.card-body {
+    padding: 3%;
+}
+
+.card-body .diabetes {
+    display: flex;
+    flex-flow: row;
+}
+
+.card-body .meal {
+    display: flex;
+    flex-flow: row;
+}
+/*
+    Tablet
+*/
+@media screen and (min-width: 600px) {
+    .entry-card-link {
+        width: 24%
+    }
+}
+
+/*
+    Desktop
+*/
+@media screen and (min-width: 1024px) {
+    .entry-card-link {
+        width: 19%;
+    }
+}

@@ -18,12 +18,12 @@ export default class App extends Component {
     return (
       <Layout>
         <Route exact path='/' component={Home} />
-            <Route path='/login' component={Login} />
-            <Route path='/makeentry' component={MakeEntry} />
-            <Route path='/listentry' component={EntryList} />
+            <Route path='/Login' component={Login} />
+            <Route path='/MakeEntry' component={MakeEntry} />
+            <Route path='/Notebook' component={EntryList} />
             <Route path='/EntryDetail' component={EntryDetail} />
-        <Route path='/register' component={Register} />
-        <Route path='/logout' component={Logout} />
+        <Route path='/Register' component={Register} />
+        <Route path='/Logout' component={Logout} />
       </Layout>
     );
   }
