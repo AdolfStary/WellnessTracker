@@ -28,16 +28,17 @@ namespace WellnessTracker.Controllers
         }
         
         [HttpPost("MakeEntry")]
-        public ActionResult<string> MakeEntry_POST(string categoryID, string userID, string statusID, string time, string carbs, string protein, string fats, string notes, string insulin, string bg, string allergen1, string allergen2, string allergen3)
+        public ActionResult<string> MakeEntry_POST(string categoryID, string userID, string statusID, string time, string carbs, string protein, string fats, string notes, string insulin, string bg, string allergen1, string allergen2, string allergen3, string exerciseLength)
         {
             try
             {
                 if (int.TryParse(categoryID.Trim(), out int parsedCategoryID) && int.TryParse(statusID.Trim(), out int parsedStatusID) &&
                     int.TryParse(carbs.Trim(), out int parsedCarbs) && int.TryParse(protein.Trim(), out int parsedProtein) && int.TryParse(fats.Trim(), out int parsedFats) &&
                     int.TryParse(allergen1.Trim(), out int parsedAllergen1) && int.TryParse(allergen2.Trim(), out int parsedAllergen2) && int.TryParse(allergen3.Trim(), out int parsedAllergen3) &&
-                    double.TryParse(insulin.Trim(), out double parsedInsulin) && double.TryParse(bg.Trim(), out double parsedBG) && DateTime.TryParse(time.Trim(), out DateTime parsedTime))
+                    double.TryParse(insulin.Trim(), out double parsedInsulin) && double.TryParse(bg.Trim(), out double parsedBG) && DateTime.TryParse(time.Trim(), out DateTime parsedTime)
+                    && int.TryParse(exerciseLength.Trim(), out int parsedExerciseLength))
                 {
-                    return EntryController.MakeEntry(parsedCategoryID, userID, parsedStatusID, parsedTime, parsedCarbs, parsedProtein, parsedFats, notes.Trim(), parsedInsulin, parsedBG, parsedAllergen1, parsedAllergen2, parsedAllergen3);
+                    return EntryController.MakeEntry(parsedCategoryID, userID, parsedStatusID, parsedTime, parsedCarbs, parsedProtein, parsedFats, notes.Trim(), parsedInsulin, parsedBG, parsedAllergen1, parsedAllergen2, parsedAllergen3, parsedExerciseLength);
                 }
                 else throw new Exception("Invalid values were passed.");
             }

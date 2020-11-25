@@ -52,6 +52,9 @@ namespace WellnessTracker.Models
         [Column(TypeName = "bool")]
         public bool IsArchived { get; set; }
 
+        [Column(TypeName = "int(3)")]
+        public int ExerciseLength { get; set; }
+
         [ForeignKey(nameof(StatusID))]
         [InverseProperty(nameof(Models.Status.Entries))]
         public virtual Status EntryStatus { get; set; }
@@ -73,7 +76,7 @@ namespace WellnessTracker.Models
 
         }
 
-        public Entry(int categoryID, string userID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg)
+        public Entry(int categoryID, string userID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg, int exerciseLength)
         {
             CategoryID = categoryID;
             UserID = userID;
@@ -86,6 +89,7 @@ namespace WellnessTracker.Models
             Insulin = insulin;
             BG = bg;
             IsArchived = false;
+            ExerciseLength = exerciseLength;
         }
     }
 }

@@ -61,7 +61,7 @@ namespace WellnessTracker.Controllers
 
         }
 
-        public static string MakeEntry(int categoryID, string userID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg, int allergen1, int allergen2, int allergen3)
+        public static string MakeEntry(int categoryID, string userID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg, int allergen1, int allergen2, int allergen3, int exerciseLength)
         {
             try
             {
@@ -106,12 +106,16 @@ namespace WellnessTracker.Controllers
                 {
                     throw new Exception("User doesn't exist in the database.");
                 }
+                else if (exerciseLength < 0 || exerciseLength > 999)
+                {
+                    throw new Exception("Exercise length is invalid.");
+                }
                 else
                 {                    
                     using (EntryContext context = new EntryContext())
                     {
                         
-                        Entry newEntry = new Entry(categoryID, userID, statusID, time, carbs, protein, fats, notes, insulin, bg);
+                        Entry newEntry = new Entry(categoryID, userID, statusID, time, carbs, protein, fats, notes, insulin, bg, exerciseLength);
                         context.Entries.Add(newEntry);
                         context.SaveChanges();
 
