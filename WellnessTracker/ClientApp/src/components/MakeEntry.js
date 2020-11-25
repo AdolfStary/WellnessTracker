@@ -61,8 +61,7 @@ const MakeEntry = () => {
                 method: 'get',
                 url: 'API/GetAllergens'
             }
-        ).then((res) => {     
-            console.log(res.data);
+        ).then((res) => {
             setListOfAllergens(res.data);
         });
 

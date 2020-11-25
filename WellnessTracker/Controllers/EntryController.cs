@@ -354,7 +354,7 @@ namespace WellnessTracker.Controllers
                     List<Entry> listOfEntries = new List<Entry>();
                     using (EntryContext context = new EntryContext())
                     {
-                        listOfEntries = context.Entries.Where(x => x.UserID == userID).Include(x => x.EntryCategory).Include(x => x.EntryStatus).Include(x => x.EntryAllergens).ThenInclude(x=> x.Allergen).ToList();
+                        listOfEntries = context.Entries.Where(x => x.UserID == userID).Include(x => x.EntryCategory).Include(x => x.EntryStatus).Include(x => x.EntryAllergens).ThenInclude(x=> x.Allergen).OrderByDescending(x => x.Time).ToList();
                     }
                     if (!showArchived)
                     {
