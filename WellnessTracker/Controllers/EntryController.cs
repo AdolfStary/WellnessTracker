@@ -242,7 +242,7 @@ namespace WellnessTracker.Controllers
         {
             bool result = true;
 
-            if (testString.Contains("*") || testString.Contains("=") || testString.Contains(";"))
+            if (testString.Contains("*") || (testString.Contains("=") && !testString.Contains("http")) || testString.Contains(";"))
             {
                 result = false;
             }

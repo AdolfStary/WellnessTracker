@@ -10,9 +10,20 @@ const MakeEntry = () => {
     const [listOfStatuses, setListOfStatuses] = useState([]);
     const [listOfAllergens, setListOfAllergens] = useState([]);
 
+    const now = new Date();
+    if(!downloadedData) {
+        // Got heavily inspired at : https://stackoverflow.com/questions/24468518/html5-input-datetime-local-default-value-of-today-and-current-time
+        // Had to modify to make it work for my own use. 
+        //I got heavily inspired as I didn't know how to more simplify the code to achieve same result.
+        // Method suggests creating new date, setting time straight according to timezone and then assigning as value to
+        // Datetime-local input by converting it to ISOString.
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        now.setMilliseconds(0);
+    }
+
     const [category, setCategory] = useState("-5");
     const [status, setStatus] = useState("-5");
-    const [time, setTime] = useState("");
+    const [time, setTime] = useState(now.toISOString().slice(0, -1));
     const [carbs, setCarbs] = useState(0);
     const [protein, setProtein] = useState(0);
     const [fats, setFats] = useState(0);
