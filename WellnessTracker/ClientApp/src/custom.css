@@ -22,10 +22,14 @@ code {
   border-color: #1861ac;
 }
 
-h2 {
+h1, h2 {
     font-family: 'Architects Daughter', cursive;
     padding: 1%;
     border-bottom: 1px solid #444444;
+}
+
+form input, select {
+    margin: 1%;
 }
 
 #entry-list form {

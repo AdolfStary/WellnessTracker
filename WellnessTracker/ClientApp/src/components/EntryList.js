@@ -136,7 +136,7 @@ const EntryList = () => {
                     <label htmlFor='showArchived'>Show Archived: </label>
                     <input id='showArchived' name='showArchvied' type='checkbox' onChange={(e) => setShowArchived(!showArchived)} value={showArchived} />
 
-                    <input type="submit" value="Filter" />
+                    <input type="submit" className="btn btn-primary" value="Filter" />
                 </form>
                 <div id="entry-card-list">
                     
