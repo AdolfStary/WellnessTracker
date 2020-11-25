@@ -58,6 +58,9 @@ form input, select {
 .entry-card {
     border-radius: 5px;
     height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
 }
 
 .entry-card:hover {
@@ -66,26 +69,70 @@ form input, select {
 
 .entry-card.Meal {
     border: 1px solid #f86d6d;
+    background-color: #fccece;
 }
 
 .entry-card.Event {
     border: 1px solid #8ef86d;
+    background-color: #d3fac7;
 }
 
 .entry-card.Exercise {
     border: 1px solid #6daef8;
+    background-color: #c7dffa;
 }
 
 .entry-card.Insulin.Injection{
     border: 1px solid #f8f66d;
+    background-color: #f8f7c5;
 }
 
 .entry-card.BG.Reading {
     border: 1px solid #f8bc6d;
+    background-color: #f8e2c5;
 }
 .entry-card div {
     width: 100%;
 }
+
+.entry-card .card-head.true {
+    border-bottom: 3px solid #10fa10;
+}
+
+.entry-card .card-head.false {
+    border-bottom: 3px solid #3f96fa;
+}
+
+.entry-card .card-body {
+    text-align: center; 
+    display: flex;
+    flex-flow: column;
+}
+
+.entry-card .card-body .diabetes {
+    display: flex;
+    margin: auto;
+}
+
+.entry-card .card-body .meal {
+    display: flex;
+    margin: auto;
+}
+
+.entry-card .card-body .exercise {
+    display: flex;
+    margin: auto;
+}
+
+.entry-card .card-head .status {
+    text-align: right;
+    padding: 5px 2px 0px 5px;
+    border-radius: 5px;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 12px;
+}
+
 
 
 
@@ -197,7 +244,15 @@ table {
 /*
     Tablet
 */
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 500px) {
+    .entry-card-link {
+        width: 32%
+    }
+
+
+}
+
+@media screen and (min-width: 768px) {
     .entry-card-link {
         width: 24%
     }
