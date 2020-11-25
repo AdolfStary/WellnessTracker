@@ -11,7 +11,7 @@ const EntryList = () => {
 
     const [category, setCategory] = useState("0");
     const [status, setStatus] = useState("0");
-    const [timeframe, setTimeframe] = useState("0");
+    const [timeframe, setTimeframe] = useState("-1");
     const [notesText, setNotesText] = useState(" ");
     const [listOfCategories, setListOfCategories] = useState([]);
     const [listOfStatuses, setListOfStatuses] = useState([]);
@@ -105,7 +105,8 @@ const EntryList = () => {
                     <h4>Filter options</h4>
                     <label htmlFor='timeframe'>Time Frame: </label>
                     <select id='timeframe' name='timeframe'onChange={(e) => setTimeframe(e.target.value)} value={timeframe} required>
-                        <option value="0">To date</option>
+                        <option value="-1">To date</option>
+                        <option value="0">Today</option>
                         <option value="7">Past week</option>
                         <option value="14">Past 2 weeks</option>
                         <option value="30">Past 30 days</option>

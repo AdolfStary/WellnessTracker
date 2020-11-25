@@ -33,6 +33,7 @@ const MakeEntry = () => {
     const [allergen1, setAllergen1] = useState("0");
     const [allergen2, setAllergen2] = useState("0");
     const [allergen3, setAllergen3] = useState("0");
+    const [exerciseLength, setExerciseLength] = useState("0");
 
     // Runs when loaded once to load Categories and Statuses
     if (!downloadedData){
@@ -101,7 +102,8 @@ const MakeEntry = () => {
                     bg: bg,
                     allergen1: allergen1,
                     allergen2: allergen2,
-                    allergen3: allergen3 
+                    allergen3: allergen3,
+                    exerciseLength: exerciseLength
                 }
             }
         ).then((res) => {     

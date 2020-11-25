@@ -1,10 +1,19 @@
 /* Provide sufficient contrast against white background */
+/* 
+    heading font: font-family: 'Architects Daughter', cursive;
+
+
+*/
 a {
   color: #0366d6;
 }
 
 code {
   color: #E01A76;
+}
+
+.mainlogo {
+    font-family: 'Architects Daughter', cursive;
 }
 
 .btn-primary {
@@ -14,6 +23,7 @@ code {
 }
 
 h2 {
+    font-family: 'Architects Daughter', cursive;
     padding: 1%;
     border-bottom: 1px solid #444444;
 }
@@ -138,6 +148,47 @@ h2 {
     width: 96%;
     height: 200px;
     margin: 1% auto;
+}
+
+.today-chart {
+    display: flex;
+    flex-flow: row;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 10px;
+    margin: 2% auto;
+}
+
+.today-chart table, td, th {
+    border-radius: 5px 5px 0px 0px;
+    height: 6rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.today-chart table, td {
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 0px 0px 5px 5px;
+}
+
+
+.today-meal-fats, .today-diabetes-bg {
+    background-color: #f86d6d;
+}
+
+.today-meal-carbs, .today-diabetes-avginsulin {
+    background-color: #e3f86d;
+}
+
+.today-meal-protein, .today-diabetes-totinsulin {
+    background-color: #6daef8;
+}
+
+.today-meal-meals {
+    background-color: #8ef86d;
 }
 /*
     Tablet

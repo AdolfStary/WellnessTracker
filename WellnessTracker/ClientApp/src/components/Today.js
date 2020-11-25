@@ -16,7 +16,7 @@ const Today = () => {
                     userID: sessionStorage.getItem('user'),
                     category: "-5",
                     status: "0",
-                    timeframe: "1",
+                    timeframe: "0",
                     notesText: "",
                     showArchived: false
                 }
@@ -143,8 +143,8 @@ const Today = () => {
                                 <tbody>
                                     <tr>
                                         <td className="today-diabetes-bg">{avgBG()}</td>
-                                        <td className="today-diabetes-avginsulin">{avgInsulin()}</td>
-                                        <td className="today-diabetes-totinsulin">{totalInsulin()}</td>
+                                        <td className="today-diabetes-avginsulin">{avgInsulin()}u</td>
+                                        <td className="today-diabetes-totinsulin">{totalInsulin()}u</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -163,9 +163,9 @@ const Today = () => {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td className="today-meal-fats">{totalFats()}</td>
-                                    <td className="today-meal-carbs">{totalCarbs()}</td>
-                                    <td className="today-meal-protein">{totalProtein()}</td>
+                                    <td className="today-meal-fats">{totalFats()}g</td>
+                                    <td className="today-meal-carbs">{totalCarbs()}g</td>
+                                    <td className="today-meal-protein">{totalProtein()}g</td>
                                     <td className="today-meal-meals">{totalMeals()}</td>
                                 </tr>
                             </tbody>

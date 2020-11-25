@@ -337,7 +337,7 @@ namespace WellnessTracker.Controllers
                     }
                 }
 
-                if (timeframe < 0 || timeframe > 180)
+                if (timeframe < -1 || timeframe > 180)
                 {
                     throw new Exception("Incorrect timeframe was received.");
                 }
@@ -371,7 +371,7 @@ namespace WellnessTracker.Controllers
                         listOfEntries = listOfEntries.Where(x => x.StatusID == statusID).ToList();
                     }
 
-                    if (timeframe != 0)
+                    if (timeframe != -1)
                     {
                         listOfEntries = listOfEntries.Where(x => (DateTime.Now - x.Time).TotalDays <= timeframe).ToList();
                     }
