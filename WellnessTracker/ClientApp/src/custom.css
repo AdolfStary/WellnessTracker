@@ -4,6 +4,12 @@
 
 
 */
+
+/*
+    ////////////////////////////////////////
+    // General
+    ////////////////////////////////////////
+*/
 a {
   color: #0366d6;
 }
@@ -35,6 +41,82 @@ form input, select {
     margin: 1%; 
 }
 
+table {
+    border-collapse: separate;
+    border-spacing: 10px;
+    margin: 2% auto;
+}
+
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+/*
+    ////////////////////////////////////////
+    // Entry Form
+    ////////////////////////////////////////
+*/
+
+#entryform form {
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    margin: 2%;
+    width: 95%;
+}
+
+#entryform form div.main-section {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 1% auto;
+    width: 95%;
+    text-align: center;
+}
+
+
+#entryform form #carbs, #fats, #protein, #bg, #insulin {
+    width: 3.25rem;
+}
+
+#entryform div.notes {
+    flex-flow: column;
+    align-items: normal;
+}
+
+#entryform div.notes label {
+    text-align: left;
+}
+
+#entryform textarea {
+    margin: auto;
+    width: 95%;
+    height: 150px;
+}
+
+#entryform div div {
+    flex-flow: column;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+#entryform div.allergens, div.nutrition {
+    flex-flow: column;
+    align-items: stretch;
+    width: 45%;
+}
+
+
+/*
+    ////////////////////////////////////////
+    // Entry List
+    ////////////////////////////////////////
+*/
 #entry-list form {
     display: flex;
     flex-wrap: wrap;
@@ -66,6 +148,12 @@ form input, select {
     color: #000000;
 
 }
+
+/*
+    ////////////////////////////////////////
+    // Entry Card
+    ////////////////////////////////////////
+*/
 
 .entry-card {
     border-radius: 5px;
@@ -145,9 +233,6 @@ form input, select {
     font-size: 12px;
 }
 
-
-
-
 .card-head {
     padding: 3%;
     font-weight: bold;
@@ -196,9 +281,11 @@ form input, select {
     flex-flow: row;
 }
 
-.right {
-    text-align: right;
-}
+/*
+    ////////////////////////////////////////
+    // Entry Details
+    ////////////////////////////////////////
+*/
 
 .entry-details-buttons input {
     margin: 1% auto;
@@ -213,16 +300,18 @@ form input, select {
     margin: 1% auto;
 }
 
+/*
+    ////////////////////////////////////////
+    // Today
+    ////////////////////////////////////////
+*/
+
 .today-chart {
     display: flex;
     flex-flow: row;
 }
 
-table {
-    border-collapse: separate;
-    border-spacing: 10px;
-    margin: 2% auto;
-}
+
 
 .today-chart table, td, th {
     border-radius: 5px 5px 0px 0px;
@@ -257,8 +346,12 @@ table {
 .today-meal-protein, .today-diabetes-totinsulin {
     background-color: #f8bc6d;
 }
+
+
 /*
-    Tablet
+    ////////////////////////////////////////
+    // Tablet
+    ////////////////////////////////////////
 */
 @media screen and (min-width: 500px) {
     .entry-card-link {
@@ -277,7 +370,9 @@ table {
 }
 
 /*
-    Desktop
+    ////////////////////////////////////////
+    // Desktop
+    ////////////////////////////////////////
 */
 @media screen and (min-width: 1024px) {
     .entry-card-link {

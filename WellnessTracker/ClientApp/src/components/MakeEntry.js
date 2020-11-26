@@ -129,60 +129,76 @@ const MakeEntry = () => {
                 <h2>Make an entry</h2>
                 {response !== "" ? <PopUp message={response} /> : ""}
                 <form onSubmit={event => handleSubmit(event)}>
+                    <div className="main-section">
+                        <div>
+                            <label htmlFor='category'>Category: </label>
+                            <select name='category' id='category' onChange={(e) => setCategory(e.target.value)} value={category}>
+                                {
+                                    listOfCategories.map( (categoryItem) => <option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</option>)
+                                }
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor='status'>Mood: </label>
+                            <select name='status' id='status' onChange={(e) => setStatus(e.target.value)} value={status}>
+                                {
+                                    listOfStatuses.map( (statusItem) => <option key={statusItem.id} value={statusItem.id}>{statusItem.name}</option>)
+                                }
+                            </select>
+                        </div>                        
+                        <div>
+                            <label htmlFor='time'>Time: </label>
+                            <input id='time' name='time' type='datetime-local' onChange={(e) => setTime(e.target.value)} value={time} required />
+                        </div>
+                    </div>
 
-                    <label htmlFor='category'>Category: </label>
-                    <select name='category' id='category' onChange={(e) => setCategory(e.target.value)} value={category}>
-                        {
-                            listOfCategories.map( (categoryItem) => <option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</option>)
-                        }
-                    </select>
-
-                    <label htmlFor='status'>Mood: </label>
-                    <select name='status' id='status' onChange={(e) => setStatus(e.target.value)} value={status}>
-                        {
-                            listOfStatuses.map( (statusItem) => <option key={statusItem.id} value={statusItem.id}>{statusItem.name}</option>)
-                        }
-                    </select>
-
-                    <label htmlFor='time'>Time: </label>
-                    <input id='time' name='time' type='datetime-local' onChange={(e) => setTime(e.target.value)} value={time} required />
-                    
                     {
                         // If the selected category is "Meal", show meal entry options
                         (category === "-5") ? 
-                        <div>
-                            <label htmlFor='carbs'>Carbs: </label>
-                            <input id='carbs' name='carbs' type='number' onChange={(e) => setCarbs(e.target.value)} value={carbs} />
-
-                            <label htmlFor='protein'>Protein: </label>
-                            <input id='protein' name='protein' type='number' onChange={(e) => setProtein(e.target.value)} value={protein} />
-        
-                            <label htmlFor='fats'>Fats: </label>
-                            <input id='fats' name='fats' type='number' onChange={(e) => setFats(e.target.value)} value={fats} />
-
-                            <label htmlFor='allergen1'>Allergen 1: </label>
-                            <select name='allergen1' id='allergen1' onChange={(e) => setAllergen1(e.target.value)}>
-                                <option value="0">N/A</option>
-                                {
-                                    listOfAllergens.map( (allergenItem) => <option key={allergenItem.id} value={allergenItem.id}>{allergenItem.name}</option>)
-                                }
-                            </select>
-
-                            <label htmlFor='allergen2'>Allergen 2: </label>
-                            <select name='allergen2' id='allergen2' onChange={(e) => setAllergen2(e.target.value)}>
-                                <option value="0">N/A</option>
-                                {
-                                    listOfAllergens.map( (allergenItem) => <option key={allergenItem.id} value={allergenItem.id}>{allergenItem.name}</option>)
-                                }
-                            </select>
-
-                            <label htmlFor='allergen3'>Allergen 3: </label>
-                            <select name='allergen3' id='allergen3' onChange={(e) => setAllergen3(e.target.value)}>
-                                <option value="0">N/A</option>
-                                {
-                                    listOfAllergens.map( (allergenItem) => <option key={allergenItem.id} value={allergenItem.id}>{allergenItem.name}</option>)
-                                }
-                            </select>
+                        <div className="main-section">
+                            <div className="nutrition">
+                                <div>
+                                    <label htmlFor='carbs'>Carbs: </label>
+                                    <input id='carbs' name='carbs' type='number' onChange={(e) => setCarbs(e.target.value)} value={carbs} />
+                                </div>
+                                <div>
+                                    <label htmlFor='protein'>Protein: </label>
+                                    <input id='protein' name='protein' type='number' onChange={(e) => setProtein(e.target.value)} value={protein} />
+                                </div>
+                                <div>
+                                    <label htmlFor='fats'>Fats: </label>
+                                    <input id='fats' name='fats' type='number' onChange={(e) => setFats(e.target.value)} value={fats} />
+                                </div>
+                            </div>
+                            <div className="allergens">
+                                <div>
+                                    <label htmlFor='allergen1'>Allergen 1: </label>
+                                    <select name='allergen1' id='allergen1' onChange={(e) => setAllergen1(e.target.value)}>
+                                        <option value="0">N/A</option>
+                                        {
+                                            listOfAllergens.map( (allergenItem) => <option key={allergenItem.id} value={allergenItem.id}>{allergenItem.name}</option>)
+                                        }
+                                    </select>
+                                </div>
+                                <div>
+                                    <label htmlFor='allergen2'>Allergen 2: </label>
+                                    <select name='allergen2' id='allergen2' onChange={(e) => setAllergen2(e.target.value)}>
+                                        <option value="0">N/A</option>
+                                        {
+                                            listOfAllergens.map( (allergenItem) => <option key={allergenItem.id} value={allergenItem.id}>{allergenItem.name}</option>)
+                                        }
+                                    </select>
+                                </div>
+                                <div>
+                                    <label htmlFor='allergen3'>Allergen 3: </label>
+                                    <select name='allergen3' id='allergen3' onChange={(e) => setAllergen3(e.target.value)}>
+                                        <option value="0">N/A</option>
+                                        {
+                                            listOfAllergens.map( (allergenItem) => <option key={allergenItem.id} value={allergenItem.id}>{allergenItem.name}</option>)
+                                        }
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         : false
                     }
@@ -190,7 +206,7 @@ const MakeEntry = () => {
                     {
                         // If Category is "Exercise" show exercise entry options
                         (category === "-4") ?
-                        <div>
+                        <div className="main-section">
                             <label htmlFor='exerciseLength'>Length of exercies (minutes): </label>
                             <input id='exerciseLength' name='exerciseLength' type='number' onChange={(e) => setExerciseLength(e.target.value)} value={exerciseLength} />
                         </div>
@@ -201,19 +217,23 @@ const MakeEntry = () => {
                     
                     {
                         (sessionStorage.getItem('isDiabetic') === "true") ?
-                            <div>
-                                <label htmlFor='insulin'>Insulin: </label>
-                                <input id='insulin' name='insulin' type='number' onChange={(e) => setInsulin(e.target.value)} value={insulin} />
-                                
-                                <label htmlFor='bg'>Blood Glucose: </label>
-                                <input id='bg' name='bg' type='number' onChange={(e) => setBG(e.target.value)} value={bg} />
+                            <div className="main-section">
+                                <div>
+                                    <label htmlFor='insulin'>Insulin: </label>
+                                    <input id='insulin' name='insulin' type='number' onChange={(e) => setInsulin(e.target.value)} value={insulin} />
+                                </div>
+                                <div>
+                                    <label htmlFor='bg'>Blood Glucose: </label>
+                                    <input id='bg' name='bg' type='number' onChange={(e) => setBG(e.target.value)} value={bg} />
+                                </div>
                             </div>
                             : false
                     }
 
-                    <label htmlFor='notes'>Notes: </label>
-                    <textarea id='notes' name='notes' onChange={(e) => setNotes(e.target.value)} value={notes} />
-
+                    <div className="notes main-section">
+                        <label htmlFor='notes'>Notes: </label>
+                        <textarea id='notes' name='notes' onChange={(e) => setNotes(e.target.value)} value={notes} />
+                    </div>
 
                     <input type='submit' className="btn btn-primary" value='Make Entry' />
                 </form>
