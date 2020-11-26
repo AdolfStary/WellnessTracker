@@ -40,7 +40,7 @@ const Today = () => {
             }
         }
 
-        count > 0 ? result = total / count : result = "N/A";
+        count > 0 ? result = (total / count) : result = "N/A";
 
         return result;
     }
@@ -56,7 +56,7 @@ const Today = () => {
             }
         }
 
-        count > 0 ? result = total / count : result = "N/A";
+        count > 0 ? result = (total / count)+"u" : result = "N/A";
 
         return result;
     }
@@ -68,7 +68,7 @@ const Today = () => {
             total += item.insulin;
         }
 
-        return total > 0 ? total : "N/A";
+        return total > 0 ? total+"u" : "N/A";
     }
 
     const totalFats = () => {
@@ -78,7 +78,7 @@ const Today = () => {
             total += item.fats;
         }
 
-        return total > 0 ? total : "N/A";
+        return total > 0 ? total+"g" : "N/A";
     }
 
     const totalCarbs = () => {
@@ -88,7 +88,7 @@ const Today = () => {
             total += item.carbs;
         }
 
-        return total > 0 ? total : "N/A";
+        return total > 0 ? total+"g" : "N/A";
     }
 
     const totalProtein = () => {
@@ -98,7 +98,7 @@ const Today = () => {
             total += item.protein;
         }
 
-        return total > 0 ? total : "N/A";
+        return total > 0 ? total+"g" : "N/A";
     }
 
     const totalMeals = () => {
@@ -111,6 +111,18 @@ const Today = () => {
 
         }
         return total;
+    }
+
+    const totalExercise = () => {
+        let total = 0;
+
+        for(let item of listToday){
+            if (item.entryCategory.name === "Exercise"){
+                total += item.exerciseLength;
+            }
+
+        }
+        return total+"m";
     }
 
 
@@ -137,14 +149,14 @@ const Today = () => {
                                     <tr>
                                         <th className="today-diabetes-bg">Avg. BG</th>
                                         <th className="today-diabetes-avginsulin">Avg. insulin dose</th>
-                                        <th className="today-diabetes-totinsulin">Total meal insulin</th>                                        
+                                        <th className="today-diabetes-totinsulin">Total meal insulin</th>                                       
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td className="today-diabetes-bg">{avgBG()}</td>
-                                        <td className="today-diabetes-avginsulin">{avgInsulin()}u</td>
-                                        <td className="today-diabetes-totinsulin">{totalInsulin()}u</td>
+                                        <td className="today-diabetes-avginsulin">{avgInsulin()}</td>
+                                        <td className="today-diabetes-totinsulin">{totalInsulin()}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -159,14 +171,16 @@ const Today = () => {
                                     <th className="today-meal-carbs">Total Carbs</th>
                                     <th className="today-meal-protein">Total Protein</th>
                                     <th className="today-meal-meals">Number of meals</th>
+                                    <th className="today-meal-exercise">Exercise Today</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td className="today-meal-fats">{totalFats()}g</td>
-                                    <td className="today-meal-carbs">{totalCarbs()}g</td>
-                                    <td className="today-meal-protein">{totalProtein()}g</td>
+                                    <td className="today-meal-fats">{totalFats()}</td>
+                                    <td className="today-meal-carbs">{totalCarbs()}</td>
+                                    <td className="today-meal-protein">{totalProtein()}</td>
                                     <td className="today-meal-meals">{totalMeals()}</td>
+                                    <td className="today-meal-exercise">{totalExercise()}</td>
                                 </tr>
                             </tbody>
                         </table>

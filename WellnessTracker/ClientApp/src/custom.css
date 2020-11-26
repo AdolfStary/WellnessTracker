@@ -27,13 +27,25 @@ h1, h2 {
     padding: 1%;
     border-bottom: 1px solid #444444;
 }
+h4 {
+    margin: 2% 2% 2% 1%;
+}
 
 form input, select {
-    margin: 1%;
+    margin: 1%; 
 }
 
 #entry-list form {
-    margin: 5% auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2%;
+}
+
+#entry-list form div {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: 1% auto;
 }
 
 #entry-card-list {
@@ -234,12 +246,16 @@ table {
     background-color: #e3f86d;
 }
 
-.today-meal-protein, .today-diabetes-totinsulin {
+.today-meal-exercise {
     background-color: #6daef8;
 }
 
 .today-meal-meals {
     background-color: #8ef86d;
+}
+
+.today-meal-protein, .today-diabetes-totinsulin {
+    background-color: #f8bc6d;
 }
 /*
     Tablet
