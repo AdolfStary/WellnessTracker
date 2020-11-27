@@ -57,6 +57,67 @@ table {
 
 /*
     ////////////////////////////////////////
+    // Login
+    ////////////////////////////////////////
+*/
+
+#login {
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    margin: 2% auto;
+    width: 300px;
+    text-align: center;
+    height: auto;
+}
+
+#login form {
+    display: flex;
+    flex-flow: column;
+    margin: 5%;
+}
+
+#login label {
+    margin: 1%;
+}
+
+#login input {
+    margin: 2%;
+}
+
+#input p {
+    margin-top: 5%;
+}
+
+#input div.diabetes-checkbox {
+    display: flex;
+    flex-flow: row;
+}
+
+/*
+    ////////////////////////////////////////
+    // Register
+    ////////////////////////////////////////
+*/
+
+#register form {
+    display: flex;
+    flex-flow: column;
+    margin: 5% auto;
+    text-align: center;
+    width: 300px;
+}
+
+#register label {
+    margin: 1%;
+}
+
+#register input {
+    margin: 2%;
+}
+
+/*
+    ////////////////////////////////////////
     // Entry Form
     ////////////////////////////////////////
 */
@@ -67,6 +128,7 @@ table {
     flex-wrap: wrap;
     margin: 2%;
     width: 95%;
+    text-align: center;
 }
 
 #entryform form div.main-section {
@@ -78,8 +140,14 @@ table {
     text-align: center;
 }
 
+#entryform form div.main-section.exercise {
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+}
 
-#entryform form #carbs, #fats, #protein, #bg, #insulin {
+
+#entryform form #carbs, #fats, #protein, #bg, #insulin, #exerciseLength {
     width: 3.25rem;
 }
 
@@ -103,6 +171,10 @@ table {
     align-items: center;
     flex-wrap: wrap;
     margin: 0 auto;
+}
+
+#entryform .exercise {
+    text-align: center;
 }
 
 #entryform div.allergens, div.nutrition {

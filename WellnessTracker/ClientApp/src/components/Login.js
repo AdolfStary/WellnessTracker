@@ -45,9 +45,10 @@ const Login = () => {
 
     
     return (
-        <div id="login">
-            <h2>Login</h2>
-            {response !== "" ? <PopUp message={response} /> : ""}
+        <>
+        <h2>Login</h2>
+        {response !== "" ? <PopUp message={response} /> : ""}
+        <div id="login">  
             <form onSubmit={event => handleSubmit(event)}>
                 <label htmlFor='username'>Username: </label>
                 <input id='username' name='username' type='text' onChange={(e) => setUsername(e.target.value)} value={username} required />
@@ -55,8 +56,9 @@ const Login = () => {
                 <input id='password' name='password' type='password' onChange={(e) => setPassword(e.target.value)} value={password} required />
                 <input type='submit' value='Login' className='btn btn-primary'/>
             </form>
-            Don't have an account? <Link to='/register'> Register here </Link>
+            <p>Don't have an account? <Link to='/register'> Register here </Link></p>
         </div>
+        </>
     );
     
 

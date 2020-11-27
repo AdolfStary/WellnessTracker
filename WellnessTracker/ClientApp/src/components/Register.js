@@ -37,21 +37,23 @@ const Register = () => {
     
 
     return (
-        
-            <div id="register">
-            <h2>Register</h2>
-            
-            {response !== "" ? <PopUp message={response} /> : ""}
-            <form onSubmit={e => handleSubmit(e)}>
-                    <label htmlFor='username'>Username: </label>
-                    <input id='username' name='username' type='text' onChange={(e) => setUsername(e.target.value)} value={username} required />
-                    <label htmlFor='password'>Password: </label>
-                    <input id='password' name='password' type='password' onChange={(e) => setPassword(e.target.value)} value={password} required />
-                    <label htmlFor='isDiabetic'>Include diabetes data: </label>
-                    <input id='isDiabetic' name='isDiabetic' type='checkbox' onChange={(e) => setIsDiabetic(!isDiabetic)} value={isDiabetic} />
-                    <input type='submit' value='Register' className='btn btn-primary'/>
-                </form>
-            </div>
+            <>
+                <h2>Register</h2>            
+                {response !== "" ? <PopUp message={response} /> : ""}
+                <div id="register">
+                    <form onSubmit={e => handleSubmit(e)}>
+                        <label htmlFor='username'>Username: </label>
+                        <input id='username' name='username' type='text' onChange={(e) => setUsername(e.target.value)} value={username} required />
+                        <label htmlFor='password'>Password: </label>
+                        <input id='password' name='password' type='password' onChange={(e) => setPassword(e.target.value)} value={password} required />
+                        <div className="diabetes-checkbox">
+                            <label htmlFor='isDiabetic'>Include diabetes data: </label>
+                            <input id='isDiabetic' name='isDiabetic' type='checkbox' onChange={(e) => setIsDiabetic(!isDiabetic)} value={isDiabetic} />
+                        </div>
+                        <input type='submit' value='Register' className='btn btn-primary'/>
+                    </form>
+                </div>
+            </>
         );
     
 

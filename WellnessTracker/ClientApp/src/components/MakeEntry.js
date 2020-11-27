@@ -22,7 +22,7 @@ const MakeEntry = () => {
     }
 
     const [category, setCategory] = useState("-5");
-    const [status, setStatus] = useState("-5");
+    const [status, setStatus] = useState("-10");
     const [time, setTime] = useState(now.toISOString().slice(0, -1));
     const [carbs, setCarbs] = useState(0);
     const [protein, setProtein] = useState(0);
@@ -206,7 +206,7 @@ const MakeEntry = () => {
                     {
                         // If Category is "Exercise" show exercise entry options
                         (category === "-4") ?
-                        <div className="main-section">
+                        <div className="main-section exercise">
                             <label htmlFor='exerciseLength'>Length of exercies (minutes): </label>
                             <input id='exerciseLength' name='exerciseLength' type='number' onChange={(e) => setExerciseLength(e.target.value)} value={exerciseLength} />
                         </div>
@@ -219,12 +219,12 @@ const MakeEntry = () => {
                         (sessionStorage.getItem('isDiabetic') === "true") ?
                             <div className="main-section">
                                 <div>
-                                    <label htmlFor='insulin'>Insulin: </label>
-                                    <input id='insulin' name='insulin' type='number' onChange={(e) => setInsulin(e.target.value)} value={insulin} />
-                                </div>
-                                <div>
                                     <label htmlFor='bg'>Blood Glucose: </label>
                                     <input id='bg' name='bg' type='number' onChange={(e) => setBG(e.target.value)} value={bg} />
+                                </div>
+                                <div>
+                                    <label htmlFor='insulin'>Insulin: </label>
+                                    <input id='insulin' name='insulin' type='number' onChange={(e) => setInsulin(e.target.value)} value={insulin} />
                                 </div>
                             </div>
                             : false
