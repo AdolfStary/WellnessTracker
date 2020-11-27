@@ -9,6 +9,7 @@ import MakeEntry from './components/MakeEntry';
 import EntryList from './components/EntryList';
 import EntryDetail from './components/EntryDetail';
 import Today from './components/Today';
+import Summary from './components/Summary';
 import './custom.css'
 
 
@@ -24,6 +25,7 @@ export default class App extends Component {
             <Route path='/Notebook' component={EntryList} />
             <Route path='/EntryDetail' component={EntryDetail} />
             <Route path='/Today' component={Today} />
+            <Route path='/Summary' component={Summary} />
         <Route path='/Register' component={Register} />
         <Route path='/Logout' component={Logout} />
       </Layout>

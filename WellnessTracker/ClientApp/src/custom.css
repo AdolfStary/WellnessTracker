@@ -118,6 +118,25 @@ table {
 
 /*
     ////////////////////////////////////////
+    // Summary
+    ////////////////////////////////////////
+*/
+
+#summary form {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2%;
+}
+
+#summary form div {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        margin: 1%;
+}
+
+/*
+    ////////////////////////////////////////
     // Entry Form
     ////////////////////////////////////////
 */

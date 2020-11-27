@@ -108,12 +108,16 @@ const MakeEntry = () => {
             }
         ).then((res) => {     
             setResponse(res.data);
+            if (res.data === "Success!"){
+                window.location = "/MakeEntry";
+
+            }
         }
         ).catch((err) => {
             setResponse(err.response.data);
         });
 
-        if (sessionStorage.getItem('user') !== null || sessionStorage.getItem('user') !== "") window.location = '/';
+        
     }
 
 

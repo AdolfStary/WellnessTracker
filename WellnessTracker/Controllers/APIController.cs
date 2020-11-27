@@ -38,7 +38,7 @@ namespace WellnessTracker.Controllers
                     double.TryParse(insulin.Trim(), out double parsedInsulin) && double.TryParse(bg.Trim(), out double parsedBG) && DateTime.TryParse(time.Trim(), out DateTime parsedTime)
                     && int.TryParse(exerciseLength.Trim(), out int parsedExerciseLength))
                 {
-                    return EntryController.MakeEntry(parsedCategoryID, userID, parsedStatusID, parsedTime, parsedCarbs, parsedProtein, parsedFats, notes.Trim(), parsedInsulin, parsedBG, parsedAllergen1, parsedAllergen2, parsedAllergen3, parsedExerciseLength);
+                    return EntryController.MakeEntry(parsedCategoryID, userID, parsedStatusID, parsedTime, parsedCarbs, parsedProtein, parsedFats, (notes == null) ? notes : notes.Trim(), parsedInsulin, parsedBG, parsedAllergen1, parsedAllergen2, parsedAllergen3, parsedExerciseLength);
                 }
                 else throw new Exception("Invalid values were passed.");
             }

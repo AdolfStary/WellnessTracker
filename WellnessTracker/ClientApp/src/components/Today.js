@@ -14,7 +14,7 @@ const Today = () => {
                 url: 'API/GetEntries',
                 params: {
                     userID: sessionStorage.getItem('user'),
-                    category: "-5",
+                    category: "0",
                     status: "0",
                     timeframe: "0",
                     notesText: "",
@@ -184,12 +184,6 @@ const Today = () => {
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-                <div>
-                    <h2>Daily Goals</h2>
-                    <div className="today-goals">
-
                     </div>
                 </div>
             </div>

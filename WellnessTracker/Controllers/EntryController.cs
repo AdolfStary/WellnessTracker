@@ -65,6 +65,13 @@ namespace WellnessTracker.Controllers
         {
             try
             {
+
+                if (notes != null)
+                {
+                    if (!TestString(notes))
+                        throw new Exception("Notes contain invalid characters.");
+                }
+
                 if (allergen1 != 0)
                 {
                     if (GetAllergenByID(allergen1) == null) throw new Exception("Passed allergen 1 doesn't exist.");
@@ -89,10 +96,6 @@ namespace WellnessTracker.Controllers
                 else if (carbs > 9999 || carbs < 0 || protein > 9999 || protein < 0 || fats > 9999 || fats < 0)
                 {
                     throw new Exception("Nutrition information values are out of range.");
-                }
-                else if (!TestString(notes))
-                {
-                    throw new Exception("Notes contain invalid characters.");
                 }
                 else if (insulin < 0 || insulin > 999 || bg < 0 || bg > 999)
                 {
