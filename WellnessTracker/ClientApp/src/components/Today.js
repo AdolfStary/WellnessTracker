@@ -16,7 +16,7 @@ const Today = () => {
                     userID: sessionStorage.getItem('user'),
                     category: "0",
                     status: "0",
-                    timeframe: "0",
+                    timeframe: "1",
                     notesText: "",
                     showArchived: false
                 }
@@ -40,7 +40,7 @@ const Today = () => {
             }
         }
 
-        count > 0 ? result = (total / count) : result = "N/A";
+        count > 0 ? result = (total / count).toFixed(2) : result = "N/A";
 
         return result;
     }
@@ -56,7 +56,7 @@ const Today = () => {
             }
         }
 
-        count > 0 ? result = (total / count)+"u" : result = "N/A";
+        count > 0 ? result = (total / count).toFixed(2)+"u" : result = "N/A";
 
         return result;
     }
@@ -137,6 +137,7 @@ const Today = () => {
             getToday();
             setDataLoaded(true);
         }
+        console.log(listToday);
         return (
             <div id="today-chart">
                 <div>

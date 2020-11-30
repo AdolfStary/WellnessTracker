@@ -85,7 +85,115 @@ const Summary = () => {
             count > 0 ? result = (total / count).toFixed(2)+"u" : result = "N/A";
     
             return result;
-        }   
+        }
+    
+        const avgDailyInsulin = () => {
+            let total = 0;
+            let count = 0;
+            let totalAvg = 0;
+            let totalCount = 0;
+            let lastDate = "";
+    
+            
+            for(let item of entryList){
+                
+                if(item.insulin !== 0){
+
+                    if(lastDate === null) lastDate = new Date(item.time).getDay();
+
+                    if (new Date(item.time).getDate() === lastDate){
+                        total += item.insulin;
+                        count++;
+                    }
+                    else {
+                        if(count > 0){
+                            totalAvg += total/count;
+                            totalCount++;
+                            total = 0;
+                            count = 0;
+                        }
+                        lastDate = new Date(item.time).getDate();
+                        total += item.insulin;
+                        count++;
+                    }
+                }
+            }
+            totalAvg += total;
+            totalCount += count;
+            
+            return totalCount > 0 ? (totalAvg/totalCount).toFixed(2)+"u" : "N/A";
+        }
+    
+        const totalFats = () => {
+            let total = 0;
+    
+            for(let item of entryList){
+                total += item.fats;
+            }
+    
+            return total > 0 ? total+"g" : "N/A";
+        }
+    
+        const totalCarbs = () => {
+            let total = 0;
+    
+            for(let item of entryList){
+                total += item.carbs;
+            }
+    
+            return total > 0 ? total+"g" : "N/A";
+        }
+    
+        const totalProtein = () => {
+            let total = 0;
+    
+            for(let item of entryList){
+                total += item.protein;
+            }
+    
+            return total > 0 ? total+"g" : "N/A";
+        }
+
+        const avgDailyMeals = () => {
+
+        }
+
+        const avgDailyExercise = () => {
+            let total = 0;
+            let totalAvg = 0;
+            let totalCount = 0;
+            let lastDate = "";
+    
+            
+            for(let item of entryList){
+                
+                if(item.exerciseLength !== 0){
+
+                    if(lastDate === null) lastDate = new Date(item.time).getDate();
+
+                    if (new Date(item.time).getDate() === lastDate){
+                        total += item.exerciseLength;                        
+                    }
+                    else {
+                            totalAvg += total;
+                            totalCount++;                        
+                        lastDate = new Date(item.time).getDate();
+                        total += item.exerciseLength;
+                    }
+                }
+            }
+            if (totalAvg === 0){
+                totalAvg += total;
+                totalCount += 1;
+            }
+
+            
+            return totalCount > 0 ? (totalAvg/totalCount).toFixed(2)+"m" : "N/A";
+        }
+    
+
+
+
         
         return (
             <div id="summary">
@@ -133,7 +241,7 @@ const Summary = () => {
                                         <tr>
                                             <td className="today-diabetes-bg">{avgBG()}</td>
                                             <td className="today-diabetes-avginsulin">{avgInsulin()}</td>
-                                            <td className="today-diabetes-totinsulin">{/* avg amount of insulin daily*/}</td>
+                                            <td className="today-diabetes-totinsulin">{avgDailyInsulin()}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -144,20 +252,20 @@ const Summary = () => {
                             <table>
                                 <thead>
                                     <tr>
-                                        <th className="today-meal-fats">Avg Fats</th>
-                                        <th className="today-meal-carbs">Avg Carbs</th>
-                                        <th className="today-meal-protein">Avg Protein</th>
-                                        <th className="today-meal-meals">Number of meals</th>
-                                        <th className="today-meal-exercise">Exercise</th>
+                                        <th className="today-meal-fats">Avg Daily Fats</th>
+                                        <th className="today-meal-carbs">Avg Daily Carbs</th>
+                                        <th className="today-meal-protein">Avg Daily Protein</th>
+                                        <th className="today-meal-meals">Avg Number of meals</th>
+                                        <th className="today-meal-exercise">Avg Exercise day length</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className="today-meal-fats">{/* avg amount of carbs daily */}</td>
-                                        <td className="today-meal-carbs">{/* avg amount of carbs daily */}</td>
-                                        <td className="today-meal-protein">{/* avg amount of protein daily */}</td>
-                                        <td className="today-meal-meals">{/* avg amount of meals daily api */}</td>
-                                        <td className="today-meal-exercise">{/* avg daily exercise api */}</td>
+                                        <td className="today-meal-fats">{avgDailyFats()}</td>
+                                        <td className="today-meal-carbs">{avgDailyCarbs()}</td>
+                                        <td className="today-meal-protein">{avgDailyProtein()}</td>
+                                        <td className="today-meal-meals">{avgDailyMeals()}</td>
+                                        <td className="today-meal-exercise">{avgDailyExercise()}</td>
                                     </tr>
                                 </tbody>
                             </table>

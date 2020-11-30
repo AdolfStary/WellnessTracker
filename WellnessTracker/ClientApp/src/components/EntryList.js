@@ -34,10 +34,11 @@ const EntryList = () => {
                 }
             }
         ).then((res) => {
-            
+            console.log(res.data); 
             if(!res.data.includes("Error")){
                 setEntryList(res.data);
-                setResponse("Success!");                
+                setResponse("Success!");
+                console.log(res.data);                
             }
             else setResponse(res.data);
         }
@@ -108,7 +109,7 @@ const EntryList = () => {
                         <label htmlFor='timeframe'>Time: </label>
                         <select id='timeframe' name='timeframe'onChange={(e) => setTimeframe(e.target.value)} value={timeframe} required>
                             <option value="-1">To date</option>
-                            <option value="0">Today</option>
+                            <option value="1">Today</option>
                             <option value="7">Past week</option>
                             <option value="14">Past 2 weeks</option>
                             <option value="30">Past 30 days</option>

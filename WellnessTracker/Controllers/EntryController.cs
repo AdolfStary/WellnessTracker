@@ -358,10 +358,12 @@ namespace WellnessTracker.Controllers
                 }
                 else
                 {
+                    
                     List<Entry> listOfEntries = new List<Entry>();
                     using (EntryContext context = new EntryContext())
                     {
-                        listOfEntries = context.Entries.Where(x => x.UserID == userID).Include(x => x.EntryCategory).Include(x => x.EntryStatus).Include(x => x.EntryAllergens).ThenInclude(x=> x.Allergen).OrderByDescending(x => x.Time).ToList();
+                        listOfEntries = context.Entries.Where(x => x.UserID == userID).Include(y => y.EntryCategory).Include(z => z.EntryStatus).Include(w => w.EntryAllergens).ThenInclude(e => e.Allergen).OrderByDescending(x => x.Time)
+                            .ToList();                        
                     }
                     if (!showArchived)
                     {
@@ -391,9 +393,9 @@ namespace WellnessTracker.Controllers
                     return listOfEntries;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return new List<Entry>()/*$"Error making an entry: {e.Message}"*/;
+                return new List<Entry>();
             }
         }
 

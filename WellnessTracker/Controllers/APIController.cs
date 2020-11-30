@@ -75,9 +75,9 @@ namespace WellnessTracker.Controllers
                 }
                 else throw new Exception("Invalid values passed.");
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return new List<Entry>()/*$"Error getting entries: {e.Message}"*/;
+                return new List<Entry>();
             }
 
 
