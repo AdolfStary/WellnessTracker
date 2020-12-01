@@ -32,6 +32,7 @@ namespace WellnessTracker.Models
 
         [InverseProperty(nameof(Models.Entry.ApplicationUser))]
         public virtual ICollection<Entry> Entries { get; set; }
+
         public User()
         {
 

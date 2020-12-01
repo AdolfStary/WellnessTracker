@@ -231,6 +231,24 @@ namespace WellnessTracker.Models
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
 
+                entity.HasData(
+                    new User() 
+                    { 
+                        ID = "fca0f3e8-dae4-45d9-ad10-345257364235",
+                        Username = "Adolf",
+                        Password = "6346c10aad3dd848f542060024022522ac86f9d7e13dbf39bb8a2252228c794e",
+                        IsDiabetic = true
+                    }, 
+                    new User()
+                    {
+                        ID = "77c8faaa-62f2-4993-96b2-48587cba72a3",
+                        Username = "Ummer",
+                        Password = "a7b5c820d7a015504cb09776d23899e3f1e392e349916329a70ce3562d38565f",
+                        IsDiabetic = false
+                    }
+
+                    );
+
             });
 
             ///////////////////////

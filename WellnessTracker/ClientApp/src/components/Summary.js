@@ -124,7 +124,7 @@ const Summary = () => {
             return totalCount > 0 ? (totalAvg/totalCount).toFixed(2)+"u" : "N/A";
         }
     
-        const totalFats = () => {
+        const avgDailyFats = () => {
             let total = 0;
     
             for(let item of entryList){
@@ -134,7 +134,7 @@ const Summary = () => {
             return total > 0 ? total+"g" : "N/A";
         }
     
-        const totalCarbs = () => {
+        const avgDailyCarbs = () => {
             let total = 0;
     
             for(let item of entryList){
@@ -144,7 +144,7 @@ const Summary = () => {
             return total > 0 ? total+"g" : "N/A";
         }
     
-        const totalProtein = () => {
+        const avgDailyProtein = () => {
             let total = 0;
     
             for(let item of entryList){

@@ -34,7 +34,7 @@ namespace WellnessTracker
             .AddNewtonsoftJson(
                 options =>
                 {
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    //options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
         }
 

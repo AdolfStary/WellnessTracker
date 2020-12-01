@@ -8,7 +8,18 @@ Purpose: This project was created as a capstone project for my Full Stack Develo
 Last Modified: Nov 12, 2020
 
 # Testing instructions
-1. Set your own database details in EntryContext.cs, run dotnet ef database update
+- Set your own database details in EntryContext.cs, run dotnet ef database update
+- There are two default profiles for testing:
+        - Username: Adolf
+        - Password: AdaAya
+        - User is diabetic, has access to diabetic options
+
+        - Username: Ummer
+        - Password: aaa
+        - User is not a diabetic, doesn't have diabetic options showing.
+- There are few default entries of different types for each user allowing you to access and filter them in 'My Notebook' section and to view 'Summary'.
+- To test 'Today' you will need to 'Make Entry' the same day to see the functionality of the section.
+- Feel free to experiment, or even create your own account.
 
 # Resources
 https://www.w3schools.com/bootstrap/bootstrap_alerts.asp
