@@ -65,6 +65,7 @@ const EntryList = () => {
                     }
                 ).then((res) => {     
                     setListOfCategories(res.data);
+                    console.log(res.data);
                 });
             }
             else {
@@ -85,6 +86,7 @@ const EntryList = () => {
                 }
             ).then((res) => {     
                 setListOfStatuses(res.data);
+                console.log(res.data);
             });
 
             // Initial load of data with no filters

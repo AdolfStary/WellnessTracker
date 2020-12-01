@@ -231,7 +231,7 @@ namespace WellnessTracker.Migrations
                             Notes = "Feeling pretty good today, had Eggs and toast for breakfast.",
                             Protein = 20,
                             StatusID = -10,
-                            Time = new DateTime(2020, 12, 1, 11, 22, 32, 686, DateTimeKind.Local).AddTicks(1161),
+                            Time = new DateTime(2020, 12, 1, 11, 38, 29, 33, DateTimeKind.Local).AddTicks(1293),
                             UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
                         },
                         new
@@ -247,7 +247,7 @@ namespace WellnessTracker.Migrations
                             Notes = "Went out for dinner, had chicken and potatoes.",
                             Protein = 50,
                             StatusID = -8,
-                            Time = new DateTime(2020, 12, 1, 11, 22, 32, 686, DateTimeKind.Local).AddTicks(7049),
+                            Time = new DateTime(2020, 12, 1, 11, 38, 29, 33, DateTimeKind.Local).AddTicks(7471),
                             UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
                         },
                         new
@@ -263,7 +263,7 @@ namespace WellnessTracker.Migrations
                             Notes = "Hardcore exercise",
                             Protein = 0,
                             StatusID = -10,
-                            Time = new DateTime(2020, 12, 1, 11, 22, 32, 686, DateTimeKind.Local).AddTicks(7191),
+                            Time = new DateTime(2020, 12, 1, 11, 38, 29, 33, DateTimeKind.Local).AddTicks(7588),
                             UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
                         },
                         new
@@ -343,7 +343,7 @@ namespace WellnessTracker.Migrations
                             Notes = "Endluged in some fast food after excercising",
                             Protein = 33,
                             StatusID = -10,
-                            Time = new DateTime(2020, 12, 1, 11, 22, 32, 686, DateTimeKind.Local).AddTicks(7219),
+                            Time = new DateTime(2020, 12, 1, 11, 38, 29, 33, DateTimeKind.Local).AddTicks(7612),
                             UserID = "77c8faaa-62f2-4993-96b2-48587cba72a3"
                         },
                         new
@@ -359,7 +359,7 @@ namespace WellnessTracker.Migrations
                             Notes = "I'm stressed, running out of bacon. Gotta go shopping soon.",
                             Protein = 45,
                             StatusID = -2,
-                            Time = new DateTime(2020, 12, 1, 11, 22, 32, 686, DateTimeKind.Local).AddTicks(7222),
+                            Time = new DateTime(2020, 12, 1, 11, 38, 29, 33, DateTimeKind.Local).AddTicks(7615),
                             UserID = "77c8faaa-62f2-4993-96b2-48587cba72a3"
                         },
                         new
@@ -376,7 +376,7 @@ namespace WellnessTracker.Migrations
                             Protein = 0,
                             StatusID = -7,
                             Time = new DateTime(2020, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
+                            UserID = "77c8faaa-62f2-4993-96b2-48587cba72a3"
                         },
                         new
                         {
@@ -392,7 +392,7 @@ namespace WellnessTracker.Migrations
                             Protein = 0,
                             StatusID = -6,
                             Time = new DateTime(2020, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
+                            UserID = "77c8faaa-62f2-4993-96b2-48587cba72a3"
                         },
                         new
                         {
@@ -408,7 +408,7 @@ namespace WellnessTracker.Migrations
                             Protein = 0,
                             StatusID = -1,
                             Time = new DateTime(2020, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
+                            UserID = "77c8faaa-62f2-4993-96b2-48587cba72a3"
                         });
                 });
 
@@ -526,7 +526,7 @@ namespace WellnessTracker.Migrations
                             ID = "fca0f3e8-dae4-45d9-ad10-345257364235",
                             IsDiabetic = true,
                             Password = "6346c10aad3dd848f542060024022522ac86f9d7e13dbf39bb8a2252228c794e",
-                            Registered = new DateTime(2020, 12, 1, 11, 22, 32, 675, DateTimeKind.Local).AddTicks(9627),
+                            Registered = new DateTime(2020, 12, 1, 11, 38, 29, 22, DateTimeKind.Local).AddTicks(9167),
                             Username = "Adolf"
                         },
                         new
@@ -534,7 +534,7 @@ namespace WellnessTracker.Migrations
                             ID = "77c8faaa-62f2-4993-96b2-48587cba72a3",
                             IsDiabetic = false,
                             Password = "a7b5c820d7a015504cb09776d23899e3f1e392e349916329a70ce3562d38565f",
-                            Registered = new DateTime(2020, 12, 1, 11, 22, 32, 678, DateTimeKind.Local).AddTicks(375),
+                            Registered = new DateTime(2020, 12, 1, 11, 38, 29, 25, DateTimeKind.Local).AddTicks(65),
                             Username = "Ummer"
                         });
                 });

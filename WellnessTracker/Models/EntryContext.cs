@@ -297,9 +297,9 @@ namespace WellnessTracker.Models
                     new Entry(-1, "fca0f3e8-dae4-45d9-ad10-345257364235", -1, new DateTime(2020, 11, 22), 0, 0, 0, "Felt very exhausted, tested blood sugar, high reading, took correction", 2.2, 19.8, 0) { ID = -7 },
                     new Entry(-5, "77c8faaa-62f2-4993-96b2-48587cba72a3", -10, DateTime.Now, 80, 33, 28, "Endluged in some fast food after excercising", 0, 0, 0) { ID = -8 },
                     new Entry(-5, "77c8faaa-62f2-4993-96b2-48587cba72a3", -2, DateTime.Now, 20, 45, 35, "I'm stressed, running out of bacon. Gotta go shopping soon.", 0, 0, 0) { ID = -9 },
-                    new Entry(-4, "fca0f3e8-dae4-45d9-ad10-345257364235", -7, new DateTime(2020, 11, 22), 0, 0, 0, "Regular exercise, bench, legs, running", 0, 0, 60) { ID = -10 },
-                    new Entry(-3, "fca0f3e8-dae4-45d9-ad10-345257364235", -6, new DateTime(2020, 11, 23), 0, 0, 0, "Found awesome new exercise: https://www.verywellfit.com/the-plank-exercise-3120068", 0, 0, 0) { ID = -11 },
-                    new Entry(-4, "fca0f3e8-dae4-45d9-ad10-345257364235", -1, new DateTime(2020, 11, 24), 0, 0, 0, "Tried the new plank exercise, pretty brutal", 0, 0, 15) { ID = -12 }
+                    new Entry(-4, "77c8faaa-62f2-4993-96b2-48587cba72a3", -7, new DateTime(2020, 11, 22), 0, 0, 0, "Regular exercise, bench, legs, running", 0, 0, 60) { ID = -10 },
+                    new Entry(-3, "77c8faaa-62f2-4993-96b2-48587cba72a3", -6, new DateTime(2020, 11, 23), 0, 0, 0, "Found awesome new exercise: https://www.verywellfit.com/the-plank-exercise-3120068", 0, 0, 0) { ID = -11 },
+                    new Entry(-4, "77c8faaa-62f2-4993-96b2-48587cba72a3", -1, new DateTime(2020, 11, 24), 0, 0, 0, "Tried the new plank exercise, pretty brutal", 0, 0, 15) { ID = -12 }
                     );
 
             });

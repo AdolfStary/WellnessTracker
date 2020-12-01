@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
 
@@ -18,6 +18,7 @@ const EntryCard = (props) => {
     const assignClickedEntry = () => {
         sessionStorage.setItem('entry', JSON.stringify(props.entry))
     }
+
     return (
     <Link to="/EntryDetail" className="entry-card-link" onClick={() => assignClickedEntry()}>
         <div className={`entry-card ${props.entry.entryCategory.name}`}>
