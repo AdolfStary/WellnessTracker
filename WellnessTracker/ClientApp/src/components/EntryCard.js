@@ -31,8 +31,11 @@ const EntryCard = (props) => {
 
         for (let item of props.statuses){
             if (item.id === props.entry.statusID)
+            {
                 statusName = item.name;
                 isPositive = item.isPositive;
+            }
+
         }
         setData(
             {
@@ -56,7 +59,6 @@ const EntryCard = (props) => {
                 <div className="time">{date} - {time}</div>
                 <div className={`status`}>{data.status}</div>
             </div>
-            {console.log(data)}
             <div className="card-body">                
                 {
                     // If entry was a meal, show nutrition
