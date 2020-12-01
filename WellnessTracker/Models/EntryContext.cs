@@ -237,14 +237,16 @@ namespace WellnessTracker.Models
                         ID = "fca0f3e8-dae4-45d9-ad10-345257364235",
                         Username = "Adolf",
                         Password = "6346c10aad3dd848f542060024022522ac86f9d7e13dbf39bb8a2252228c794e",
-                        IsDiabetic = true
+                        IsDiabetic = true,
+                        Registered = DateTime.Now
                     }, 
                     new User()
                     {
                         ID = "77c8faaa-62f2-4993-96b2-48587cba72a3",
                         Username = "Ummer",
                         Password = "a7b5c820d7a015504cb09776d23899e3f1e392e349916329a70ce3562d38565f",
-                        IsDiabetic = false
+                        IsDiabetic = false,
+                        Registered = DateTime.Now
                     }
 
                     );
@@ -284,6 +286,21 @@ namespace WellnessTracker.Models
                 .HasForeignKey(thisEntity => thisEntity.StatusID)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName(statusKeyName);
+
+                entity.HasData(
+                    new Entry(-5, "fca0f3e8-dae4-45d9-ad10-345257364235", -10, DateTime.Now, 40, 20, 15, "Feeling pretty good today, had Eggs and toast for breakfast.", 2.5, 9.4, 0) { ID = -1},
+                    new Entry(-5, "fca0f3e8-dae4-45d9-ad10-345257364235", -8, DateTime.Now, 20, 50, 35, "Went out for dinner, had chicken and potatoes.", 1.25, 7.8, 0) { ID = -2 },
+                    new Entry(-4, "fca0f3e8-dae4-45d9-ad10-345257364235", -10, DateTime.Now, 0, 0, 0, "Hardcore exercise", 0, 0, 50) { ID = -3 },
+                    new Entry(-4, "fca0f3e8-dae4-45d9-ad10-345257364235", -10, new DateTime(2020, 11, 10), 0, 0, 0, "Starting to exercise, taking it easy", 0, 0, 20) { ID = -4 },
+                    new Entry(-3, "fca0f3e8-dae4-45d9-ad10-345257364235", -6, new DateTime(2020, 11, 15), 0, 0, 0, "Got a new job, pretty awesome", 0, 5.6, 0) { ID = -5 },
+                    new Entry(-2, "fca0f3e8-dae4-45d9-ad10-345257364235", -2, new DateTime(2020, 11, 19), 0, 0, 0, "Felt strange, tested blood sugar, low reading", 0, 3.7, 0) { ID = -6 },
+                    new Entry(-1, "fca0f3e8-dae4-45d9-ad10-345257364235", -1, new DateTime(2020, 11, 22), 0, 0, 0, "Felt very exhausted, tested blood sugar, high reading, took correction", 2.2, 19.8, 0) { ID = -7 },
+                    new Entry(-5, "77c8faaa-62f2-4993-96b2-48587cba72a3", -10, DateTime.Now, 80, 33, 28, "Endluged in some fast food after excercising", 0, 0, 0) { ID = -8 },
+                    new Entry(-5, "77c8faaa-62f2-4993-96b2-48587cba72a3", -2, DateTime.Now, 20, 45, 35, "I'm stressed, running out of bacon. Gotta go shopping soon.", 0, 0, 0) { ID = -9 },
+                    new Entry(-4, "fca0f3e8-dae4-45d9-ad10-345257364235", -7, new DateTime(2020, 11, 22), 0, 0, 0, "Regular exercise, bench, legs, running", 0, 0, 60) { ID = -10 },
+                    new Entry(-3, "fca0f3e8-dae4-45d9-ad10-345257364235", -6, new DateTime(2020, 11, 23), 0, 0, 0, "Found awesome new exercise: https://www.verywellfit.com/the-plank-exercise-3120068", 0, 0, 0) { ID = -11 },
+                    new Entry(-4, "fca0f3e8-dae4-45d9-ad10-345257364235", -1, new DateTime(2020, 11, 24), 0, 0, 0, "Tried the new plank exercise, pretty brutal", 0, 0, 15) { ID = -12 }
+                    );
 
             });
 
