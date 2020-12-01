@@ -18,7 +18,8 @@ const EntryCard = (props) => {
         }).format(new Date(props.entry.time));
 
     const assignClickedEntry = () => {
-        sessionStorage.setItem('entry', JSON.stringify(props.entry))
+        sessionStorage.setItem('entry', JSON.stringify(props.entry));
+        sessionStorage.setItem('entryStatic', JSON.stringify(data));
     }
 
     const initialData = () => {

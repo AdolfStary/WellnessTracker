@@ -31,7 +31,7 @@ export class NavMenu extends Component {
                             <NavbarBrand tag={Link} to="/" className="mainlogo">WellnessTracker</NavbarBrand>
                             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-                                <ul className="navbar-nav flex-grow">
+                                <ul className="navbar-nav flex-grow hover-mod">
                                     <NavItem>
                                         <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                                     </NavItem>
@@ -54,7 +54,7 @@ export class NavMenu extends Component {
                         <NavbarBrand tag={Link} to="/">WellnessTracker</NavbarBrand>
                         <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                         <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-                            <ul className="navbar-nav flex-grow">
+                            <ul className="navbar-nav flex-grow hover-mod">
                                 <NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                                 </NavItem>

@@ -3,7 +3,6 @@ import axios from 'axios';
 
 const Today = () => {
 
-
     const [listToday, setListToday] = useState([]);
     const [dataLoaded, setDataLoaded] = useState(false);
 
@@ -105,7 +104,7 @@ const Today = () => {
         let total = 0;
 
         for(let item of listToday){
-            if (item.entryCategory.name === "Meal"){
+            if (item.categoryID === -5){
                 total++;
             }
 
@@ -117,7 +116,7 @@ const Today = () => {
         let total = 0;
 
         for(let item of listToday){
-            if (item.entryCategory.name === "Exercise"){
+            if (item.categoryID === -4){
                 total += item.exerciseLength;
             }
 

@@ -353,7 +353,7 @@ table {
     font-weight: normal;
 }
 
-.status {
+.entry-card .status {
     margin: auto auto;
     height: 30%;
 }
@@ -384,12 +384,80 @@ table {
     flex-flow: row;
 }
 
+.entry-details {
+    border-radius: 5px;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
+    box-shadow: 0px 0px 5px #999999;
+    padding: 1rem;
+}
+
+
+.entry-details.Meal {
+    border: 1px solid #f86d6d;
+    background-color: #fccece;
+}
+
+.entry-details.Event {
+    border: 1px solid #8ef86d;
+    background-color: #d3fac7;
+}
+
+.entry-details.Exercise {
+    border: 1px solid #6daef8;
+    background-color: #c7dffa;
+}
+
+.entry-details.Insulin.Injection{
+    border: 1px solid #f8f66d;
+    background-color: #f8f7c5;
+}
+
+.entry-details.BG.Reading {
+    border: 1px solid #f8bc6d;
+    background-color: #f8e2c5;
+}
+
+.entry-details h4 {
+    font-family: 'Architects Daughter', cursive;
+}
+
+.entry-details div.status, .entry-details div.time {
+    padding-left: 20px;
+}
+
+.entry-details .meal .nutrition-details, .entry-details .diabetes {
+    display: flex;
+    flex-flow: row;
+    margin-left: 20px;
+}
+
+.entry-details .meal .nutrition-details div, .entry-details .diabetes div {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    border-radius: 5px ;
+    height: 6rem;
+    width: 6rem;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 5px;
+}
+.entry-details .meal .nutrition-details p, .entry-details .diabetes p {
+    margin: auto auto;
+}
+
 .notes textarea {
     display: block;
     width: 96%;
     height: 200px;
     margin: 1% auto;
 }
+
+
 
 /*
     ////////////////////////////////////////

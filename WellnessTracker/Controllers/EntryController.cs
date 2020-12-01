@@ -366,10 +366,6 @@ namespace WellnessTracker.Controllers
                     using (EntryContext context = new EntryContext())
                     {
                         listOfEntries = context.Entries.Where(x => x.UserID == userID)
-                            /*.Include(y => y.EntryCategory)
-                            .Include(z => z.EntryStatus)
-                            .Include(w => w.EntryAllergens)
-                            .ThenInclude(e => e.Allergen)*/
                             .OrderByDescending(x => x.Time)
                             .ToList();           
                     }
