@@ -33,12 +33,10 @@ const EntryList = () => {
                     showArchived: showArchived
                 }
             }
-        ).then((res) => {
-            console.log(res.data); 
+        ).then((res) => { 
             if(!res.data.includes("Error")){
                 setEntryList(res.data);
-                setResponse("Success!");
-                console.log(res.data);                
+                setResponse("Success!");                
             }
             else setResponse(res.data);
         }
@@ -65,7 +63,6 @@ const EntryList = () => {
                     }
                 ).then((res) => {     
                     setListOfCategories(res.data);
-                    console.log(res.data);
                 });
             }
             else {
@@ -86,7 +83,6 @@ const EntryList = () => {
                 }
             ).then((res) => {     
                 setListOfStatuses(res.data);
-                console.log(res.data);
             });
 
             // Initial load of data with no filters
@@ -155,7 +151,7 @@ const EntryList = () => {
                 <div id="entry-card-list">
                     
                         {
-                            (entryList.length !== 0) ? entryList.map( (Item) => <EntryCard entry={Item} key={Item.id}/>) : <p>No matching entries found.</p>
+                            (entryList.length !== 0) ? entryList.map( (Item) => <EntryCard entry={Item} statuses={listOfStatuses} categories={listOfCategories} key={Item.id}/>) : <p>No matching entries found.</p>
                         }
                     
                 </div>

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 const EntryCard = (props) => {
 
+    const [data, setData] = useState({});
+    const [dataLoaded, setDataLoaded] = useState(false);
     let time = new Intl.DateTimeFormat("en-GB", {
         hour: "numeric",
         minute: "numeric"
@@ -19,20 +21,46 @@ const EntryCard = (props) => {
         sessionStorage.setItem('entry', JSON.stringify(props.entry))
     }
 
+    const initialData = () => {
+        let categoryName, statusName, isPositive;
+
+        for (let item of props.categories){
+            if (item.id === props.entry.categoryID)
+                categoryName = item.name;
+        }
+
+        for (let item of props.statuses){
+            if (item.id === props.entry.statusID)
+                statusName = item.name;
+                isPositive = item.isPositive;
+        }
+        setData(
+            {
+                category: categoryName,
+                status: statusName,
+                isPositive: isPositive
+            }
+        );
+        setDataLoaded(true);
+    }
+
+    if (!dataLoaded) initialData();
+
     return (
+        
     <Link to="/EntryDetail" className="entry-card-link" onClick={() => assignClickedEntry()}>
-        <div className={`entry-card ${props.entry.entryCategory.name}`}>
+        <div className={`entry-card ${data.category}`}>
 
-            <div className={`card-head ${props.entry.entryCategory.name} ${props.entry.entryStatus.isPositive}`}>
-                {props.entry.entryCategory.name}
+            <div className={`card-head ${data.category} ${data.isPositive}`}>
+                {data.category}
                 <div className="time">{date} - {time}</div>
-                <div className={`status`}>{props.entry.entryStatus.name}</div>
+                <div className={`status`}>{data.status}</div>
             </div>
-
+            {console.log(data)}
             <div className="card-body">                
                 {
                     // If entry was a meal, show nutrition
-                    (props.entry.entryCategory.name === "Meal") ? 
+                    (data.category === "Meal") ? 
                         <div className="meal">
                             <div className="fats">F: {props.entry.fats}g</div>
                             <div className="carbs">C: {props.entry.carbs}g</div>
@@ -42,7 +70,7 @@ const EntryCard = (props) => {
                 }
                 {
                     // If entry was a meal, show nutrition
-                    (props.entry.entryCategory.name === "Exercise") ? 
+                    (data.category === "Exercise") ? 
                         <div className="exercise">
                             <div>{props.entry.exerciseLength !== 0 ? props.entry.exerciseLength+"m" : "N/A"}</div>                      
                         </div>
