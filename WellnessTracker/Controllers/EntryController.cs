@@ -395,7 +395,7 @@ namespace WellnessTracker.Controllers
 
                     if (notesText != null && notesText != "")
                     {
-                        listOfEntries = listOfEntries.Where(x => x.Notes.Contains(notesText)).ToList();
+                        listOfEntries = listOfEntries.Where(x => x.Notes != null && x.Notes.ToLower().Contains(notesText.ToLower())).ToList();
                     }
                     
 
