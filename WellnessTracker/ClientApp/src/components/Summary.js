@@ -49,7 +49,7 @@ const Summary = () => {
 
         // Runs when loaded once to load Categories and Statuses
         if (!downloadedData){
-                       // Initial load of data with no filters
+            // Initial load of data with no filters
             handleSubmit();
 
             setDownloadedData(true);
@@ -88,83 +88,172 @@ const Summary = () => {
         }
     
         const avgDailyInsulin = () => {
-            let total = 0;
-            let count = 0;
-            let totalAvg = 0;
-            let totalCount = 0;
+            let dailyTotal = 0;
             let lastDate = "";
-    
-            
+            let dailyTotals = [];
+            let superTotal = 0;
+
             for(let item of entryList){
                 
                 if(item.insulin !== 0){
 
-                    if(lastDate === null) lastDate = new Date(item.time).getDay();
+                    if(lastDate === null) lastDate = new Date(item.time).getDate();
 
                     if (new Date(item.time).getDate() === lastDate){
-                        total += item.insulin;
-                        count++;
+                        dailyTotal += item.insulin;                   
                     }
                     else {
-                        if(count > 0){
-                            totalAvg += total/count;
-                            totalCount++;
-                            total = 0;
-                            count = 0;
-                        }
+                        dailyTotals.push(dailyTotal);                  
                         lastDate = new Date(item.time).getDate();
-                        total += item.insulin;
-                        count++;
+                        dailyTotal = 0;
+                        dailyTotal += item.insulin;
                     }
-                }
+                } 
             }
-            totalAvg += total;
-            totalCount += count;
-            
-            return totalCount > 0 ? (totalAvg/totalCount).toFixed(2)+"u" : "N/A";
+
+            if (dailyTotal !== 0){
+                dailyTotals.push(dailyTotal);
+            }
+
+            for(let total of dailyTotals){
+                superTotal += total;
+            }
+
+            return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(2)+"u" : "N/A";
         }
     
         const avgDailyFats = () => {
-            let total = 0;
+            let dailyTotal = 0;
+            let lastDate = "";
+            let dailyTotals = [];
+            let superTotal = 0;
     
+            
             for(let item of entryList){
-                total += item.fats;
+                
+                if(lastDate === null) lastDate = new Date(item.time).getDate();
+
+                if (new Date(item.time).getDate() === lastDate){
+                    dailyTotal += item.fats;                   
+                }
+                else {
+                    dailyTotals.push(dailyTotal);                  
+                    lastDate = new Date(item.time).getDate();
+                    dailyTotal = 0;
+                    dailyTotal += item.fats;
+                }
+                if (entryList.indexOf(item) === entryList.length-1)
+                    dailyTotals.push(dailyTotal);                
             }
-    
-            return total > 0 ? total+"g" : "N/A";
+
+            for(let total of dailyTotals){
+                superTotal += total;
+            }
+
+            return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(0)+"g" : "N/A";
         }
     
         const avgDailyCarbs = () => {
-            let total = 0;
+            let dailyTotal = 0;
+            let lastDate = "";
+            let dailyTotals = [];
+            let superTotal = 0;
     
+            
             for(let item of entryList){
-                total += item.carbs;
+                
+                if(lastDate === null) lastDate = new Date(item.time).getDate();
+
+                if (new Date(item.time).getDate() === lastDate){
+                    dailyTotal += item.carbs;                   
+                }
+                else {
+                    dailyTotals.push(dailyTotal);                  
+                    lastDate = new Date(item.time).getDate();
+                    dailyTotal = 0;
+                    dailyTotal += item.carbs;
+                }
+                if (entryList.indexOf(item) === entryList.length-1)
+                    dailyTotals.push(dailyTotal);                
             }
-    
-            return total > 0 ? total+"g" : "N/A";
+
+            for(let total of dailyTotals){
+                superTotal += total;
+            }
+
+            return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(0)+"g" : "N/A";
         }
     
         const avgDailyProtein = () => {
-            let total = 0;
+            let dailyTotal = 0;
+            let lastDate = "";
+            let dailyTotals = [];
+            let superTotal = 0;
     
+            
             for(let item of entryList){
-                total += item.protein;
+                
+                if(lastDate === null) lastDate = new Date(item.time).getDate();
+
+                if (new Date(item.time).getDate() === lastDate){
+                    dailyTotal += item.protein;                   
+                }
+                else {
+                    dailyTotals.push(dailyTotal);                  
+                    lastDate = new Date(item.time).getDate();
+                    dailyTotal = 0;
+                    dailyTotal += item.protein;
+                }
+                if (entryList.indexOf(item) === entryList.length-1)
+                    dailyTotals.push(dailyTotal);             
             }
-    
-            return total > 0 ? total+"g" : "N/A";
+
+            for(let total of dailyTotals){
+                superTotal += total;
+            }
+
+            return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(0)+"g" : "N/A";
         }
 
         const avgDailyMeals = () => {
+            let dailyTotal = 0;
+            let lastDate = "";
+            let dailyTotals = [];
+            let superTotal = 0;
+    
+            
+            for(let item of entryList){
+                
+                if(lastDate === null) lastDate = new Date(item.time).getDate();
 
+                if (new Date(item.time).getDate() === lastDate){
+                    if (item.categoryID === -5)
+                        dailyTotal++;                   
+                }
+                else {
+                    dailyTotals.push(dailyTotal);                  
+                    lastDate = new Date(item.time).getDate();
+                    dailyTotal = 0;
+                    if (item.categoryID === -5)
+                        dailyTotal++; 
+                }
+                if (entryList.indexOf(item) === entryList.length-1)
+                    dailyTotals.push(dailyTotal);             
+            }
+
+            for(let total of dailyTotals){
+                superTotal += total;
+            }
+            console.log(dailyTotals);
+            return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(1) : "N/A";
         }
 
         const avgDailyExercise = () => {
-            let total = 0;
-            let totalAvg = 0;
-            let totalCount = 0;
+            let dailyTotal = 0;
             let lastDate = "";
-    
-            
+            let dailyTotals = [];
+            let superTotal = 0;
+
             for(let item of entryList){
                 
                 if(item.exerciseLength !== 0){
@@ -172,23 +261,26 @@ const Summary = () => {
                     if(lastDate === null) lastDate = new Date(item.time).getDate();
 
                     if (new Date(item.time).getDate() === lastDate){
-                        total += item.exerciseLength;                        
+                        dailyTotal += item.exerciseLength;                   
                     }
                     else {
-                            totalAvg += total;
-                            totalCount++;                        
+                        dailyTotals.push(dailyTotal);                  
                         lastDate = new Date(item.time).getDate();
-                        total += item.exerciseLength;
+                        dailyTotal = 0;
+                        dailyTotal += item.exerciseLength;
                     }
-                }
-            }
-            if (totalAvg === 0){
-                totalAvg += total;
-                totalCount += 1;
+                } 
             }
 
-            
-            return totalCount > 0 ? (totalAvg/totalCount).toFixed(2)+"m" : "N/A";
+            if (dailyTotal !== 0){
+                dailyTotals.push(dailyTotal);
+            }
+
+            for(let total of dailyTotals){
+                superTotal += total;
+            }
+
+            return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(0)+"m" : "N/A";
         }
     
 
@@ -255,8 +347,8 @@ const Summary = () => {
                                         <th className="today-meal-fats">Avg Daily Fats</th>
                                         <th className="today-meal-carbs">Avg Daily Carbs</th>
                                         <th className="today-meal-protein">Avg Daily Protein</th>
-                                        <th className="today-meal-meals">Avg Number of meals</th>
-                                        <th className="today-meal-exercise">Avg Exercise day length</th>
+                                        <th className="today-meal-meals">Avg Daily Meals</th>
+                                        <th className="today-meal-exercise">Avg 'Exercise Day' length</th>
                                     </tr>
                                 </thead>
                                 <tbody>
