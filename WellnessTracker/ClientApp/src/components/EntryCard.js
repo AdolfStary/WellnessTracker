@@ -14,7 +14,7 @@ const EntryCard = (props) => {
     let date = new Intl.DateTimeFormat("en-GB", {
         year: "numeric",
         month: "long",
-        day: "2-digit",
+        day: "numeric",
         }).format(new Date(props.entry.time));
 
     const assignClickedEntry = () => {

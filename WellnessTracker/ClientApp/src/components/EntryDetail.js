@@ -92,7 +92,7 @@ const EntryDetail = (props) => {
         date = new Intl.DateTimeFormat("en-GB", {
             year: "numeric",
             month: "long",
-            day: "2-digit",
+            day: "numeric",
           }).format(new Date(entry.time));
 
         time = new Intl.DateTimeFormat("en-GB", {
@@ -109,11 +109,13 @@ const EntryDetail = (props) => {
             <div className={`entry-details ${entryStatic.category}`}>
             {isArchived ? <p className="alert alert-danger right">Archived</p> : false }
 
-                <div className={`category ${entryStatic.category}`}> <h2>{entryStatic.category}</h2></div>
-
-                <div className={`status ${entryStatic.status}`}><strong>Mood:</strong> {entryStatic.status}</div>
-
-                <div className="time"><strong>Date entered:</strong> {date} - {time}</div>
+                <div className={`category ${entryStatic.category}`}> 
+                    <h2>{entryStatic.category}</h2>
+                    <div className="time-status">
+                        <div className="time right">{date} - {time}</div>
+                        <div className={`status ${entryStatic.status} right ${entryStatic.isPositive}`}>{entryStatic.status}</div>
+                    </div>
+                </div>  
 
                 {
                     // If entry was a meal, show nutrition
