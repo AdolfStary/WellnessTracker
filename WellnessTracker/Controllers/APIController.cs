@@ -89,6 +89,25 @@ namespace WellnessTracker.Controllers
             return EntryController.GetStatuses();
         }
 
+        [HttpGet("GetNegativeStatusAllergens")]
+        public Dictionary<string, int> GetNegativeStatusAllergens_GET(string userID, string timeframe)
+        {
+            try
+            {
+                if (int.TryParse(timeframe.Trim(), out int parsedTimeframe))
+                {
+                    return EntryController.GetNegativeStatusAllergens(userID.Trim(), parsedTimeframe);
+                }
+                else throw new Exception("Invalid values passed.");
+            }
+            catch (Exception e)
+            {
+                return new Dictionary<string, int>();
+            }
+
+
+        }
+
         [HttpGet("GetAllergens")]
         public List<Allergen> GetAllergens_GET()
         {

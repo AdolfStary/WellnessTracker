@@ -358,9 +358,6 @@ namespace WellnessTracker.Controllers
                 }
                 else
                 {
-
-
-
                     List<Entry> listOfEntries = new List<Entry>();
                     List<Allergen> listOfAllergens = new List<Allergen>();
                     using (EntryContext context = new EntryContext())
@@ -475,6 +472,57 @@ namespace WellnessTracker.Controllers
             }
 
             return category;
+        }
+
+        public static Dictionary<string, int> GetNegativeStatusAllergens(string userID, int timeframe)
+        {
+            List<Entry> mealEntries = new List<Entry>();
+            List<Entry> negativeFeelingEntries = new List<Entry>();
+            List<string> allergens = new List<string>();
+            Dictionary<string, int> result = new Dictionary<string, int>();
+
+            using (EntryContext context = new EntryContext())
+            {
+                negativeFeelingEntries = context.Entries.Where(x => x.UserID == userID && x.EntryStatus.IsPositive == false).ToList();
+                mealEntries = context.Entries.Where(x => x.UserID == userID && x.EntryCategory.Name == "Meal").ToList();
+
+                if (timeframe != -1)
+                {
+                    negativeFeelingEntries = negativeFeelingEntries.Where(x => (DateTime.Now - x.Time).TotalDays <= timeframe).ToList();
+                    mealEntries = mealEntries.Where(x => (DateTime.Now - x.Time).TotalDays <= timeframe).ToList();
+                }
+
+
+                foreach (Entry negativeFeelingEntry in negativeFeelingEntries)
+                {
+                    foreach (Entry mealEntry in mealEntries)
+                    {
+                        
+                        if (context.Allergen_Entries.Where(x => x.EntryID == mealEntry.ID).ToList().Count > 0)
+                        {
+                            if ((negativeFeelingEntry.Time - mealEntry.Time).TotalHours <= 3 && (negativeFeelingEntry.Time - mealEntry.Time).TotalHours >= 0)
+                            {
+                                allergens.AddRange(context.Allergen_Entries.Where(x => x.EntryID == mealEntry.ID).Select(y => y.Allergen.Name).ToList());
+                                allergens.Add("AllergenMeal");
+                            }
+                        }
+
+                    }
+                }
+
+                var groupedAllergens = allergens.GroupBy(x => x);
+
+                foreach (var group in groupedAllergens)
+                {
+                    result.Add(group.Key, group.Count());
+                }
+                
+                return result;
+                        
+                    
+            }
+
+            
         }
 
         // Borrowed code from: https://www.c-sharpcorner.com/article/hashing-passwords-in-net-core-with-tips/
