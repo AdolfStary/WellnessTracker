@@ -135,6 +135,55 @@ table {
         margin: 1%;
 }
 
+
+#summary .observations .sick-data ul {
+    list-style-type: none;
+    padding-left: 0;
+    width: 75%;
+    margin: 3% auto;
+}
+
+#summary .observations .sick-data li {
+    margin: 1% auto;
+    padding: 20px;
+    border-radius: 5px;
+    
+}
+
+#summary .observations .sick-data li strong {
+    font-size: 1.5rem;
+    margin: 1%;
+}
+
+#summary .observations .sick-data li.high {
+    border: 1px solid #f86d6d;
+    background-color: #fccece;
+
+}
+
+#summary .observations .sick-data li.high strong{
+    color:  #ff4848;
+}
+
+#summary .observations .sick-data li.mid {
+    border: 1px solid #f8f66d;
+    background-color: #f8f7c5;
+}
+
+#summary .observations .sick-data li.mid strong{
+    color:   #ffbf0e;
+}
+
+#summary .observations .sick-data li.neutral {
+    border: 1px solid #6daef8;
+    background-color: #c7dffa;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+
+
+
 /*
     ////////////////////////////////////////
     // Entry Form
@@ -553,11 +602,16 @@ table {
     }
 
 
+
 }
 
 @media screen and (min-width: 768px) {
     .entry-card-link {
         width: 24%
+    }
+
+    #summary .observations .sick-data ul {
+        width: 50%;
     }
 
 

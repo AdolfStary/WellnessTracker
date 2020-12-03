@@ -313,11 +313,7 @@ const Summary = () => {
             arrayResponse.sort((a,b) => b[1] - a[1]);
 
             return(
-                <div className="sick-data">
-                    <ul>
-                        {arrayResponse.map( (item) => <li key={item[0]}><strong>{item[0]}</strong> in {(item[1]/totalCases*100).toFixed(0)}% of cases</li>)}
-                    </ul>
-                </div>
+                        arrayResponse.map( (item) => <li key={item[0]} className={(item[1]/totalCases*100).toFixed(0) > 50 ? "high" : "mid"}><strong>{item[0]}</strong> in <strong>{(item[1]/totalCases*100).toFixed(0)}%</strong> of cases</li>)
             );
         }
     
@@ -403,8 +399,12 @@ const Summary = () => {
                     </div>
                     <div className="observations">
                         <h2>Observations</h2>
-                        <p>Did you know, you were not feeling well within 3 hours after eating these foods?</p>
-                        {sicknessData !== null ? displaySickData() : "No data that could give insight was detected."}
+                        <div className="sick-data">
+                            <ul>
+                                <li className="neutral">Did you know, you were not feeling well within 3 hours after eating these foods?</li>
+                                {sicknessData !== null ? displaySickData() : "No data that could give insight was detected."}
+                            </ul>
+                        </div>
                     </div>
 
                 </div>
