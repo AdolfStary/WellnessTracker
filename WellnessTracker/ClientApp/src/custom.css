@@ -116,6 +116,16 @@ table {
     margin: 2%;
 }
 
+#register div {
+    margin: 1%;
+}
+
+#register .disclaimer {
+    border: 1px solid #444444;
+    border-radius: 5px;
+    padding: 5px;
+}
+
 /*
     ////////////////////////////////////////
     // Summary
