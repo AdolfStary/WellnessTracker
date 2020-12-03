@@ -18,7 +18,14 @@ Last Modified: Nov 12, 2020
         - Password: aaa
         - User is not a diabetic, doesn't have diabetic options showing.
 - There are few default entries of different types for each user allowing you to access and filter them in 'My Notebook' section and to view 'Summary'.
-- To test 'Today' you will need to 'Make Entry' the same day to see the functionality of the section.
+- To test "Observations" in "Summary", you need to make at least a couple "Meal" entries and specify allergens consumed. Then you need to create a negative status / feeling entry dated within 3 hours after the Meal entries.
+        For example:
+                - Create a meal at 9 AM today, where you "consumed" milk as allergen.
+                - Create a meal at 9:15 AM today, where you "consumed" milk and gluten as allergen.
+                - Create a meal at 9:20 AM today, where you "consumed" milk and egg as allergen.
+                - Create an event at 10:00 AM today, where your status is any of the negative options, for example "Tired".
+                - Visit "Summary" page to view Observation section for results;
+- To test 'Today' you may need to 'Make Entry' the today to see the functionality of the section.
 - Feel free to experiment, or even create your own account.
 
 # Resources

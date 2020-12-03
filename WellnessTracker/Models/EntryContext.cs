@@ -289,7 +289,7 @@ namespace WellnessTracker.Models
 
                 entity.HasData(
                     new Entry(-5, "fca0f3e8-dae4-45d9-ad10-345257364235", -10, DateTime.Now, 40, 20, 15, "Feeling pretty good today, had Eggs and toast for breakfast.", 2.5, 9.4, 0) { ID = -1},
-                    new Entry(-5, "fca0f3e8-dae4-45d9-ad10-345257364235", -8, DateTime.Now, 20, 50, 35, "Went out for dinner, had chicken and potatoes.", 1.25, 7.8, 0) { ID = -2 },
+                    new Entry(-5, "fca0f3e8-dae4-45d9-ad10-345257364235", -8, DateTime.Now, 20, 50, 35, "Went out for dinner, had chicken, toast and potatoes, big glass of milk.", 1.25, 7.8, 0) { ID = -2 },
                     new Entry(-4, "fca0f3e8-dae4-45d9-ad10-345257364235", -10, DateTime.Now, 0, 0, 0, "Hardcore exercise", 0, 0, 50) { ID = -3 },
                     new Entry(-4, "fca0f3e8-dae4-45d9-ad10-345257364235", -10, new DateTime(2020, 11, 10), 0, 0, 0, "Starting to exercise, taking it easy", 0, 0, 20) { ID = -4 },
                     new Entry(-3, "fca0f3e8-dae4-45d9-ad10-345257364235", -6, new DateTime(2020, 11, 15), 0, 0, 0, "Got a new job, pretty awesome", 0, 5.6, 0) { ID = -5 },

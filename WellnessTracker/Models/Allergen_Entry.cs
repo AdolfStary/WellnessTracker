@@ -34,5 +34,10 @@ namespace WellnessTracker.Models
 
         public Allergen_Entry() { }
 
+        public Allergen_Entry(int allergenID, int entryID)
+        {
+            AllergenID = AllergenID;
+            EntryID = EntryID;
+        }
     }
 }
