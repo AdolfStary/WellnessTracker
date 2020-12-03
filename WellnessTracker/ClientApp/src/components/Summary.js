@@ -38,6 +38,24 @@ const Summary = () => {
         ).catch((err) => {
             setResponse(err.response.statusText);
         });
+
+        axios(
+            {
+                method: 'get',
+                url: 'API/GetNegativeStatusAllergens',
+                params: {
+                    userID: sessionStorage.getItem('user'),
+                    timeframe: timeframe,
+                    showArchived: showArchived
+                }
+            }
+        ).then((res) => {
+            console.log(res.data);
+            /* Do something cool with data */
+        }
+        ).catch((err) => {
+            setResponse(err.response.statusText);
+        });
     }
 
     if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === "") {
@@ -244,7 +262,6 @@ const Summary = () => {
             for(let total of dailyTotals){
                 superTotal += total;
             }
-            console.log(dailyTotals);
             return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(1) : "N/A";
         }
 

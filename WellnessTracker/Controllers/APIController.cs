@@ -65,7 +65,7 @@ namespace WellnessTracker.Controllers
         }
 
         [HttpGet("GetEntries")]
-        public List<Entry> GetEntries_GET(string userID, string category, string status, string timeframe, string notesText, string showArchived)
+        public ActionResult<List<Entry>> GetEntries_GET(string userID, string category, string status, string timeframe, string notesText, string showArchived)
         {
             try
             {
@@ -75,9 +75,9 @@ namespace WellnessTracker.Controllers
                 }
                 else throw new Exception("Invalid values passed.");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return new List<Entry>();
+                return NotFound($"Error getting data: {e.Message}");
             }
 
 
@@ -90,19 +90,19 @@ namespace WellnessTracker.Controllers
         }
 
         [HttpGet("GetNegativeStatusAllergens")]
-        public Dictionary<string, int> GetNegativeStatusAllergens_GET(string userID, string timeframe)
+        public ActionResult<Dictionary<string, int>> GetNegativeStatusAllergens_GET(string userID, string timeframe, string showArchived)
         {
             try
             {
-                if (int.TryParse(timeframe.Trim(), out int parsedTimeframe))
+                if (int.TryParse(timeframe.Trim(), out int parsedTimeframe) && bool.TryParse(showArchived.Trim(), out bool parsedShowArchived))
                 {
-                    return EntryController.GetNegativeStatusAllergens(userID.Trim(), parsedTimeframe);
+                    return EntryController.GetNegativeStatusAllergens(userID.Trim(), parsedTimeframe, parsedShowArchived);
                 }
                 else throw new Exception("Invalid values passed.");
             }
             catch (Exception e)
             {
-                return new Dictionary<string, int>();
+                return NotFound($"Error getting data: {e.Message}");
             }
 
 

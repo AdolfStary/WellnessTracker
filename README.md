@@ -29,6 +29,8 @@ https://stackoverflow.com/questions/6193574/save-javascript-objects-in-sessionst
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
 https://stackoverflow.com/questions/263965/how-can-i-convert-a-string-to-boolean-in-javascript
 https://stackoverflow.com/questions/24468518/html5-input-datetime-local-default-value-of-today-and-current-time
+https://stackoverflow.com/questions/1139181/a-method-to-count-occurrences-in-a-list
+https://www.bing.com/search?q=associative+list+c%23&cvid=525d892b5d0e477ba5d7d9e1f692757c&pglt=43&FORM=ANNTA1&PC=LCTS
 
 
 # Trello

@@ -136,7 +136,7 @@ const Today = () => {
             getToday();
             setDataLoaded(true);
         }
-        console.log(listToday);
+
         return (
             <div id="today-chart">
                 <div>

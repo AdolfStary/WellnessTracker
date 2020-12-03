@@ -316,10 +316,8 @@ namespace WellnessTracker.Controllers
             }
         }
 
-        public static List<Entry> GetEntries(string userID, int categoryID, int statusID, int timeframe, string notesText, bool showArchived = false)
+        public static ActionResult<List<Entry>> GetEntries(string userID, int categoryID, int statusID, int timeframe, string notesText, bool showArchived = false)
         {
-            try
-            {
                 if (categoryID != 0)
                 {
                     if (GetCategoryByID(categoryID) == null)
@@ -383,7 +381,7 @@ namespace WellnessTracker.Controllers
 
                     if (timeframe != -1)
                     {
-                        listOfEntries = listOfEntries.Where(x => (DateTime.Now - x.Time).TotalDays <= timeframe).ToList();
+                        listOfEntries = listOfEntries.Where(x => Math.Floor((DateTime.Now - x.Time).TotalDays) <= timeframe).ToList();
                     }
 
                     if (notesText != null && notesText != "")
@@ -394,11 +392,6 @@ namespace WellnessTracker.Controllers
 
                     return listOfEntries;
                 }
-            }
-            catch (Exception)
-            {
-                return new List<Entry>();
-            }
         }
 
         public static string ChangeArchivedEntryByID(int id)
@@ -474,55 +467,72 @@ namespace WellnessTracker.Controllers
             return category;
         }
 
-        public static Dictionary<string, int> GetNegativeStatusAllergens(string userID, int timeframe)
+        public static ActionResult<Dictionary<string, int>> GetNegativeStatusAllergens(string userID, int timeframe, bool showArchived)
         {
-            List<Entry> mealEntries = new List<Entry>();
-            List<Entry> negativeFeelingEntries = new List<Entry>();
-            List<string> allergens = new List<string>();
-            Dictionary<string, int> result = new Dictionary<string, int>();
-
-            using (EntryContext context = new EntryContext())
-            {
-                negativeFeelingEntries = context.Entries.Where(x => x.UserID == userID && x.EntryStatus.IsPositive == false).ToList();
-                mealEntries = context.Entries.Where(x => x.UserID == userID && x.EntryCategory.Name == "Meal").ToList();
-
-                if (timeframe != -1)
+                if (timeframe < -1 || timeframe > 180)
                 {
-                    negativeFeelingEntries = negativeFeelingEntries.Where(x => (DateTime.Now - x.Time).TotalDays <= timeframe).ToList();
-                    mealEntries = mealEntries.Where(x => (DateTime.Now - x.Time).TotalDays <= timeframe).ToList();
+                    throw new Exception("Incorrect timeframe was received.");
                 }
-
-
-                foreach (Entry negativeFeelingEntry in negativeFeelingEntries)
+                else if (userID.Length != 36)
                 {
-                    foreach (Entry mealEntry in mealEntries)
+                    throw new Exception("User ID is invalid.");
+                }
+                else if (GetUserByID(userID) == null)
+                {
+                    throw new Exception("User doesn't exist in the database.");
+                }
+                else
+                {
+                    List<Entry> mealEntries = new List<Entry>();
+                    List<Entry> negativeFeelingEntries = new List<Entry>();
+                    List<string> allergens = new List<string>();
+                    Dictionary<string, int> result = new Dictionary<string, int>();
+
+                    using (EntryContext context = new EntryContext())
                     {
-                        
-                        if (context.Allergen_Entries.Where(x => x.EntryID == mealEntry.ID).ToList().Count > 0)
+                        negativeFeelingEntries = context.Entries.Where(x => x.UserID == userID && x.EntryStatus.IsPositive == false).ToList();
+                        mealEntries = context.Entries.Where(x => x.UserID == userID && x.EntryCategory.Name == "Meal").ToList();
+
+                        if (timeframe != -1)
                         {
-                            if ((negativeFeelingEntry.Time - mealEntry.Time).TotalHours <= 3 && (negativeFeelingEntry.Time - mealEntry.Time).TotalHours >= 0)
+                            negativeFeelingEntries = negativeFeelingEntries.Where(x => Math.Floor((DateTime.Now - x.Time).TotalDays) <= timeframe).ToList();
+                            mealEntries = mealEntries.Where(x => Math.Floor((DateTime.Now - x.Time).TotalDays) <= timeframe).ToList();
+                        }
+
+                    if (!showArchived)
+                    {
+                        negativeFeelingEntries = negativeFeelingEntries.Where(x => x.IsArchived == false).ToList();
+                        mealEntries = mealEntries.Where(x => x.IsArchived == false).ToList();
+                    }
+
+
+                    foreach (Entry negativeFeelingEntry in negativeFeelingEntries)
+                        {
+                            foreach (Entry mealEntry in mealEntries)
                             {
-                                allergens.AddRange(context.Allergen_Entries.Where(x => x.EntryID == mealEntry.ID).Select(y => y.Allergen.Name).ToList());
-                                allergens.Add("AllergenMeal");
+
+                                if (context.Allergen_Entries.Where(x => x.EntryID == mealEntry.ID).ToList().Count > 0)
+                                {
+                                    if ((negativeFeelingEntry.Time - mealEntry.Time).TotalHours <= 3 && (negativeFeelingEntry.Time - mealEntry.Time).TotalHours >= 0)
+                                    {
+                                        allergens.AddRange(context.Allergen_Entries.Where(x => x.EntryID == mealEntry.ID).Select(y => y.Allergen.Name).ToList());
+                                        allergens.Add("AllergenMeal");
+                                    }
+                                }
+
                             }
                         }
 
+                        var groupedAllergens = allergens.GroupBy(x => x);
+
+                        foreach (var group in groupedAllergens)
+                        {
+                            result.Add(group.Key, group.Count());
+                        }
+
+                        return result;
                     }
-                }
-
-                var groupedAllergens = allergens.GroupBy(x => x);
-
-                foreach (var group in groupedAllergens)
-                {
-                    result.Add(group.Key, group.Count());
-                }
-                
-                return result;
-                        
-                    
-            }
-
-            
+                }                            
         }
 
         // Borrowed code from: https://www.c-sharpcorner.com/article/hashing-passwords-in-net-core-with-tips/
