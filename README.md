@@ -31,6 +31,8 @@ https://stackoverflow.com/questions/263965/how-can-i-convert-a-string-to-boolean
 https://stackoverflow.com/questions/24468518/html5-input-datetime-local-default-value-of-today-and-current-time
 https://stackoverflow.com/questions/1139181/a-method-to-count-occurrences-in-a-list
 https://www.bing.com/search?q=associative+list+c%23&cvid=525d892b5d0e477ba5d7d9e1f692757c&pglt=43&FORM=ANNTA1&PC=LCTS
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/error-handling/web-api-global-error-handling
+https://attacomsian.com/blog/javascript-iterate-objects
 
 
 # Trello

@@ -7,6 +7,7 @@ const Summary = () => {
     const [response, setResponse] = useState("");
     const [entryList, setEntryList] = useState([]);
     const [downloadedData, setDownloadedData] = useState(false);
+    const [sicknessData, setSicknessData] = useState({});
 
     const [timeframe, setTimeframe] = useState("-1");
     const [showArchived, setShowArchived] = useState(false);
@@ -50,8 +51,7 @@ const Summary = () => {
                 }
             }
         ).then((res) => {
-            console.log(res.data);
-            /* Do something cool with data */
+            setSicknessData(res.data);
         }
         ).catch((err) => {
             setResponse(err.response.statusText);
@@ -299,6 +299,27 @@ const Summary = () => {
 
             return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(0)+"m" : "N/A";
         }
+
+        const displaySickData = () => {
+            let totalCases;
+            const arrayResponse = Object.entries(sicknessData);
+            for(let item of arrayResponse){
+                if (item[0] === "AllergenMeal"){
+                    totalCases = item[1];
+                    delete arrayResponse[arrayResponse.indexOf(item)];
+                }
+
+            }
+            arrayResponse.sort((a,b) => b[1] - a[1]);
+
+            return(
+                <div className="sick-data">
+                    <ul>
+                        {arrayResponse.map( (item) => <li key={item[0]}><strong>{item[0]}</strong> in {(item[1]/totalCases*100).toFixed(0)}% of cases</li>)}
+                    </ul>
+                </div>
+            );
+        }
     
 
 
@@ -382,7 +403,8 @@ const Summary = () => {
                     </div>
                     <div className="observations">
                         <h2>Observations</h2>
-
+                        <p>Did you know, you were not feeling well within 3 hours after eating these foods?</p>
+                        {sicknessData !== null ? displaySickData() : "No data that could give insight was detected."}
                     </div>
 
                 </div>
