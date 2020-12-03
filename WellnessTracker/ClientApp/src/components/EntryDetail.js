@@ -10,6 +10,7 @@ const EntryDetail = (props) => {
     const [textareaDisabled, setTextareaDisabled] = useState(true);
     const [notes, setNotes] = useState("No notes were entered.");
     const [response, setResponse] = useState("");
+    const [allergens, setAllergens] = useState([]);
 
     let time, date, entry, entryStatic;
 
@@ -67,6 +68,25 @@ const EntryDetail = (props) => {
         setNotes(entry.notes);
     }
 
+    const loadAllergens = () => {
+
+        axios(
+            {
+                method: 'get',
+                url: 'API/GetEntryAllergens',
+                params: {
+                    userID: sessionStorage.getItem('user'),
+                    entryID: entry.id
+                }
+            }
+
+        ).then((res) => {            
+            setAllergens(res.data);
+        }).catch((err) => {
+            setResponse(err.response.data);
+        });;
+    }
+
     if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === "") {
         return (
             <p className="alert alert-danger">You do not have access to this page.</p>
@@ -85,7 +105,8 @@ const EntryDetail = (props) => {
 
         if (!dataLoaded){
             setNotes(entry.notes);
-            setIsArchived(Boolean(entry.isArchived));            
+            setIsArchived(Boolean(entry.isArchived));   
+            loadAllergens();
             setDataLoaded(true);
         }
 
@@ -125,7 +146,10 @@ const EntryDetail = (props) => {
                             <div className="nutrition-details">
                                 <div className="today-meal-fats"><p>Fat<br />{entry.fats > 0 ? entry.fats+"g" : "N/A"}</p></div>
                                 <div className="today-meal-carbs"><p>Carb<br />{entry.carbs > 0 ? entry.carbs+"g" : "N/A"}</p></div>
-                                <div className="today-meal-protein"><p>Protein<br />{entry.protein > 0 ? entry.protein+"g" : "N/A"}</p></div>   
+                                <div className="today-meal-protein"><p>Protein<br />{entry.protein > 0 ? entry.protein+"g" : "N/A"}</p></div>  
+                                {
+                                    allergens.length > 0 ? allergens.map( (item) => <div key={item} className="allergen-box"><p>{item}</p></div>) : false
+                                }
                             </div>                     
                         </div> 
                         : false
@@ -144,7 +168,7 @@ const EntryDetail = (props) => {
                 }
                 
 
-            <div className="notes"><h4>Notes</h4><textarea disabled={textareaDisabled} onChange={(e) => setNotes(e.target.value)} value={notes}></textarea></div>
+            <div className="notes"><h4>Notes</h4><textarea disabled={textareaDisabled} onChange={(e) => setNotes(e.target.value)} value={ notes === null ? "" : notes}></textarea></div>
                            
 
                 <div className="entry-details-buttons right">

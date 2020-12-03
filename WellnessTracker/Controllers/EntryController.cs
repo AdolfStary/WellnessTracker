@@ -292,6 +292,31 @@ namespace WellnessTracker.Controllers
             }
         }
 
+        public static ActionResult<List<string>> GetEntryAllergens(string userID, int entryID)
+        {
+            if (userID.Length != 36)
+            {
+                throw new Exception("User ID is invalid.");
+            }
+            else if (GetUserByID(userID) == null)
+            {
+                throw new Exception("User doesn't exist in the database.");
+            }
+            else if (GetEntryByID(entryID) == null)
+            {
+                throw new Exception("Entry doesn't exist in the database.");
+            }
+            else if (GetEntryByID(entryID).UserID != userID)
+            {
+                throw new Exception("Entry doesn't belong to the user.");
+            }
+
+            using (EntryContext context = new EntryContext())
+            {
+                return context.Allergen_Entries.Where(x => x.EntryID == entryID).Select(x => x.Allergen.Name).ToList();
+            }
+        }
+
         public static List<Category> GetCategories()
         {
             using (EntryContext context = new EntryContext())

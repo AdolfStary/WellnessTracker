@@ -33,6 +33,8 @@ https://stackoverflow.com/questions/1139181/a-method-to-count-occurrences-in-a-l
 https://www.bing.com/search?q=associative+list+c%23&cvid=525d892b5d0e477ba5d7d9e1f692757c&pglt=43&FORM=ANNTA1&PC=LCTS
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/error-handling/web-api-global-error-handling
 https://attacomsian.com/blog/javascript-iterate-objects
+https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
+https://hosting.review/tutorial/javascript-remove-element-from-array/
 
 
 # Trello

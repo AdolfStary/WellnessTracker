@@ -104,14 +104,30 @@ namespace WellnessTracker.Controllers
             {
                 return NotFound($"Error getting data: {e.Message}");
             }
-
-
         }
 
         [HttpGet("GetAllergens")]
         public List<Allergen> GetAllergens_GET()
         {
             return EntryController.GetAllergens();
+        }
+
+        [HttpGet("GetEntryAllergens")]
+        public ActionResult<List<string>> GetEntryAllergens_GET(string userID, string entryID)
+        {
+            try
+            {
+                if (int.TryParse(entryID, out int parsedEntryID))
+                {
+                    return EntryController.GetEntryAllergens(userID.Trim(), parsedEntryID);
+                }
+                else throw new Exception("Invalid values passed.");
+            }
+            catch (Exception e)
+            {
+                return NotFound($"Error getting data: {e.Message}");
+            }
+            
         }
 
         [HttpGet("GetCategories")]
