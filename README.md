@@ -8,7 +8,7 @@ Purpose: This project was created as a capstone project for my Full Stack Develo
 Last Modified: Nov 12, 2020
 
 # Scope
-- basic profile creation and authentiaction - ACHIEVED
+- basic profile creation and authentication - ACHIEVED
 - making entries into a notebook, which save important data about day's events and meals - ACHIEVED
 - raw data display (Notebook.js) - ACHIEVED
 - diabetic and non-diabetic version - ACHIEVED
@@ -16,7 +16,7 @@ Last Modified: Nov 12, 2020
 - advanced observations - ACHIEVED (Summary.js Observations section, using data to determine, which allergens may be causing sickness, tiredness, etc.)
 
 # Out of Scope
-- comparisons to general charts - SCRAPPED, general charts not useful for individuals, didn't want to get on the thin ice of making suggestions how much to eat etc. Should be handled by practicioner or dietitian
+- comparisons to general charts - SCRAPPED, general charts not useful for individuals, didn't want to get on the thin ice of making suggestions how much to eat etc. Should be handled by practitioner or dietitian
 
 # Testing instructions
 General filters (See controllers for filtering and data sanitation, html form inputs have basic type filtering(number, text, date)):
