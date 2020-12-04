@@ -1,11 +1,14 @@
 # DOCSTRING
 Author: Adolf Stary
 
-Title:
+Title: WellnessTracker
 
 Purpose: This project was created as a capstone project for my Full Stack Developer course at University of Alberta. It involves the full scope of full stack development using CodeFirst C# EntityFramework back end, React/JavaScript front end and MariaDB. This app was designed for personal use, to track health and wellness related events throughout the day with ease and assist with summaries and overviews of the data.
 
-Last Modified: Nov 12, 2020
+Problem this app solves: I find it quite hard to keep relevant notes about my day and then organizing and searching data when I feel off and need to find out what caused it. 
+How this app solves the problem: This app makes data entry, search and getting an overview very simple. It's quick and convenient, it handles a lot of data and manipulates it in a way, which makes it is easy to navigate through it.
+
+Last Modified: Dec 4, 2020
 
 # Scope
 - basic profile creation and authentication - ACHIEVED
@@ -18,6 +21,9 @@ Last Modified: Nov 12, 2020
 # Out of Scope
 - comparisons to general charts - SCRAPPED, general charts not useful for individuals, didn't want to get on the thin ice of making suggestions how much to eat etc. Should be handled by practitioner or dietitian
 
+# Installation instructions
+- Set your own database details in EntryContext.cs, run dotnet ef database update
+
 # Testing instructions
 General filters (See controllers for filtering and data sanitation, html form inputs have basic type filtering(number, text, date)):
         - Inputs are filtered for: "*", "=", couple swear words and ";". ";" is allowed if the input also contains "http", to allow saving links to articles in entry notes. - Try entering "=" in entry notes.
@@ -27,7 +33,6 @@ General filters (See controllers for filtering and data sanitation, html form in
         - Passed UserID must be in uuid4 format (36 characters long) - Try sending out of range requests to API in Postman, or edit your sessionStorage in dev tools to alter your userID
         - All values sent to API must successfully parse, otherwise Exception is returned. - Try sending out of range requests to API in Postman
 
-- Set your own database details in EntryContext.cs, run dotnet ef database update
 - There are two default profiles for testing:
         - Username: Adolf
         - Password: AdaAya
