@@ -15,7 +15,7 @@ const Today = () => {
                     userID: sessionStorage.getItem('user'),
                     category: "0",
                     status: "0",
-                    timeframe: "1",
+                    timeframe: "0",
                     notesText: "",
                     showArchived: false
                 }
