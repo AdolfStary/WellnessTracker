@@ -6,6 +6,7 @@ const Today = () => {
     const [listToday, setListToday] = useState([]);
     const [dataLoaded, setDataLoaded] = useState(false);
 
+    // Gets today's entries
     const getToday = () => {
         axios(
             {
@@ -26,6 +27,7 @@ const Today = () => {
         });
     }
 
+    // Calculates avergage blood glucose
     const avgBG = () => {
         let total = 0, count = 0;
         let result;
@@ -41,6 +43,7 @@ const Today = () => {
         return result;
     }
 
+    // Calculates average insulin dose
     const avgInsulin = () => {
         let total = 0, count = 0;
         let result;
@@ -56,6 +59,7 @@ const Today = () => {
         return result;
     }
 
+    // Calculates total insulin taken today
     const totalInsulin = () => {
         let total = 0;
 
@@ -107,6 +111,7 @@ const Today = () => {
         return total;
     }
 
+    // Gets total exercise length for today
     const totalExercise = () => {
         let total = 0;
 
@@ -118,7 +123,7 @@ const Today = () => {
         return total+"m";
     }
 
-
+    // Checks if user is logged in
     if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === "") {
         return (
             <p className="alert alert-danger">You do not have access to this page.</p>
@@ -126,6 +131,7 @@ const Today = () => {
     }
     else
     {
+        // Initial data load
         if (!dataLoaded){
             getToday();
             setDataLoaded(true);

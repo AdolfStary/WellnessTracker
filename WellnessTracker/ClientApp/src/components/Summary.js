@@ -54,6 +54,7 @@ const Summary = () => {
         });
     }
 
+    // Checks if user is logged in
     if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === "") {
         return (
             <p className="alert alert-danger">You do not have access to this page.</p>
@@ -61,13 +62,14 @@ const Summary = () => {
     }
     else
     {
-        // Runs when loaded once to load Categories and Statuses
+        // Runs when loaded once to load Categories, Statuses, Allergens related to negative feelings, if any
         if (!downloadedData){
             // Initial load of data with no filters
             handleSubmit();
             setDownloadedData(true);
         }
 
+        // All calculations only execute if user is logged in
         const avgBG = () => {
             let total = 0, count = 0;
             let result;
@@ -99,7 +101,8 @@ const Summary = () => {
     
             return result;
         }
-    
+        
+        // Calculates Average daily insulin
         const avgDailyInsulin = () => {
             let dailyTotal = 0;
             let lastDate = "";
@@ -134,13 +137,12 @@ const Summary = () => {
 
             return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(2)+"u" : "N/A";
         }
-    
+        
         const avgDailyFats = () => {
             let dailyTotal = 0;
             let lastDate = "";
             let dailyTotals = [];
-            let superTotal = 0;
-    
+            let superTotal = 0;    
             
             for(let item of entryList){
                 
@@ -170,8 +172,7 @@ const Summary = () => {
             let dailyTotal = 0;
             let lastDate = "";
             let dailyTotals = [];
-            let superTotal = 0;
-    
+            let superTotal = 0;    
             
             for(let item of entryList){
                 
@@ -201,8 +202,7 @@ const Summary = () => {
             let dailyTotal = 0;
             let lastDate = "";
             let dailyTotals = [];
-            let superTotal = 0;
-    
+            let superTotal = 0;    
             
             for(let item of entryList){
                 
@@ -228,6 +228,7 @@ const Summary = () => {
             return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(0)+"g" : "N/A";
         }
 
+        // Calculates average daily meals per day, includes days where user skipped meals to give accurate data
         const avgDailyMeals = () => {
             let dailyTotal = 0;
             let lastDate = "";
@@ -260,6 +261,7 @@ const Summary = () => {
             return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(1) : "N/A";
         }
 
+        // Calculates average daily workout time, in case of multiple workouts through day, excludes days that are not workout days. Working out daily is not beneficial so lower average due to resting days is counter productive
         const avgDailyExercise = () => {
             let dailyTotal = 0;
             let lastDate = "";
@@ -295,6 +297,7 @@ const Summary = () => {
             return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(0)+"m" : "N/A";
         }
 
+        // Method to display possible relation between allergens consumed within 3 hrs prior to negative feeling entries
         const displaySickData = () => {
             let totalCases;
             const arrayResponse = Object.entries(sicknessData);
@@ -312,9 +315,6 @@ const Summary = () => {
             );
         }
     
-
-
-
         
         return (
             <div id="summary">

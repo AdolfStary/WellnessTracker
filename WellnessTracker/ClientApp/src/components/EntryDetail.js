@@ -56,11 +56,13 @@ const EntryDetail = (props) => {
         });;
     }
 
+    // Resets defaults if changes are discarded.
     const discardChange = () => {
         setTextareaDisabled(true);
         setNotes(entry.notes);
     }
 
+    // Gets alergens for this entry, if there are any.
     const loadAllergens = () => {
         axios(
             {
@@ -78,11 +80,13 @@ const EntryDetail = (props) => {
         });;
     }
 
+    // Checks if user is logged in
     if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === "") {
         return (
             <p className="alert alert-danger">You do not have access to this page.</p>
         );
     }
+    // Checks if entry data is present
     else if (sessionStorage.getItem('entry') === null || sessionStorage.getItem('entry') === undefined)
     {
         return (
@@ -91,9 +95,11 @@ const EntryDetail = (props) => {
     }
     else
     {
+        // Gets entry data from sessionStorage
         entry = JSON.parse(sessionStorage.getItem('entry'));
         entryStatic = JSON.parse(sessionStorage.getItem('entryStatic'));
 
+        // Initial data load
         if (!dataLoaded){
             setNotes(entry.notes);
             setIsArchived(Boolean(entry.isArchived));   
@@ -119,7 +125,10 @@ const EntryDetail = (props) => {
             {response !== "" ? <PopUp message={response} /> : ""}
 
             <div className={`entry-details ${entryStatic.category}`}>
-            {isArchived ? <p className="alert alert-danger right">Archived</p> : false }
+
+                { /* Shows whether entry is archived */
+                    isArchived ? <p className="alert alert-danger right">Archived</p> : false 
+                }
 
                 <div className={`category ${entryStatic.category}`}> 
                     <h2>{entryStatic.category}</h2>
@@ -164,6 +173,7 @@ const EntryDetail = (props) => {
                 </div>                          
 
                 <div className="entry-details-buttons right">
+                    {/* Button change dynamically based on options, choices and data */}
                     { !textareaDisabled ? <input onClick={() => changeNotes()} className="btn btn-success" value="Submit Changes" readOnly/>: false}
                     { !textareaDisabled ? <input onClick={() => discardChange()} className="btn btn-danger" value="Discard Changes" readOnly/>: false}
                     { textareaDisabled ? <input onClick={() => setTextareaDisabled(!textareaDisabled)} className="btn btn-primary" value="Edit Notes" readOnly />: false}

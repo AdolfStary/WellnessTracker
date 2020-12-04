@@ -9,6 +9,7 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+    // Validates user
     const handleSubmit = (event) => {
         event.preventDefault();
         let concatPassword = username + password;

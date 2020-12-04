@@ -37,11 +37,10 @@ const Register = () => {
             });
         }
         else setResponse("You need to read and understand the disclaimer before proceeding.");
-
     }
 
     
-
+    // Registration form, including disclaimer, which needs to be agreed to before registering.
     return (
             <>
                 <h2>Register</h2>            

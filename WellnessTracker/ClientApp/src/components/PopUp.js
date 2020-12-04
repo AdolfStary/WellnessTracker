@@ -1,6 +1,6 @@
 import React from 'react';
 
-
+// Displays response message with color coding
 const PopUp = (props) => {
     if (props.message.includes("Success")){
         return (

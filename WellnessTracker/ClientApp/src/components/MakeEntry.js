@@ -77,8 +77,6 @@ const MakeEntry = () => {
             setListOfAllergens(res.data);
         });
 
-
-
         setDownloadedData(true);
     }
 
@@ -115,12 +113,10 @@ const MakeEntry = () => {
         }
         ).catch((err) => {
             setResponse(err.response.data);
-        });
-
-        
+        });        
     }
 
-
+    // Checks if user is logged in
     if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === "") {
         return (
             <p className="alert alert-danger">You do not have access to this page.</p>
@@ -222,6 +218,7 @@ const MakeEntry = () => {
                    
                     
                     {
+                        // If user is diabetic show diabetes options
                         (sessionStorage.getItem('isDiabetic') === "true") ?
                             <div className="main-section">
                                 <div>

@@ -42,6 +42,7 @@ const EntryList = () => {
         });
     }
 
+    // Checks if user is logged in
     if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === "") {
         return (
             <p className="alert alert-danger">You do not have access to this page.</p>
@@ -86,9 +87,6 @@ const EntryList = () => {
             handleSubmit();
             setDownloadedData(true);
         }
-
-
-
 
         
         return (
@@ -145,12 +143,12 @@ const EntryList = () => {
 
                     <input type="submit" className="btn btn-primary" value="Filter" />
                 </form>
-                <div id="entry-card-list">
-                    
-                        {
-                            entryList.length !== 0 && listOfCategories.length !== 0 && listOfStatuses !== 0 ? entryList.map( (Item) => <EntryCard entry={Item} statuses={listOfStatuses} categories={listOfCategories} key={Item.id}/>) : <p>No matching entries found.</p>
-                        }
-                    
+
+                <div id="entry-card-list">                    
+                    {
+                        // If all data is loaded show cards for all matching entries
+                        entryList.length !== 0 && listOfCategories.length !== 0 && listOfStatuses !== 0 ? entryList.map( (Item) => <EntryCard entry={Item} statuses={listOfStatuses} categories={listOfCategories} key={Item.id}/>) : <p>No matching entries found.</p>
+                    }                    
                 </div>
             </div>
 
