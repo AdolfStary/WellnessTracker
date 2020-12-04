@@ -5,7 +5,7 @@ export class Home extends Component {
 
   render () {
     return (
-      <div>
+      <div className="home-div">
         <h1>WellnessTracker</h1>
             <p>Welcome, my name is Adolf Stary and I created this wellness tracker for personal use as a capstone project for TechCareers - Full Stack developer program.</p>
             <p>This app was designed solely as an aid for personal wellness tracking. It is not intended or recommended to be used for making any diet or medical decisions. Always consult your medical practitioner or dietitian when making any decisions related to your health or diet, always use tools provided by your diabetes team or medical equipment supplier to keep track of your diabetes related data.</p>

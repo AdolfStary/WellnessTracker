@@ -209,7 +209,7 @@ namespace WellnessTracker.Controllers
         {
             bool result = true;
 
-            if (testString.Contains("*") || (testString.Contains("=") && !testString.Contains("http")) || testString.Contains(";"))
+            if (testString.Contains("*") || (testString.Contains("=") && !testString.Contains("http")) || testString.Contains(";") || testString.Contains("fuck") || testString.Contains("shit"))
             {
                 result = false;
             }
@@ -382,6 +382,7 @@ namespace WellnessTracker.Controllers
         public static ActionResult<string> ChangeArchivedEntryByID(int id)
         {
             Entry entryToBeChanged = GetEntryByID(id);
+            List<Allergen_Entry> childEntries = new List<Allergen_Entry>();
 
             if (entryToBeChanged == null)
             {
@@ -393,6 +394,14 @@ namespace WellnessTracker.Controllers
                 entryToBeChanged = context.Entries.Where(x => x.ID == id).SingleOrDefault();
                 entryToBeChanged.IsArchived = !entryToBeChanged.IsArchived;
 
+                childEntries = context.Allergen_Entries.Where(x => x.EntryID == id).ToList();
+                if (childEntries.Count > 0)
+                {
+                    foreach(Allergen_Entry childEntry in childEntries)
+                    {
+                        childEntry.isArchived = !childEntry.isArchived;
+                    }
+                }
                 context.SaveChanges();
             }
 
