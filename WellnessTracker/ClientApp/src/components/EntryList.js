@@ -104,7 +104,7 @@ const EntryList = () => {
                         <label htmlFor='timeframe'>Time: </label>
                         <select id='timeframe' name='timeframe'onChange={(e) => setTimeframe(e.target.value)} value={timeframe} required>
                             <option value="-1">To date</option>
-                            <option value="1">Today</option>
+                            <option value="0">Today</option>
                             <option value="7">Past week</option>
                             <option value="14">Past 2 weeks</option>
                             <option value="30">Past 30 days</option>
@@ -148,7 +148,7 @@ const EntryList = () => {
                 <div id="entry-card-list">
                     
                         {
-                            (entryList.length !== 0) ? entryList.map( (Item) => <EntryCard entry={Item} statuses={listOfStatuses} categories={listOfCategories} key={Item.id}/>) : <p>No matching entries found.</p>
+                            entryList.length !== 0 && listOfCategories.length !== 0 && listOfStatuses !== 0 ? entryList.map( (Item) => <EntryCard entry={Item} statuses={listOfStatuses} categories={listOfCategories} key={Item.id}/>) : <p>No matching entries found.</p>
                         }
                     
                 </div>

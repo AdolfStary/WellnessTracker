@@ -366,7 +366,7 @@ namespace WellnessTracker.Controllers
 
                     if (timeframe != -1)
                     {
-                        listOfEntries = listOfEntries.Where(x => Math.Floor((DateTime.Now - x.Time).TotalDays) <= timeframe).ToList();
+                        listOfEntries = listOfEntries.Where(x => (DateTime.Today - x.Time.Date).Days <= timeframe).ToList();
                     }
 
                     if (notesText != null && notesText != "")
@@ -464,8 +464,8 @@ namespace WellnessTracker.Controllers
 
                         if (timeframe != -1)
                         {
-                            negativeFeelingEntries = negativeFeelingEntries.Where(x => Math.Floor((DateTime.Now - x.Time).TotalDays) <= timeframe).ToList();
-                            mealEntries = mealEntries.Where(x => Math.Floor((DateTime.Now - x.Time).TotalDays) <= timeframe).ToList();
+                            negativeFeelingEntries = negativeFeelingEntries.Where(x => (DateTime.Today - x.Time.Date).Days <= timeframe).ToList();
+                            mealEntries = mealEntries.Where(x => (DateTime.Today - x.Time.Date).Days <= timeframe).ToList();
                         }
 
                     if (!showArchived)
