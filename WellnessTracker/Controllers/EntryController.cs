@@ -12,6 +12,7 @@ namespace WellnessTracker.Controllers
 {
     public class EntryController : Controller
     {        
+        // Sanitizes input, creates new user profile
         public static ActionResult<string> RegisterUser(string id, string username, string password, bool isDiabetic)
         {
             if (id.Length < 36)
@@ -46,6 +47,7 @@ namespace WellnessTracker.Controllers
             return "Success!";
         }
 
+        // Sanitizes input, creates new notebook Entry and Allergen-Entry if allergens were entered.
         public static ActionResult<string> MakeEntry(int categoryID, string userID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg, int allergen1, int allergen2, int allergen3, int exerciseLength)
         {
                 if (notes != null)
@@ -144,6 +146,7 @@ namespace WellnessTracker.Controllers
                 return "Success!";
         }
 
+        // Checkes if combination of username and password exist in database using hashed password, validates user
         public static List<string> ValidateUser(string username, string password)
         {
             List<string> validateReturn = new List<string>();
@@ -205,6 +208,7 @@ namespace WellnessTracker.Controllers
             return user;
         }
 
+        // Tests given string of forbidden words and characters
         public static bool TestString(string testString)
         {
             bool result = true;
@@ -252,6 +256,7 @@ namespace WellnessTracker.Controllers
             }
         }
 
+        // Gets allergens of given entry and checks if the entry corresponds with a user who's asking to view the data
         public static ActionResult<List<string>> GetEntryAllergens(string userID, int entryID)
         {
             if (userID.Length != 36)
@@ -285,6 +290,7 @@ namespace WellnessTracker.Controllers
             }
         }
 
+        // Gets categories for non-diabetic users
         public static ActionResult<List<Category>> GetCategoriesNoDia()
         {
             using (EntryContext context = new EntryContext())
@@ -301,6 +307,7 @@ namespace WellnessTracker.Controllers
             }
         }
 
+        // Sanitizes data, gets all user's entries and filters them based on passed data
         public static ActionResult<List<Entry>> GetEntries(string userID, int categoryID, int statusID, int timeframe, string notesText, bool showArchived = false)
         {
                 if (categoryID != 0)
@@ -379,6 +386,7 @@ namespace WellnessTracker.Controllers
                 }
         }
 
+        // Changes property IsArchived on given entry and it's child entries if there are any.
         public static ActionResult<string> ChangeArchivedEntryByID(int id)
         {
             Entry entryToBeChanged = GetEntryByID(id);
@@ -408,6 +416,7 @@ namespace WellnessTracker.Controllers
             return "Success!";
         }
 
+        // Edits notes of a given entry
         public static string ChangeEntryNotesByID(int id, string notes)
         {
             Entry entryToBeChanged = GetEntryByID(id);
@@ -445,6 +454,8 @@ namespace WellnessTracker.Controllers
             return category;
         }
 
+        // Gets total number of cases where meal was eaten before negative feelings, counts how many times certain allergen was present in meal
+        // Returns an array with total cases and allergen specific counts
         public static ActionResult<Dictionary<string, int>> GetNegativeStatusAllergens(string userID, int timeframe, bool showArchived)
         {
                 if (timeframe < -1 || timeframe > 180)
@@ -468,47 +479,52 @@ namespace WellnessTracker.Controllers
 
                     using (EntryContext context = new EntryContext())
                     {
+                        // Gets all meals of the user, gets all negative feeling entries
                         negativeFeelingEntries = context.Entries.Where(x => x.UserID == userID && x.EntryStatus.IsPositive == false).ToList();
                         mealEntries = context.Entries.Where(x => x.UserID == userID && x.EntryCategory.Name == "Meal").ToList();
 
+                        // Timeframe and showArchived filtering
                         if (timeframe != -1)
                         {
                             negativeFeelingEntries = negativeFeelingEntries.Where(x => (DateTime.Today - x.Time.Date).Days <= timeframe).ToList();
                             mealEntries = mealEntries.Where(x => (DateTime.Today - x.Time.Date).Days <= timeframe).ToList();
                         }
 
-                    if (!showArchived)
-                    {
-                        negativeFeelingEntries = negativeFeelingEntries.Where(x => x.IsArchived == false).ToList();
-                        mealEntries = mealEntries.Where(x => x.IsArchived == false).ToList();
-                    }
-
-
-                    foreach (Entry negativeFeelingEntry in negativeFeelingEntries)
+                        if (!showArchived)
                         {
-                            foreach (Entry mealEntry in mealEntries)
+                            negativeFeelingEntries = negativeFeelingEntries.Where(x => x.IsArchived == false).ToList();
+                            mealEntries = mealEntries.Where(x => x.IsArchived == false).ToList();
+                        }
+
+                        // Checks whether meals within 3 hours prior to the negative feeling had allergens in them and adds them to an array.
+                        foreach (Entry negativeFeelingEntry in negativeFeelingEntries)
                             {
-
-                                if (context.Allergen_Entries.Where(x => x.EntryID == mealEntry.ID).ToList().Count > 0)
+                                foreach (Entry mealEntry in mealEntries)
                                 {
-                                    if ((negativeFeelingEntry.Time - mealEntry.Time).TotalHours <= 3 && (negativeFeelingEntry.Time - mealEntry.Time).TotalHours >= 0)
+
+                                    if (context.Allergen_Entries.Where(x => x.EntryID == mealEntry.ID).ToList().Count > 0)
                                     {
-                                        allergens.AddRange(context.Allergen_Entries.Where(x => x.EntryID == mealEntry.ID).Select(y => y.Allergen.Name).ToList());
-                                        allergens.Add("AllergenMeal");
+                                        if ((negativeFeelingEntry.Time - mealEntry.Time).TotalHours <= 3 && (negativeFeelingEntry.Time - mealEntry.Time).TotalHours >= 0)
+                                        {
+                                            // Adds allergens from a matching meal
+                                            allergens.AddRange(context.Allergen_Entries.Where(x => x.EntryID == mealEntry.ID).Select(y => y.Allergen.Name).ToList());
+                                            // Keyword for Allergen Meal case
+                                            allergens.Add("AllergenMeal");
+                                        }
                                     }
+
                                 }
-
                             }
-                        }
 
-                        var groupedAllergens = allergens.GroupBy(x => x);
+                            // Creates output with Allergen as Key and total count of occurences as Value, AllergenMeal is key for total count of cases.
+                            var groupedAllergens = allergens.GroupBy(x => x);
 
-                        foreach (var group in groupedAllergens)
-                        {
-                            result.Add(group.Key, group.Count());
-                        }
+                            foreach (var group in groupedAllergens)
+                            {
+                                result.Add(group.Key, group.Count());
+                            }
 
-                        return result;
+                            return result;
                     }
                 }                            
         }

@@ -3,11 +3,30 @@ Author: Adolf Stary
 
 Title:
 
-Purpose: This project was created as a capstone project for my Full Stack Developer course at University of Alberta. It involves the full scope of full stack development using C# MVC back end, React/JavaScript front end and MariaDB. This app was designed for personal use, to track health and wellness related events throughout the day with ease and assist with summaries and overviews of the data.
+Purpose: This project was created as a capstone project for my Full Stack Developer course at University of Alberta. It involves the full scope of full stack development using CodeFirst C# EntityFramework back end, React/JavaScript front end and MariaDB. This app was designed for personal use, to track health and wellness related events throughout the day with ease and assist with summaries and overviews of the data.
 
 Last Modified: Nov 12, 2020
 
+# Scope
+- basic profile creation and authentiaction - ACHIEVED
+- making entries into a notebook, which save important data about day's events and meals - ACHIEVED
+- raw data display (Notebook.js) - ACHIEVED
+- diabetic and non-diabetic version - ACHIEVED
+- filtered reports - ACHIEVED (Summary.js + Today.js + Notebook.js(filtering))
+- advanced observations - ACHIEVED (Summary.js Observations section, using data to determine, which allergens may be causing sickness, tiredness, etc.)
+
+# Out of Scope
+- comparisons to general charts - SCRAPPED, general charts not useful for individuals, didn't want to get on the thin ice of making suggestions how much to eat etc. Should be handled by practicioner or dietitian
+
 # Testing instructions
+General filters (See controllers for filtering and data sanitation, html form inputs have basic type filtering(number, text, date)):
+        - Inputs are filtered for: "*", "=", couple swear words and ";". ";" is allowed if the input also contains "http", to allow saving links to articles in entry notes. - Try entering "=" in entry notes.
+        - When creating a profile, username cannot already exist in database. - Try creating a profile with username "Adolf"
+        - Entered data needs to be in range - Try sending out of range requests to API in Postman
+        - All referenced entities must exist - Try sending out of range requests to API in Postman
+        - Passed UserID must be in uuid4 format (36 characters long) - Try sending out of range requests to API in Postman, or edit your sessionStorage in dev tools to alter your userID
+        - All values sent to API must successfully parse, otherwise Exception is returned. - Try sending out of range requests to API in Postman
+
 - Set your own database details in EntryContext.cs, run dotnet ef database update
 - There are two default profiles for testing:
         - Username: Adolf
