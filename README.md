@@ -61,6 +61,7 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/error-handling/web-api-
 https://attacomsian.com/blog/javascript-iterate-objects
 https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
 https://hosting.review/tutorial/javascript-remove-element-from-array/
+https://github.com/reactstrap/reactstrap/issues/336
 
 
 # Trello

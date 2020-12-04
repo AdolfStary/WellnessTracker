@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, NavLink as RRDNavLink } from 'react-router-dom';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -14,6 +14,7 @@ export class NavMenu extends Component {
       collapsed: true
     };
   }
+  
 
   toggleNavbar () {
     this.setState({
@@ -33,10 +34,10 @@ export class NavMenu extends Component {
                             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
                                 <ul className="navbar-nav flex-grow hover-mod">
                                     <NavItem>
-                                        <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+                                        <NavLink  tag={RRDNavLink} className="text-dark" activeClassName="active-link" to="/" exact>Home</NavLink>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink tag={Link} className="text-dark" to="/Login">Login</NavLink>
+                                        <NavLink tag={RRDNavLink} className="text-dark" activeClassName="active-link" to="/Login">Login</NavLink>
                                     </NavItem>
                                 </ul>
                             </Collapse>
@@ -45,42 +46,41 @@ export class NavMenu extends Component {
                 </header>
             );
         }
+        // Shows full menu if user is logged in
         else {
 
-        return (
-            <header>
-                <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
-                    <Container>
-                        <NavbarBrand tag={Link} to="/">WellnessTracker</NavbarBrand>
-                        <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-                        <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-                            <ul className="navbar-nav flex-grow hover-mod">
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/Today">Today</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/Summary">Summary</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/MakeEntry">Make Entry</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/Notebook">My Notebook</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/Logout">Logout</NavLink>
-                                </NavItem>
-                            </ul>
-                        </Collapse>
-                    </Container>
-                </Navbar>
-            </header>
-            );
-        }
-    }
-
-  
+            return (
+                <header>
+                    <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
+                        <Container>
+                            <NavbarBrand tag={Link} to="/">WellnessTracker</NavbarBrand>
+                            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+                            <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
+                                <ul className="navbar-nav flex-grow hover-mod">
+                                    <NavItem>
+                                        <NavLink tag={RRDNavLink} className="text-dark" activeClassName="active-link" to="/" exact>Home</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={RRDNavLink} className="text-dark" activeClassName="active-link" to="/Today">Today</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={RRDNavLink} className="text-dark" activeClassName="active-link" to="/Summary">Summary</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={RRDNavLink} className="text-dark" activeClassName="active-link" to="/MakeEntry">Make Entry</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={RRDNavLink} className="text-dark" activeClassName="active-link" to="/Notebook">My Notebook</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={RRDNavLink} className="text-dark" activeClassName="active-link" to="/Logout">Logout</NavLink>
+                                    </NavItem>
+                                </ul>
+                            </Collapse>
+                        </Container>
+                    </Navbar>
+                </header>
+                );
+            }
+        }  
 }
