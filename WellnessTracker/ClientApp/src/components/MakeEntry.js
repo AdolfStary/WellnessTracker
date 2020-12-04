@@ -131,7 +131,9 @@ const MakeEntry = () => {
         return (
             <div id="entryform">
                 <h2>Make an entry</h2>
+
                 {response !== "" ? <PopUp message={response} /> : ""}
+                
                 <form onSubmit={event => handleSubmit(event)}>
                     <div className="main-section">
                         <div>

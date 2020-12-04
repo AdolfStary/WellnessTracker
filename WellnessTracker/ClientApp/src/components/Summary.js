@@ -29,15 +29,11 @@ const Summary = () => {
                 }
             }
         ).then((res) => {
-            
-            if(!res.data.includes("Error")){
                 setEntryList(res.data);
                 setResponse("Success!");                
-            }
-            else setResponse(res.data);
         }
         ).catch((err) => {
-            setResponse(err.response.statusText);
+            setResponse(err.response.data);
         });
 
         axios(
@@ -54,7 +50,7 @@ const Summary = () => {
             setSicknessData(res.data);
         }
         ).catch((err) => {
-            setResponse(err.response.statusText);
+            setResponse(err.response.data);
         });
     }
 
@@ -63,13 +59,12 @@ const Summary = () => {
             <p className="alert alert-danger">You do not have access to this page.</p>
         );
     }
-    else{
-
+    else
+    {
         // Runs when loaded once to load Categories and Statuses
         if (!downloadedData){
             // Initial load of data with no filters
             handleSubmit();
-
             setDownloadedData(true);
         }
 
@@ -326,6 +321,7 @@ const Summary = () => {
                 <h2>Summary</h2>
                 
                 {(response !== "" && response !== "Success!") ? <PopUp message={response} /> : ""}
+                
                 <h4>Filter options</h4>
                 <form onSubmit={event => handleSubmit(event)}>                    
                     <div>

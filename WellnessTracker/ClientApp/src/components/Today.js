@@ -21,10 +21,8 @@ const Today = () => {
                 }
             }
 
-        ).then((res) => {     
-
+        ).then((res) => {    
             setListToday(res.data);
-
         });
     }
 
@@ -38,7 +36,6 @@ const Today = () => {
                 count++;
             }
         }
-
         count > 0 ? result = (total / count).toFixed(2) : result = "N/A";
 
         return result;
@@ -54,7 +51,6 @@ const Today = () => {
                 count++;
             }
         }
-
         count > 0 ? result = (total / count).toFixed(2)+"u" : result = "N/A";
 
         return result;
@@ -107,7 +103,6 @@ const Today = () => {
             if (item.categoryID === -5){
                 total++;
             }
-
         }
         return total;
     }
@@ -119,7 +114,6 @@ const Today = () => {
             if (item.categoryID === -4){
                 total += item.exerciseLength;
             }
-
         }
         return total+"m";
     }

@@ -11,61 +11,43 @@ using WellnessTracker.Models;
 namespace WellnessTracker.Controllers
 {
     public class EntryController : Controller
-    {
-
-        
-        public static string RegisterUser(string id, string username, string password, bool isDiabetic)
+    {        
+        public static ActionResult<string> RegisterUser(string id, string username, string password, bool isDiabetic)
         {
-            try
+            if (id.Length < 36)
             {
-
-                if (id.Length < 36)
-                {
-                    throw new Exception("Invalid ID.");
-                }
-                else if (GetUserByID(id) != null)
-                {
-                    throw new Exception("ID already exists in the database.");
-                }
-                else if (GetUserByName(username) != null)
-                {
-                    throw new Exception("Username already exists in the database.");
-                }
-                else if (!TestString(username))
-                {
-                    throw new Exception("Username contains forbidden characters.");
-                }
-                else if (!TestString(password))
-                {
-                    throw new Exception("Password contains forbidden characters.");
-                }
-                else
-                {
-                    using (EntryContext context = new EntryContext())
-                    {
-                        password = GetHash(password);
-                        User newUser = new User(id, username, password, isDiabetic);
-                        context.Users.Add(newUser);
-
-                        context.SaveChanges();
-                    }
-                }
-
-
-                return "Success!";
+                throw new Exception("Invalid ID.");
             }
-            catch (Exception e)
+            else if (GetUserByID(id) != null)
             {
-                return $"Error saving new user: {e.Message}";
+                throw new Exception("ID already exists in the database.");
+            }
+            else if (GetUserByName(username) != null)
+            {
+                throw new Exception("Username already exists in the database.");
+            }
+            else if (!TestString(username))
+            {
+                throw new Exception("Username contains forbidden characters.");
+            }
+            else if (!TestString(password))
+            {
+                throw new Exception("Password contains forbidden characters.");
             }
 
+            using (EntryContext context = new EntryContext())
+            {
+                password = GetHash(password);
+                User newUser = new User(id, username, password, isDiabetic);
+                context.Users.Add(newUser);
+
+                context.SaveChanges();
+            }                
+            return "Success!";
         }
 
-        public static string MakeEntry(int categoryID, string userID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg, int allergen1, int allergen2, int allergen3, int exerciseLength)
+        public static ActionResult<string> MakeEntry(int categoryID, string userID, int statusID, DateTime time, int carbs, int protein, int fats, string notes, double insulin, double bg, int allergen1, int allergen2, int allergen3, int exerciseLength)
         {
-            try
-            {
-
                 if (notes != null)
                 {
                     if (!TestString(notes))
@@ -113,112 +95,90 @@ namespace WellnessTracker.Controllers
                 {
                     throw new Exception("Exercise length is invalid.");
                 }
-                else
-                {                    
-                    using (EntryContext context = new EntryContext())
+                  
+                using (EntryContext context = new EntryContext())
+                {                        
+                    Entry newEntry = new Entry(categoryID, userID, statusID, time, carbs, protein, fats, notes, insulin, bg, exerciseLength);
+                    context.Entries.Add(newEntry);
+                    context.SaveChanges();
+
+                    if (allergen1 != 0)
                     {
-                        
-                        Entry newEntry = new Entry(categoryID, userID, statusID, time, carbs, protein, fats, notes, insulin, bg, exerciseLength);
-                        context.Entries.Add(newEntry);
-                        context.SaveChanges();
+                        context.Allergen_Entries.Add(
+                                new Allergen_Entry()
+                                {
+                                    AllergenID = allergen1,
+                                    EntryID = newEntry.ID
+                                }
 
-                        if (allergen1 != 0)
-                        {
-                            context.Allergen_Entries.Add(
-                                    new Allergen_Entry()
-                                    {
-                                        AllergenID = allergen1,
-                                        EntryID = newEntry.ID
-                                    }
-
-                                );
-                        }
-
-                        if (allergen2 != 0)
-                        {
-                            context.Allergen_Entries.Add(
-                                    new Allergen_Entry()
-                                    {
-                                        AllergenID = allergen2,
-                                        EntryID = newEntry.ID
-                                    }
-
-                                );
-                        }
-
-                        if (allergen3 != 0)
-                        {
-                            context.Allergen_Entries.Add(
-                                    new Allergen_Entry()
-                                    {
-                                        AllergenID = allergen3,
-                                        EntryID = newEntry.ID
-                                    }
-
-                                );
-                        }
-
-                        context.SaveChanges();
+                            );
                     }
-                }
-                return "Success!";
-            }
-            catch (Exception e)
-            {
-                return $"Error making an entry: {e.Message}";
-            }
 
+                    if (allergen2 != 0)
+                    {
+                        context.Allergen_Entries.Add(
+                                new Allergen_Entry()
+                                {
+                                    AllergenID = allergen2,
+                                    EntryID = newEntry.ID
+                                }
+
+                            );
+                    }
+
+                    if (allergen3 != 0)
+                    {
+                        context.Allergen_Entries.Add(
+                                new Allergen_Entry()
+                                {
+                                    AllergenID = allergen3,
+                                    EntryID = newEntry.ID
+                                }
+
+                            );
+                    }
+
+                    context.SaveChanges();
+                }
+                
+                return "Success!";
         }
 
         public static List<string> ValidateUser(string username, string password)
         {
             List<string> validateReturn = new List<string>();
 
-            try
+            if (GetUserByName(username) == null)
             {
-
-                if (GetUserByName(username) == null)
-                {
-                    throw new Exception("Username doesn't exist in the database.");
-                }
-                else if (!TestString(username))
-                {
-                    throw new Exception("Username contains forbidden characters.");
-                }
-                else if (!TestString(password))
-                {
-                    throw new Exception("Password contains forbidden characters.");
-                }
-                else
-                {
-                    User user;
-                    password = GetHash(password);
-
-                    using (EntryContext context = new EntryContext())
-                    {
-                        user = context.Users.Where(x => x.Username == username && x.Password == password).SingleOrDefault();
-                    }
-                    if (user == null)
-                    {
-                        throw new Exception("Wrong username or password.");
-                    }
-                    else
-                    {
-                        validateReturn.Add("Success!");
-                        validateReturn.Add(user.ID);
-                        validateReturn.Add(user.IsDiabetic.ToString().ToLower());
-                        return validateReturn;
-                    }
-
-                }
-
+                throw new Exception("Wrong username or password.");
             }
-            catch (Exception e)
+            else if (!TestString(username))
             {
-                validateReturn.Add($"Error: {e.Message}");
+                throw new Exception("Username contains forbidden characters.");
+            }
+            else if (!TestString(password))
+            {
+                throw new Exception("Password contains forbidden characters.");
+            }
+
+            User user;
+            password = GetHash(password);
+
+            using (EntryContext context = new EntryContext())
+            {
+                user = context.Users.Where(x => x.Username == username && x.Password == password).SingleOrDefault();
+            }
+            if (user == null)
+            {
+                throw new Exception("Wrong username or password.");
+            }
+            else
+            {
+                validateReturn.Add("Success!");
+                validateReturn.Add(user.ID);
+                validateReturn.Add(user.IsDiabetic.ToString().ToLower());
                 return validateReturn;
             }
-
         }
 
         public static User GetUserByID(string id)
@@ -268,7 +228,7 @@ namespace WellnessTracker.Controllers
             return status;
         }
 
-        public static List<Status> GetStatuses()
+        public static ActionResult<List<Status>> GetStatuses()
         {
             using (EntryContext context = new EntryContext())
             {
@@ -276,7 +236,7 @@ namespace WellnessTracker.Controllers
             }
         }
 
-        public static List<Allergen> GetAllergens()
+        public static ActionResult<List<Allergen>> GetAllergens()
         {
             using (EntryContext context = new EntryContext())
             {
@@ -317,7 +277,7 @@ namespace WellnessTracker.Controllers
             }
         }
 
-        public static List<Category> GetCategories()
+        public static ActionResult<List<Category>> GetCategories()
         {
             using (EntryContext context = new EntryContext())
             {
@@ -325,7 +285,7 @@ namespace WellnessTracker.Controllers
             }
         }
 
-        public static List<Category> GetCategoriesNoDia()
+        public static ActionResult<List<Category>> GetCategoriesNoDia()
         {
             using (EntryContext context = new EntryContext())
             {
@@ -419,65 +379,49 @@ namespace WellnessTracker.Controllers
                 }
         }
 
-        public static string ChangeArchivedEntryByID(int id)
+        public static ActionResult<string> ChangeArchivedEntryByID(int id)
         {
-            try 
+            Entry entryToBeChanged = GetEntryByID(id);
+
+            if (entryToBeChanged == null)
             {
-                Entry entryToBeChanged = GetEntryByID(id);
-
-                if (entryToBeChanged == null)
-                {
-                    throw new Exception("Entry wasn't found.");
-                }
-
-                using (EntryContext context = new EntryContext())
-                {
-                    entryToBeChanged = context.Entries.Where(x => x.ID == id).SingleOrDefault();
-                    entryToBeChanged.IsArchived = !entryToBeChanged.IsArchived;
-
-                    context.SaveChanges();
-                }
-
-                return "Success!";
-            }
-            catch (Exception e)
-            {
-                return $"Error editing entry: {e.Message}";
+                throw new Exception("Entry wasn't found.");
             }
 
+            using (EntryContext context = new EntryContext())
+            {
+                entryToBeChanged = context.Entries.Where(x => x.ID == id).SingleOrDefault();
+                entryToBeChanged.IsArchived = !entryToBeChanged.IsArchived;
+
+                context.SaveChanges();
+            }
+
+            return "Success!";
         }
 
         public static string ChangeEntryNotesByID(int id, string notes)
         {
-            try
+            Entry entryToBeChanged = GetEntryByID(id);
+
+            if (entryToBeChanged == null)
             {
-                Entry entryToBeChanged = GetEntryByID(id);
+                throw new Exception("Entry wasn't found.");
+            }
+            else if (!TestString(notes))
+            {
+                throw new Exception("Notes contain invalid characters.");
+            }
 
-                if (entryToBeChanged == null)
-                {
-                    throw new Exception("Entry wasn't found.");
-                }
-                else if (!TestString(notes))
-                {
-                    throw new Exception("Notes contain invalid characters.");
-                }
-
-                using (EntryContext context = new EntryContext())
-                {
-                    entryToBeChanged = context.Entries.Where(x => x.ID == id).SingleOrDefault();
+            using (EntryContext context = new EntryContext())
+            {
+                entryToBeChanged = context.Entries.Where(x => x.ID == id).SingleOrDefault();
                     
-                    entryToBeChanged.Notes = notes;
+                entryToBeChanged.Notes = notes;
 
-                    context.SaveChanges();
-                }
-
-                return "Success!";
-            }
-            catch (Exception e)
-            {
-                return $"Error editing entry: {e.Message}";
+                context.SaveChanges();
             }
 
+            return "Success!";
         }
 
         public static Category GetCategoryByID(int id)

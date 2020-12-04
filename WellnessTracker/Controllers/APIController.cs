@@ -20,11 +20,19 @@ namespace WellnessTracker.Controllers
         [HttpPost("Register")]
         public ActionResult<string> RegisterUser_POST(string id, string username, string password, string isDiabetic)
         {
-            if (bool.TryParse(isDiabetic.Trim(), out bool parsedIsDiabetic))
+            try
             {
-                return EntryController.RegisterUser(id.Trim(), username.Trim(), password.Trim(), parsedIsDiabetic);
+                if (bool.TryParse(isDiabetic.Trim(), out bool parsedIsDiabetic))
+                {
+                    return EntryController.RegisterUser(id.Trim(), username.Trim(), password.Trim(), parsedIsDiabetic);
+                }
+                else return "Invalid values passed.";
             }
-            else return "Invalid value for diabetic option.";
+            catch (Exception e)
+            {
+                return BadRequest($"Error registering new user: {e.Message}");
+            }
+
         }
         
         [HttpPost("MakeEntry")]
@@ -44,7 +52,7 @@ namespace WellnessTracker.Controllers
             }
             catch (Exception e)
             {
-                return $"Error making an entry: {e.Message}";
+                return BadRequest($"Error making an entry: {e.Message}");
             }
             
         }
@@ -56,12 +64,19 @@ namespace WellnessTracker.Controllers
         //////////////////////////////////
 
         [HttpGet("Validate")]
-        public List<string> ValidateUser_GET(string username, string password)
+        public ActionResult<List<string>> ValidateUser_GET(string username, string password)
         {
-            username = username.Trim();
-            password = password.Trim();
+            try
+            {
+                username = username.Trim();
+                password = password.Trim();
 
-            return EntryController.ValidateUser(username, password);
+                return EntryController.ValidateUser(username, password);
+            }
+            catch (Exception e)
+            {
+                return NotFound($"Error validating user: {e.Message}");
+            }
         }
 
         [HttpGet("GetEntries")]
@@ -84,9 +99,16 @@ namespace WellnessTracker.Controllers
         }
 
         [HttpGet("GetStatuses")]
-        public List<Status> GetStatuses_GET()
+        public ActionResult<List<Status>> GetStatuses_GET()
         {
-            return EntryController.GetStatuses();
+            try
+            {
+                return EntryController.GetStatuses();
+            }
+            catch (Exception e)
+            {
+                return NotFound($"Error getting data: {e.Message}");
+            }
         }
 
         [HttpGet("GetNegativeStatusAllergens")]
@@ -107,9 +129,16 @@ namespace WellnessTracker.Controllers
         }
 
         [HttpGet("GetAllergens")]
-        public List<Allergen> GetAllergens_GET()
+        public ActionResult<List<Allergen>> GetAllergens_GET()
         {
-            return EntryController.GetAllergens();
+            try 
+            {
+                return EntryController.GetAllergens();
+            }
+            catch (Exception e)
+            {
+                return NotFound($"Error getting data: {e.Message}");
+            }
         }
 
         [HttpGet("GetEntryAllergens")]
@@ -126,20 +155,33 @@ namespace WellnessTracker.Controllers
             catch (Exception e)
             {
                 return NotFound($"Error getting data: {e.Message}");
-            }
-            
+            }            
         }
 
         [HttpGet("GetCategories")]
-        public List<Category> GetCategories_GET()
+        public ActionResult<List<Category>> GetCategories_GET()
         {
-            return EntryController.GetCategories();
+            try
+            {
+                return EntryController.GetCategories();
+            }
+            catch (Exception e)
+            {
+                return NotFound($"Error getting data: {e.Message}");
+            }
         }
 
         [HttpGet("GetCategoriesNoDia")]
-        public List<Category> GetCategoriesNoDia_GET()
+        public ActionResult<List<Category>> GetCategoriesNoDia_GET()
         {
-            return EntryController.GetCategoriesNoDia();
+            try
+            {
+                return EntryController.GetCategoriesNoDia();
+            }
+            catch (Exception e)
+            {
+                return NotFound($"Error getting data: {e.Message}");
+            }
         }
 
         //////////////////////////////////
@@ -147,23 +189,37 @@ namespace WellnessTracker.Controllers
         //////////////////////////////////
 
         [HttpPatch("ChangeArchived")]
-        public string ChangeArchivedEntry_PATCH(string id)
+        public ActionResult<string> ChangeArchivedEntry_PATCH(string id)
         {
-            if (int.TryParse(id.Trim(), out int parsedID))
+            try
             {
-                return EntryController.ChangeArchivedEntryByID(parsedID);
+                if (int.TryParse(id.Trim(), out int parsedID))
+                {
+                    return EntryController.ChangeArchivedEntryByID(parsedID);
+                }
+                else throw new Exception("Invalid ID was passed.");
             }
-            else return "Invalid ID was passed.";
+            catch (Exception e)
+            {
+                return BadRequest($"Error archiving entry: {e.Message}");
+            }
         }
 
         [HttpPatch("ChangeNotes")]
-        public string ChangeEntryNotes_PATCH(string id, string notes)
+        public ActionResult<string> ChangeEntryNotes_PATCH(string id, string notes)
         {
-            if (int.TryParse(id.Trim(), out int parsedID))
+            try
             {
-                return EntryController.ChangeEntryNotesByID(parsedID, notes);
+                if (int.TryParse(id.Trim(), out int parsedID))
+                {
+                    return EntryController.ChangeEntryNotesByID(parsedID, notes);
+                }
+                else throw new Exception("Invalid ID was passed.");
             }
-            else return "Invalid ID was passed.";
+            catch (Exception e)
+            {
+                return BadRequest($"Error editing entry: {e.Message}");
+            }
         }
     }
 }

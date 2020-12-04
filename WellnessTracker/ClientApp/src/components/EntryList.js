@@ -33,15 +33,12 @@ const EntryList = () => {
                     showArchived: showArchived
                 }
             }
-        ).then((res) => { 
-            if(!res.data.includes("Error")){
+        ).then((res) => {             
                 setEntryList(res.data);
                 setResponse("Success!");                
-            }
-            else setResponse(res.data);
         }
         ).catch((err) => {
-            setResponse(err.response.statusText);
+            setResponse(err.response.data);
         });
     }
 
@@ -87,7 +84,6 @@ const EntryList = () => {
 
             // Initial load of data with no filters
             handleSubmit();
-
             setDownloadedData(true);
         }
 
@@ -100,6 +96,7 @@ const EntryList = () => {
                 <h2>My Notebook</h2>
                 
                 {(response !== "" && response !== "Success!") ? <PopUp message={response} /> : ""}
+                
                 <h4>Filter options</h4>
                 <form onSubmit={event => handleSubmit(event)}>
                     

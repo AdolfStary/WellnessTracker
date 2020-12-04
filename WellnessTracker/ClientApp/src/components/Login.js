@@ -23,18 +23,13 @@ const Login = () => {
                 }
             }
         ).then((res) => {
-            
-            if(!res.data[0].includes("Error")){
-                
-                sessionStorage.setItem('user', res.data[1]);
-                sessionStorage.setItem('isDiabetic', res.data[2]);                
+            sessionStorage.setItem('user', res.data[1]);
+            sessionStorage.setItem('isDiabetic', res.data[2]);                
 
-                setResponse(res.data[0]);
-                setUsername("");
-                setPassword("");
-                window.location = '/';
-            }
-            else setResponse(res.data[0]);
+            setResponse(res.data[0]);
+            setUsername("");
+            setPassword("");
+            window.location = '/';
         }
         ).catch((err) => {
             setResponse(err.response.data);
@@ -56,7 +51,7 @@ const Login = () => {
                 <input id='password' name='password' type='password' onChange={(e) => setPassword(e.target.value)} value={password} required />
                 <input type='submit' value='Login' className='btn btn-primary'/>
             </form>
-            <p>Don't have an account? <Link to='/register'> Register here </Link></p>
+            <p>Don't have an account? <Link to='/Register'> Register here </Link></p>
         </div>
         </>
     );

@@ -24,13 +24,10 @@ const EntryDetail = (props) => {
                     id: entry.id
                 }
             }
-
         ).then((res) => {     
-            if(res.data === "Success!"){
-                setIsArchived(!isArchived);
-                entry.isArchived = !isArchived;
-                sessionStorage['entry'] = JSON.stringify(entry);
-            }
+            setIsArchived(!isArchived);
+            entry.isArchived = !isArchived;
+            sessionStorage['entry'] = JSON.stringify(entry);
             setResponse(res.data);
 
         }).catch((err) => {
@@ -48,14 +45,10 @@ const EntryDetail = (props) => {
                     notes: notes
                 }
             }
-
         ).then((res) => {     
-            if(res.data === "Success!"){
-                entry.notes = notes;
-                sessionStorage['entry'] = JSON.stringify(entry);
-                setTextareaDisabled(true);
-                
-            }
+            entry.notes = notes;
+            sessionStorage['entry'] = JSON.stringify(entry);
+            setTextareaDisabled(true);
             setResponse(res.data);
 
         }).catch((err) => {
@@ -69,7 +62,6 @@ const EntryDetail = (props) => {
     }
 
     const loadAllergens = () => {
-
         axios(
             {
                 method: 'get',
@@ -79,7 +71,6 @@ const EntryDetail = (props) => {
                     entryID: entry.id
                 }
             }
-
         ).then((res) => {            
             setAllergens(res.data);
         }).catch((err) => {
@@ -121,12 +112,12 @@ const EntryDetail = (props) => {
             minute: "numeric"
             }).format(new Date(entry.time));
 
-
-
-
         return (
             <>
+            <h2>Entry Details</h2>
+
             {response !== "" ? <PopUp message={response} /> : ""}
+
             <div className={`entry-details ${entryStatic.category}`}>
             {isArchived ? <p className="alert alert-danger right">Archived</p> : false }
 
@@ -165,11 +156,12 @@ const EntryDetail = (props) => {
                         </div>
                     </div>
                     : false
-                }
-                
+                }                
 
-            <div className="notes"><h4>Notes</h4><textarea disabled={textareaDisabled} onChange={(e) => setNotes(e.target.value)} value={ notes === null ? "" : notes}></textarea></div>
-                           
+                <div className="notes">
+                    <h4>Notes</h4>
+                    <textarea disabled={textareaDisabled} onChange={(e) => setNotes(e.target.value)} value={ notes === null ? "" : notes}></textarea>
+                </div>                          
 
                 <div className="entry-details-buttons right">
                     { !textareaDisabled ? <input onClick={() => changeNotes()} className="btn btn-success" value="Submit Changes" readOnly/>: false}
@@ -177,11 +169,6 @@ const EntryDetail = (props) => {
                     { textareaDisabled ? <input onClick={() => setTextareaDisabled(!textareaDisabled)} className="btn btn-primary" value="Edit Notes" readOnly />: false}
                     <input onClick={() => changeArchiveEntry()} className="btn btn-warning" value={isArchived ? "Unarchive Entry" : "Archive Entry" } readOnly/> 
                 </div>  
-                
-                
-                
-                
-
             </div>
             </>
         );
