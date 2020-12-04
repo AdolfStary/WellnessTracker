@@ -198,21 +198,21 @@ footer p {
 
 #summary .observations .sick-data li.high {
     border: 1px solid #f86d6d;
-    background-color: #fccece;
+    background-color: #faebeb;
 
 }
 
 #summary .observations .sick-data li.high strong{
-    color:  #ff4848;
+    color:  #ec0000;
 }
 
 #summary .observations .sick-data li.mid {
     border: 1px solid #f8f66d;
-    background-color: #f8f7c5;
+    background-color: #f8f8e7;
 }
 
 #summary .observations .sick-data li.mid strong{
-    color:   #ffbf0e;
+    color:   #dd6b00;
 }
 
 #summary .observations .sick-data li.neutral {

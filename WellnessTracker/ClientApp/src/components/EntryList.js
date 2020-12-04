@@ -100,7 +100,7 @@ const EntryList = () => {
                     
                     <div>
                         <label htmlFor='timeframe'>Time: </label>
-                        <select id='timeframe' name='timeframe'onChange={(e) => setTimeframe(e.target.value)} value={timeframe} required>
+                        <select id='timeframe' name='timeframe'onChange={(e) => setTimeframe(e.target.value)} value={timeframe}>
                             <option value="-1">To date</option>
                             <option value="0">Today</option>
                             <option value="7">Past week</option>
