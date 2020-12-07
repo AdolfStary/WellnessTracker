@@ -501,7 +501,7 @@ namespace WellnessTracker.Controllers
                             {
                                 foreach (Entry mealEntry in mealEntries)
                                 {
-
+                                    // If the matching meal had any allergens, proceed
                                     if (context.Allergen_Entries.Where(x => x.EntryID == mealEntry.ID).ToList().Count > 0)
                                     {
                                         if ((negativeFeelingEntry.Time - mealEntry.Time).TotalHours <= 3 && (negativeFeelingEntry.Time - mealEntry.Time).TotalHours >= 0)
