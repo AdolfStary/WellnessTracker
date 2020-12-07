@@ -9,8 +9,8 @@ using WellnessTracker.Models;
 namespace WellnessTracker.Migrations
 {
     [DbContext(typeof(EntryContext))]
-    [Migration("20201119214833_ModifiedCategories")]
-    partial class ModifiedCategories
+    [Migration("20201207162643_AddedSeedDataAllergen")]
+    partial class AddedSeedDataAllergen
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,58 @@ namespace WellnessTracker.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("allergen");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = -1,
+                            Name = "Egg"
+                        },
+                        new
+                        {
+                            ID = -2,
+                            Name = "Milk"
+                        },
+                        new
+                        {
+                            ID = -3,
+                            Name = "Tree Nuts"
+                        },
+                        new
+                        {
+                            ID = -4,
+                            Name = "Shellfish"
+                        },
+                        new
+                        {
+                            ID = -5,
+                            Name = "Soy"
+                        },
+                        new
+                        {
+                            ID = -6,
+                            Name = "Wheat"
+                        },
+                        new
+                        {
+                            ID = -7,
+                            Name = "Peanut"
+                        },
+                        new
+                        {
+                            ID = -8,
+                            Name = "Seeds"
+                        },
+                        new
+                        {
+                            ID = -9,
+                            Name = "Fish"
+                        },
+                        new
+                        {
+                            ID = -10,
+                            Name = "Gluten"
+                        });
                 });
 
             modelBuilder.Entity("WellnessTracker.Models.Allergen_Entry", b =>
@@ -46,6 +98,9 @@ namespace WellnessTracker.Migrations
 
                     b.Property<int>("EntryID")
                         .HasColumnType("int(10)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("bool");
 
                     b.HasKey("ID");
 
@@ -75,38 +130,6 @@ namespace WellnessTracker.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("category");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = -5,
-                            IsDiabetic = false,
-                            Name = "Meal"
-                        },
-                        new
-                        {
-                            ID = -4,
-                            IsDiabetic = false,
-                            Name = "Exercise"
-                        },
-                        new
-                        {
-                            ID = -3,
-                            IsDiabetic = false,
-                            Name = "Event"
-                        },
-                        new
-                        {
-                            ID = -2,
-                            IsDiabetic = true,
-                            Name = "BG Reading"
-                        },
-                        new
-                        {
-                            ID = -1,
-                            IsDiabetic = true,
-                            Name = "Insulin Injection"
-                        });
                 });
 
             modelBuilder.Entity("WellnessTracker.Models.Entry", b =>
@@ -123,6 +146,9 @@ namespace WellnessTracker.Migrations
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int(10)");
+
+                    b.Property<int>("ExerciseLength")
+                        .HasColumnType("int(3)");
 
                     b.Property<int>("Fats")
                         .HasColumnType("int(4)");
@@ -182,68 +208,6 @@ namespace WellnessTracker.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("status");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = -10,
-                            IsPositive = true,
-                            Name = "Normal"
-                        },
-                        new
-                        {
-                            ID = -9,
-                            IsPositive = true,
-                            Name = "Happy"
-                        },
-                        new
-                        {
-                            ID = -8,
-                            IsPositive = true,
-                            Name = "Relaxed"
-                        },
-                        new
-                        {
-                            ID = -7,
-                            IsPositive = true,
-                            Name = "Energetic"
-                        },
-                        new
-                        {
-                            ID = -6,
-                            IsPositive = true,
-                            Name = "Excited"
-                        },
-                        new
-                        {
-                            ID = -5,
-                            IsPositive = false,
-                            Name = "Sick"
-                        },
-                        new
-                        {
-                            ID = -4,
-                            IsPositive = false,
-                            Name = "Sad"
-                        },
-                        new
-                        {
-                            ID = -3,
-                            IsPositive = false,
-                            Name = "Stressed"
-                        },
-                        new
-                        {
-                            ID = -2,
-                            IsPositive = false,
-                            Name = "Anxious"
-                        },
-                        new
-                        {
-                            ID = -1,
-                            IsPositive = false,
-                            Name = "Tired"
-                        });
                 });
 
             modelBuilder.Entity("WellnessTracker.Models.User", b =>

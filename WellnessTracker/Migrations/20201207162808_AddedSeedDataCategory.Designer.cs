@@ -9,8 +9,8 @@ using WellnessTracker.Models;
 namespace WellnessTracker.Migrations
 {
     [DbContext(typeof(EntryContext))]
-    [Migration("20201122185102_SeedDataForAllergens")]
-    partial class SeedDataForAllergens
+    [Migration("20201207162808_AddedSeedDataCategory")]
+    partial class AddedSeedDataCategory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -99,6 +99,9 @@ namespace WellnessTracker.Migrations
                     b.Property<int>("EntryID")
                         .HasColumnType("int(10)");
 
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("bool");
+
                     b.HasKey("ID");
 
                     b.HasIndex("AllergenID")
@@ -175,6 +178,9 @@ namespace WellnessTracker.Migrations
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int(10)");
+
+                    b.Property<int>("ExerciseLength")
+                        .HasColumnType("int(3)");
 
                     b.Property<int>("Fats")
                         .HasColumnType("int(4)");

@@ -9,8 +9,8 @@ using WellnessTracker.Models;
 namespace WellnessTracker.Migrations
 {
     [DbContext(typeof(EntryContext))]
-    [Migration("20201204185116_AddedArchivedPropertyToAllergenEntry")]
-    partial class AddedArchivedPropertyToAllergenEntry
+    [Migration("20201207162723_AddedSeedDataStatus")]
+    partial class AddedSeedDataStatus
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -99,7 +99,7 @@ namespace WellnessTracker.Migrations
                     b.Property<int>("EntryID")
                         .HasColumnType("int(10)");
 
-                    b.Property<bool>("isArchived")
+                    b.Property<bool>("IsArchived")
                         .HasColumnType("bool");
 
                     b.HasKey("ID");
@@ -130,38 +130,6 @@ namespace WellnessTracker.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("category");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = -5,
-                            IsDiabetic = false,
-                            Name = "Meal"
-                        },
-                        new
-                        {
-                            ID = -4,
-                            IsDiabetic = false,
-                            Name = "Exercise"
-                        },
-                        new
-                        {
-                            ID = -3,
-                            IsDiabetic = false,
-                            Name = "Event"
-                        },
-                        new
-                        {
-                            ID = -2,
-                            IsDiabetic = true,
-                            Name = "BG Reading"
-                        },
-                        new
-                        {
-                            ID = -1,
-                            IsDiabetic = true,
-                            Name = "Insulin Injection"
-                        });
                 });
 
             modelBuilder.Entity("WellnessTracker.Models.Entry", b =>
@@ -221,200 +189,6 @@ namespace WellnessTracker.Migrations
                         .HasName("FK_User_Entry");
 
                     b.ToTable("entry");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = -1,
-                            BG = 9.4000000000000004,
-                            Carbs = 40,
-                            CategoryID = -5,
-                            ExerciseLength = 0,
-                            Fats = 15,
-                            Insulin = 2.5,
-                            IsArchived = false,
-                            Notes = "Feeling pretty good today, had Eggs and toast for breakfast.",
-                            Protein = 20,
-                            StatusID = -10,
-                            Time = new DateTime(2020, 12, 4, 11, 51, 16, 190, DateTimeKind.Local).AddTicks(1662),
-                            UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
-                        },
-                        new
-                        {
-                            ID = -2,
-                            BG = 7.7999999999999998,
-                            Carbs = 20,
-                            CategoryID = -5,
-                            ExerciseLength = 0,
-                            Fats = 35,
-                            Insulin = 1.25,
-                            IsArchived = false,
-                            Notes = "Went out for dinner, had chicken, toast and potatoes, big glass of milk.",
-                            Protein = 50,
-                            StatusID = -8,
-                            Time = new DateTime(2020, 12, 4, 11, 51, 16, 190, DateTimeKind.Local).AddTicks(8675),
-                            UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
-                        },
-                        new
-                        {
-                            ID = -3,
-                            BG = 0.0,
-                            Carbs = 0,
-                            CategoryID = -4,
-                            ExerciseLength = 50,
-                            Fats = 0,
-                            Insulin = 0.0,
-                            IsArchived = false,
-                            Notes = "Hardcore exercise",
-                            Protein = 0,
-                            StatusID = -10,
-                            Time = new DateTime(2020, 12, 4, 11, 51, 16, 190, DateTimeKind.Local).AddTicks(8787),
-                            UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
-                        },
-                        new
-                        {
-                            ID = -4,
-                            BG = 0.0,
-                            Carbs = 0,
-                            CategoryID = -4,
-                            ExerciseLength = 20,
-                            Fats = 0,
-                            Insulin = 0.0,
-                            IsArchived = false,
-                            Notes = "Starting to exercise, taking it easy",
-                            Protein = 0,
-                            StatusID = -10,
-                            Time = new DateTime(2020, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
-                        },
-                        new
-                        {
-                            ID = -5,
-                            BG = 5.5999999999999996,
-                            Carbs = 0,
-                            CategoryID = -3,
-                            ExerciseLength = 0,
-                            Fats = 0,
-                            Insulin = 0.0,
-                            IsArchived = false,
-                            Notes = "Got a new job, pretty awesome",
-                            Protein = 0,
-                            StatusID = -6,
-                            Time = new DateTime(2020, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
-                        },
-                        new
-                        {
-                            ID = -6,
-                            BG = 3.7000000000000002,
-                            Carbs = 0,
-                            CategoryID = -2,
-                            ExerciseLength = 0,
-                            Fats = 0,
-                            Insulin = 0.0,
-                            IsArchived = false,
-                            Notes = "Felt strange, tested blood sugar, low reading",
-                            Protein = 0,
-                            StatusID = -2,
-                            Time = new DateTime(2020, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
-                        },
-                        new
-                        {
-                            ID = -7,
-                            BG = 19.800000000000001,
-                            Carbs = 0,
-                            CategoryID = -1,
-                            ExerciseLength = 0,
-                            Fats = 0,
-                            Insulin = 2.2000000000000002,
-                            IsArchived = false,
-                            Notes = "Felt very exhausted, tested blood sugar, high reading, took correction",
-                            Protein = 0,
-                            StatusID = -1,
-                            Time = new DateTime(2020, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
-                        },
-                        new
-                        {
-                            ID = -8,
-                            BG = 0.0,
-                            Carbs = 80,
-                            CategoryID = -5,
-                            ExerciseLength = 0,
-                            Fats = 28,
-                            Insulin = 0.0,
-                            IsArchived = false,
-                            Notes = "Endluged in some fast food after excercising",
-                            Protein = 33,
-                            StatusID = -10,
-                            Time = new DateTime(2020, 12, 4, 11, 51, 16, 190, DateTimeKind.Local).AddTicks(8813),
-                            UserID = "77c8faaa-62f2-4993-96b2-48587cba72a3"
-                        },
-                        new
-                        {
-                            ID = -9,
-                            BG = 0.0,
-                            Carbs = 20,
-                            CategoryID = -5,
-                            ExerciseLength = 0,
-                            Fats = 35,
-                            Insulin = 0.0,
-                            IsArchived = false,
-                            Notes = "I'm stressed, running out of bacon. Gotta go shopping soon.",
-                            Protein = 45,
-                            StatusID = -2,
-                            Time = new DateTime(2020, 12, 4, 11, 51, 16, 190, DateTimeKind.Local).AddTicks(8816),
-                            UserID = "77c8faaa-62f2-4993-96b2-48587cba72a3"
-                        },
-                        new
-                        {
-                            ID = -10,
-                            BG = 0.0,
-                            Carbs = 0,
-                            CategoryID = -4,
-                            ExerciseLength = 60,
-                            Fats = 0,
-                            Insulin = 0.0,
-                            IsArchived = false,
-                            Notes = "Regular exercise, bench, legs, running",
-                            Protein = 0,
-                            StatusID = -7,
-                            Time = new DateTime(2020, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "77c8faaa-62f2-4993-96b2-48587cba72a3"
-                        },
-                        new
-                        {
-                            ID = -11,
-                            BG = 0.0,
-                            Carbs = 0,
-                            CategoryID = -3,
-                            ExerciseLength = 0,
-                            Fats = 0,
-                            Insulin = 0.0,
-                            IsArchived = false,
-                            Notes = "Found awesome new exercise: https://www.verywellfit.com/the-plank-exercise-3120068",
-                            Protein = 0,
-                            StatusID = -6,
-                            Time = new DateTime(2020, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "77c8faaa-62f2-4993-96b2-48587cba72a3"
-                        },
-                        new
-                        {
-                            ID = -12,
-                            BG = 0.0,
-                            Carbs = 0,
-                            CategoryID = -4,
-                            ExerciseLength = 15,
-                            Fats = 0,
-                            Insulin = 0.0,
-                            IsArchived = false,
-                            Notes = "Tried the new plank exercise, pretty brutal",
-                            Protein = 0,
-                            StatusID = -1,
-                            Time = new DateTime(2020, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "77c8faaa-62f2-4993-96b2-48587cba72a3"
-                        });
                 });
 
             modelBuilder.Entity("WellnessTracker.Models.Status", b =>
@@ -524,24 +298,6 @@ namespace WellnessTracker.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("user");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = "fca0f3e8-dae4-45d9-ad10-345257364235",
-                            IsDiabetic = true,
-                            Password = "6346c10aad3dd848f542060024022522ac86f9d7e13dbf39bb8a2252228c794e",
-                            Registered = new DateTime(2020, 12, 4, 11, 51, 16, 180, DateTimeKind.Local).AddTicks(757),
-                            Username = "Adolf"
-                        },
-                        new
-                        {
-                            ID = "77c8faaa-62f2-4993-96b2-48587cba72a3",
-                            IsDiabetic = false,
-                            Password = "a7b5c820d7a015504cb09776d23899e3f1e392e349916329a70ce3562d38565f",
-                            Registered = new DateTime(2020, 12, 4, 11, 51, 16, 182, DateTimeKind.Local).AddTicks(1416),
-                            Username = "Ummer"
-                        });
                 });
 
             modelBuilder.Entity("WellnessTracker.Models.Allergen_Entry", b =>

@@ -43,7 +43,7 @@ namespace WellnessTracker.Models
                 entity.Property(e => e.Name)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
-
+                
                 entity.HasData(
                         new Allergen()
                         {
@@ -97,8 +97,6 @@ namespace WellnessTracker.Models
                         }
 
                     );
-
-
             });
 
             ///////////////////////
@@ -110,7 +108,7 @@ namespace WellnessTracker.Models
                 entity.Property(e => e.Name)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
-
+                
                 entity.HasData(
                         new Status()
                         {
@@ -183,7 +181,7 @@ namespace WellnessTracker.Models
                 entity.Property(e => e.Name)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
-
+                
                 entity.HasData(
                        new Category()
                        {
@@ -230,7 +228,7 @@ namespace WellnessTracker.Models
                 entity.Property(e => e.Password)
                 .HasCharSet("utf8mb4")
                 .HasCollation("utf8mb4_general_ci");
-
+                
                 entity.HasData(
                     new User() 
                     { 
@@ -286,7 +284,7 @@ namespace WellnessTracker.Models
                 .HasForeignKey(thisEntity => thisEntity.StatusID)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName(statusKeyName);
-
+                
                 entity.HasData(
                     new Entry(-5, "fca0f3e8-dae4-45d9-ad10-345257364235", -10, DateTime.Now, 40, 20, 15, "Feeling pretty good today, had Eggs and toast for breakfast.", 2.5, 9.4, 0) { ID = -1},
                     new Entry(-5, "fca0f3e8-dae4-45d9-ad10-345257364235", -8, DateTime.Now, 20, 50, 35, "Went out for dinner, had chicken, toast and potatoes, big glass of milk.", 1.25, 7.8, 0) { ID = -2 },

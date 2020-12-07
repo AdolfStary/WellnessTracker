@@ -26,7 +26,7 @@ namespace WellnessTracker.Models
 
         [Column(TypeName = "bool")]
         [Required]
-        public bool isArchived { get; set; }
+        public bool IsArchived { get; set; }
 
         [ForeignKey(nameof(AllergenID))]
         [InverseProperty(nameof(Models.Allergen.AllergenEntries))]
@@ -42,7 +42,7 @@ namespace WellnessTracker.Models
         {
             AllergenID = AllergenID;
             EntryID = EntryID;
-            isArchived = false;
+            IsArchived = false;
         }
     }
 }

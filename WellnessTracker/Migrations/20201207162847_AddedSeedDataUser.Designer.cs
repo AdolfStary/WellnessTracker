@@ -9,8 +9,8 @@ using WellnessTracker.Models;
 namespace WellnessTracker.Migrations
 {
     [DbContext(typeof(EntryContext))]
-    [Migration("20201201175132_AddedUserSeedData")]
-    partial class AddedUserSeedData
+    [Migration("20201207162847_AddedSeedDataUser")]
+    partial class AddedSeedDataUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -98,6 +98,9 @@ namespace WellnessTracker.Migrations
 
                     b.Property<int>("EntryID")
                         .HasColumnType("int(10)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("bool");
 
                     b.HasKey("ID");
 
@@ -334,7 +337,7 @@ namespace WellnessTracker.Migrations
                             ID = "fca0f3e8-dae4-45d9-ad10-345257364235",
                             IsDiabetic = true,
                             Password = "6346c10aad3dd848f542060024022522ac86f9d7e13dbf39bb8a2252228c794e",
-                            Registered = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Registered = new DateTime(2020, 12, 7, 9, 28, 46, 703, DateTimeKind.Local).AddTicks(3191),
                             Username = "Adolf"
                         },
                         new
@@ -342,7 +345,7 @@ namespace WellnessTracker.Migrations
                             ID = "77c8faaa-62f2-4993-96b2-48587cba72a3",
                             IsDiabetic = false,
                             Password = "a7b5c820d7a015504cb09776d23899e3f1e392e349916329a70ce3562d38565f",
-                            Registered = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Registered = new DateTime(2020, 12, 7, 9, 28, 46, 705, DateTimeKind.Local).AddTicks(4001),
                             Username = "Ummer"
                         });
                 });

@@ -407,7 +407,7 @@ namespace WellnessTracker.Controllers
                 {
                     foreach(Allergen_Entry childEntry in childEntries)
                     {
-                        childEntry.isArchived = !childEntry.isArchived;
+                        childEntry.IsArchived = !childEntry.IsArchived;
                     }
                 }
                 context.SaveChanges();

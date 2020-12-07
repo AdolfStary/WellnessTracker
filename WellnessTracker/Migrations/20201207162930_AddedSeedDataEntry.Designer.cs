@@ -9,7 +9,7 @@ using WellnessTracker.Models;
 namespace WellnessTracker.Migrations
 {
     [DbContext(typeof(EntryContext))]
-    [Migration("20201201183829_AddedSeedDataEntry")]
+    [Migration("20201207162930_AddedSeedDataEntry")]
     partial class AddedSeedDataEntry
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,6 +98,9 @@ namespace WellnessTracker.Migrations
 
                     b.Property<int>("EntryID")
                         .HasColumnType("int(10)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("bool");
 
                     b.HasKey("ID");
 
@@ -233,7 +236,7 @@ namespace WellnessTracker.Migrations
                             Notes = "Feeling pretty good today, had Eggs and toast for breakfast.",
                             Protein = 20,
                             StatusID = -10,
-                            Time = new DateTime(2020, 12, 1, 11, 38, 29, 33, DateTimeKind.Local).AddTicks(1293),
+                            Time = new DateTime(2020, 12, 7, 9, 29, 30, 268, DateTimeKind.Local).AddTicks(717),
                             UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
                         },
                         new
@@ -246,10 +249,10 @@ namespace WellnessTracker.Migrations
                             Fats = 35,
                             Insulin = 1.25,
                             IsArchived = false,
-                            Notes = "Went out for dinner, had chicken and potatoes.",
+                            Notes = "Went out for dinner, had chicken, toast and potatoes, big glass of milk.",
                             Protein = 50,
                             StatusID = -8,
-                            Time = new DateTime(2020, 12, 1, 11, 38, 29, 33, DateTimeKind.Local).AddTicks(7471),
+                            Time = new DateTime(2020, 12, 7, 9, 29, 30, 268, DateTimeKind.Local).AddTicks(6640),
                             UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
                         },
                         new
@@ -265,7 +268,7 @@ namespace WellnessTracker.Migrations
                             Notes = "Hardcore exercise",
                             Protein = 0,
                             StatusID = -10,
-                            Time = new DateTime(2020, 12, 1, 11, 38, 29, 33, DateTimeKind.Local).AddTicks(7588),
+                            Time = new DateTime(2020, 12, 7, 9, 29, 30, 268, DateTimeKind.Local).AddTicks(6754),
                             UserID = "fca0f3e8-dae4-45d9-ad10-345257364235"
                         },
                         new
@@ -345,7 +348,7 @@ namespace WellnessTracker.Migrations
                             Notes = "Endluged in some fast food after excercising",
                             Protein = 33,
                             StatusID = -10,
-                            Time = new DateTime(2020, 12, 1, 11, 38, 29, 33, DateTimeKind.Local).AddTicks(7612),
+                            Time = new DateTime(2020, 12, 7, 9, 29, 30, 268, DateTimeKind.Local).AddTicks(6783),
                             UserID = "77c8faaa-62f2-4993-96b2-48587cba72a3"
                         },
                         new
@@ -361,7 +364,7 @@ namespace WellnessTracker.Migrations
                             Notes = "I'm stressed, running out of bacon. Gotta go shopping soon.",
                             Protein = 45,
                             StatusID = -2,
-                            Time = new DateTime(2020, 12, 1, 11, 38, 29, 33, DateTimeKind.Local).AddTicks(7615),
+                            Time = new DateTime(2020, 12, 7, 9, 29, 30, 268, DateTimeKind.Local).AddTicks(6786),
                             UserID = "77c8faaa-62f2-4993-96b2-48587cba72a3"
                         },
                         new
@@ -528,7 +531,7 @@ namespace WellnessTracker.Migrations
                             ID = "fca0f3e8-dae4-45d9-ad10-345257364235",
                             IsDiabetic = true,
                             Password = "6346c10aad3dd848f542060024022522ac86f9d7e13dbf39bb8a2252228c794e",
-                            Registered = new DateTime(2020, 12, 1, 11, 38, 29, 22, DateTimeKind.Local).AddTicks(9167),
+                            Registered = new DateTime(2020, 12, 7, 9, 29, 30, 257, DateTimeKind.Local).AddTicks(8333),
                             Username = "Adolf"
                         },
                         new
@@ -536,7 +539,7 @@ namespace WellnessTracker.Migrations
                             ID = "77c8faaa-62f2-4993-96b2-48587cba72a3",
                             IsDiabetic = false,
                             Password = "a7b5c820d7a015504cb09776d23899e3f1e392e349916329a70ce3562d38565f",
-                            Registered = new DateTime(2020, 12, 1, 11, 38, 29, 25, DateTimeKind.Local).AddTicks(65),
+                            Registered = new DateTime(2020, 12, 7, 9, 29, 30, 259, DateTimeKind.Local).AddTicks(9572),
                             Username = "Ummer"
                         });
                 });

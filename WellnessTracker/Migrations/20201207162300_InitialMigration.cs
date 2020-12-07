@@ -31,7 +31,8 @@ namespace WellnessTracker.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "varchar(30)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
-                        .Annotation("MySql:Collation", "utf8mb4_general_ci")
+                        .Annotation("MySql:Collation", "utf8mb4_general_ci"),
+                    IsDiabetic = table.Column<bool>(type: "bool", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,7 +92,8 @@ namespace WellnessTracker.Migrations
                         .Annotation("MySql:Collation", "utf8mb4_general_ci"),
                     Insulin = table.Column<double>(type: "double(5, 1)", nullable: false),
                     BG = table.Column<double>(type: "double(5, 1)", nullable: false),
-                    IsArchived = table.Column<bool>(type: "bool", nullable: false)
+                    IsArchived = table.Column<bool>(type: "bool", nullable: false),
+                    ExerciseLength = table.Column<int>(type: "int(3)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -123,7 +125,8 @@ namespace WellnessTracker.Migrations
                     ID = table.Column<int>(type: "int(10)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     AllergenID = table.Column<int>(type: "int(10)", nullable: false),
-                    EntryID = table.Column<int>(type: "int(10)", nullable: false)
+                    EntryID = table.Column<int>(type: "int(10)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bool", nullable: false)
                 },
                 constraints: table =>
                 {
