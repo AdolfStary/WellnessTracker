@@ -8,7 +8,7 @@ Purpose: This project was created as a capstone project for my Full Stack Develo
 Problem this app solves: I find it quite hard to keep relevant notes about my day and then organizing and searching data when I feel off and need to find out what caused it. 
 How this app solves the problem: This app makes data entry, search and getting an overview very simple. It's quick and convenient, it handles a lot of data and manipulates it in a way, which makes it is easy to navigate through it.
 
-Last Modified: Dec 4, 2020
+Last Modified: Dec 7, 2020
 
 # Scope
 - basic profile creation and authentication - ACHIEVED
