@@ -49,7 +49,7 @@ General filters (See controllers for filtering and data sanitation, html form in
                 - Create a meal at 9:20 AM today, where you "consumed" milk and egg as allergen.
                 - Create an event at 10:00 AM today, where your status is any of the negative options, for example "Tired".
                 - Visit "Summary" page to view Observation section for results;
-- To test 'Today' you may need to 'Make Entry' the today to see the functionality of the section.
+- To test 'Today' you may need to 'Make Entry' today to see the functionality of the section.
 - Feel free to experiment, or even create your own account.
 
 # Resources
