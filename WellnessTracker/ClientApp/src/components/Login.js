@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {PopUp} from './PopUp';
-import axios from 'axios';
+import {validateUser} from '../utility/api-calls';
 
 const Login = () => {
     
@@ -14,38 +14,15 @@ const Login = () => {
         event.preventDefault();
         let concatPassword = username + password;
 
-        axios(
-            {
-                method: 'get',
-                url: 'API/Validate',
-                params: {
-                    username: username,
-                    password:  concatPassword
-                }
-            }
-        ).then((res) => {
-            sessionStorage.setItem('user', res.data[1]);
-            sessionStorage.setItem('isDiabetic', res.data[2]);                
-
-            setResponse(res.data[0]);
-            setUsername("");
-            setPassword("");
-            window.location = '/';
-        }
-        ).catch((err) => {
-            setResponse(err.response.data);
-        });
-
-        
+        validateUser(setUsername, setPassword, setResponse, username, concatPassword);        
     }
-
     
     return (
         <>
         <h2>Login</h2>
         {response !== "" ? <PopUp message={response} /> : ""}
         <div id="login">  
-            <form onSubmit={event => handleSubmit(event)}>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor='username'>Username: </label>
                 <input id='username' name='username' type='text' onChange={(e) => setUsername(e.target.value)} value={username} required />
                 <label htmlFor='password'>Password: </label>
@@ -56,8 +33,6 @@ const Login = () => {
         </div>
         </>
     );
-    
-
 }
 
 export default Login;

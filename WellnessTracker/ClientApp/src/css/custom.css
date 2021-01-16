@@ -157,70 +157,6 @@ footer p {
     padding: 5px;
 }
 
-/*
-    ////////////////////////////////////////
-    // Summary
-    ////////////////////////////////////////
-*/
-
-#summary form {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 2%;
-}
-
-#summary form div {
-        display: flex;
-        flex-flow: row;
-        align-items: center;
-        margin: 1%;
-}
-
-
-#summary .observations .sick-data ul {
-    list-style-type: none;
-    padding-left: 0;
-    width: 75%;
-    margin: 3% auto;
-}
-
-#summary .observations .sick-data li {
-    margin: 1% auto;
-    padding: 20px;
-    border-radius: 5px;
-    
-}
-
-#summary .observations .sick-data li strong {
-    font-size: 1.5rem;
-    margin: 1%;
-}
-
-#summary .observations .sick-data li.high {
-    border: 1px solid #f86d6d;
-    background-color: #faebeb;
-
-}
-
-#summary .observations .sick-data li.high strong{
-    color:  #ec0000;
-}
-
-#summary .observations .sick-data li.mid {
-    border: 1px solid #f8f66d;
-    background-color: #f8f8e7;
-}
-
-#summary .observations .sick-data li.mid strong{
-    color:   #dd6b00;
-}
-
-#summary .observations .sick-data li.neutral {
-    border: 1px solid #6daef8;
-    background-color: #c7dffa;
-    font-weight: 500;
-    font-size: 1.1rem;
-}
 
 
 
@@ -588,52 +524,7 @@ footer p {
 
 
 
-/*
-    ////////////////////////////////////////
-    // Today
-    ////////////////////////////////////////
-*/
 
-.today-chart {
-    display: flex;
-    flex-flow: row;
-}
-
-
-
-.today-chart table, td, th {
-    border-radius: 5px 5px 0px 0px;
-    height: 6rem;
-    width: 6rem;
-    text-align: center;
-}
-
-.today-chart table, td {
-    font-size: 1.25rem;
-    font-weight: bold;
-    border-radius: 0px 0px 5px 5px;
-}
-
-
-.today-meal-fats, .today-diabetes-bg {
-    background-color: #f86d6d;
-}
-
-.today-meal-carbs, .today-diabetes-avginsulin {
-    background-color: #e3f86d;
-}
-
-.today-meal-exercise {
-    background-color: #6daef8;
-}
-
-.today-meal-meals {
-    background-color: #8ef86d;
-}
-
-.today-meal-protein, .today-diabetes-totinsulin {
-    background-color: #f8bc6d;
-}
 
 
 /*
@@ -645,21 +536,12 @@ footer p {
     .entry-card-link {
         width: 32%
     }
-
-
-
 }
 
 @media screen and (min-width: 768px) {
     .entry-card-link {
         width: 24%
     }
-
-    #summary .observations .sick-data ul {
-        width: 50%;
-    }
-
-
 }
 
 /*

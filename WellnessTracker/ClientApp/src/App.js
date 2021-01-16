@@ -10,7 +10,7 @@ import EntryList from './components/EntryList';
 import EntryDetail from './components/EntryDetail';
 import Today from './components/Today';
 import Summary from './components/Summary';
-import './custom.css'
+import './css/custom.css'
 
 
 export default class App extends Component {

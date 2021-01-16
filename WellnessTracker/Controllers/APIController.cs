@@ -159,24 +159,11 @@ namespace WellnessTracker.Controllers
         }
 
         [HttpGet("GetCategories")]
-        public ActionResult<List<Category>> GetCategories_GET()
+        public ActionResult<List<Category>> GetCategories_GET(bool diabetic = false)
         {
             try
             {
-                return EntryController.GetCategories();
-            }
-            catch (Exception e)
-            {
-                return NotFound($"Error getting data: {e.Message}");
-            }
-        }
-
-        [HttpGet("GetCategoriesNoDia")]
-        public ActionResult<List<Category>> GetCategoriesNoDia_GET()
-        {
-            try
-            {
-                return EntryController.GetCategoriesNoDia();
+                return EntryController.GetCategories(diabetic);
             }
             catch (Exception e)
             {

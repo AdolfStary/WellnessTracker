@@ -1,0 +1,46 @@
+/*
+    ////////////////////////////////////////
+    // Today
+    ////////////////////////////////////////
+*/
+
+.today-chart {
+    display: flex;
+    flex-flow: row;
+}
+
+
+
+.today-chart table, td, th {
+    border-radius: 5px 5px 0px 0px;
+    height: 6rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.today-chart table, td {
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 0px 0px 5px 5px;
+}
+
+
+.today-meal-fats, .today-diabetes-bg {
+    background-color: #f86d6d;
+}
+
+.today-meal-carbs, .today-diabetes-avginsulin {
+    background-color: #e3f86d;
+}
+
+.today-meal-exercise {
+    background-color: #6daef8;
+}
+
+.today-meal-meals {
+    background-color: #8ef86d;
+}
+
+.today-meal-protein, .today-diabetes-totinsulin {
+    background-color: #f8bc6d;
+}

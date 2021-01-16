@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {PopUp} from './PopUp';
-import axios from 'axios';
+import {getCategories, getStatuses, getAllergens, submitEntry} from '../utility/api-calls';
 
 const MakeEntry = () => {
     
     const [response, setResponse] = useState("");
-    const [downloadedData, setDownloadedData] = useState(false);
     const [listOfCategories, setListOfCategories] = useState([]);
     const [listOfStatuses, setListOfStatuses] = useState([]);
     const [listOfAllergens, setListOfAllergens] = useState([]);
 
     const now = new Date();
-    if(!downloadedData) {
-        // Got heavily inspired at : https://stackoverflow.com/questions/24468518/html5-input-datetime-local-default-value-of-today-and-current-time
-        // Had to modify to make it work for my own use. 
-        //I got heavily inspired as I didn't know how to more simplify the code to achieve same result.
-        // Method suggests creating new date, setting time straight according to timezone and then assigning as value to
-        // Datetime-local input by converting it to ISOString.
-        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        now.setMilliseconds(0);
-    }
+    // Got heavily inspired at : https://stackoverflow.com/questions/24468518/html5-input-datetime-local-default-value-of-today-and-current-time
+    // Had to modify to make it work for my own use. 
+    // I got heavily inspired as I didn't know how to more simplify the code to achieve same result.
+    // Method suggests creating new date, setting time straight according to timezone and then assigning as value to
+    // Datetime-local input by converting it to ISOString.
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    now.setMilliseconds(0);
 
     const [category, setCategory] = useState("-5");
     const [status, setStatus] = useState("-10");
@@ -36,85 +33,27 @@ const MakeEntry = () => {
     const [exerciseLength, setExerciseLength] = useState("0");
 
     // Runs when loaded once to load Categories and Statuses
-    if (!downloadedData){
-        if(sessionStorage.getItem('isDiabetic') === "true")
-        {
-            axios(
-                {
-                    method: 'get',
-                    url: 'API/GetCategories'
-                }
-            ).then((res) => {     
-                setListOfCategories(res.data);
-            });
-        }
-        else {
-            axios(
-                {
-                    method: 'get',
-                    url: 'API/GetCategoriesNoDia'
-                }
-            ).then((res) => {     
-                setListOfCategories(res.data);
-            });
+    useEffect(() =>{
+
+        const loadStaticData = async () => {
+            const categories = sessionStorage.getItem('isDiabetic') === "true" ? await getCategories(true) : getCategories();
+            const statuses = await getStatuses();
+            const allergens = await getAllergens();
+            setListOfCategories(categories); 
+            setListOfStatuses(statuses);
+            setListOfAllergens(allergens);
         }
 
-        axios(
-            {
-                method: 'get',
-                url: 'API/GetStatuses'
-            }
-        ).then((res) => {     
-            setListOfStatuses(res.data);
-        });
-
-        axios(
-            {
-                method: 'get',
-                url: 'API/GetAllergens'
-            }
-        ).then((res) => {
-            setListOfAllergens(res.data);
-        });
-
-        setDownloadedData(true);
-    }
+        loadStaticData();
+    },[]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios(
-            {
-                method: 'post',
-                url: 'API/MakeEntry',
-                params: {
-                    categoryID: category,
-                    userID: sessionStorage.getItem('user'),
-                    statusID: status,
-                    time: time,
-                    carbs: carbs,
-                    protein: protein,
-                    fats: fats,
-                    notes: notes,
-                    insulin: insulin,
-                    bg: bg,
-                    allergen1: allergen1,
-                    allergen2: allergen2,
-                    allergen3: allergen3,
-                    exerciseLength: exerciseLength
-                }
-            }
-        ).then((res) => {     
-            setResponse(res.data);
-            if (res.data === "Success!"){
-                window.location = "/MakeEntry";
-
-            }
-        }
-        ).catch((err) => {
-            setResponse(err.response.data);
-        });        
+        submitEntry(category, status, time, carbs, protein, fats, notes, insulin, bg, allergen1, allergen2, allergen3, exerciseLength, setResponse);       
     }
+
+
 
     // Checks if user is logged in
     if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === "") {
@@ -130,7 +69,7 @@ const MakeEntry = () => {
 
                 {response !== "" ? <PopUp message={response} /> : ""}
                 
-                <form onSubmit={event => handleSubmit(event)}>
+                <form onSubmit={handleSubmit}>
                     <div className="main-section">
                         <div>
                             <label htmlFor='category'>Category: </label>

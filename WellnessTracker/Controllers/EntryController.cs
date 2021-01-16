@@ -282,20 +282,12 @@ namespace WellnessTracker.Controllers
             }
         }
 
-        public static ActionResult<List<Category>> GetCategories()
+        public static ActionResult<List<Category>> GetCategories(bool diabetic = false)
         {
             using (EntryContext context = new EntryContext())
             {
-                return context.Categories.ToList();
-            }
-        }
-
-        // Gets categories for non-diabetic users
-        public static ActionResult<List<Category>> GetCategoriesNoDia()
-        {
-            using (EntryContext context = new EntryContext())
-            {
-                return context.Categories.Where(x => x.IsDiabetic == false).ToList();
+                if(diabetic) return context.Categories.ToList();
+                else return context.Categories.Where(x => x.IsDiabetic == false).ToList();
             }
         }
 

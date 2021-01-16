@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import {PopUp} from './PopUp';
+import {changeNotes, loadAllergens, changeArchiveEntry} from '../utility/api-calls';
 
-const EntryDetail = (props) => {
+const EntryDetail = () => {
 
 
     const [isArchived, setIsArchived] = useState(false);
-    const [dataLoaded, setDataLoaded] = useState(false);
     const [textareaDisabled, setTextareaDisabled] = useState(true);
     const [notes, setNotes] = useState("No notes were entered.");
     const [response, setResponse] = useState("");
@@ -14,71 +13,19 @@ const EntryDetail = (props) => {
 
     let time, date, entry, entryStatic;
 
-
-    const changeArchiveEntry = () => {
-        axios(
-            {
-                method: 'patch',
-                url: 'API/ChangeArchived',
-                params: {
-                    id: entry.id
-                }
-            }
-        ).then((res) => {     
-            setIsArchived(!isArchived);
-            entry.isArchived = !isArchived;
-            sessionStorage['entry'] = JSON.stringify(entry);
-            setResponse(res.data);
-
-        }).catch((err) => {
-            setResponse(err.response.data);
-        });;
-    }
-
-    const changeNotes = () => {
-        axios(
-            {
-                method: 'patch',
-                url: 'API/ChangeNotes',
-                params: {
-                    id: entry.id,
-                    notes: notes
-                }
-            }
-        ).then((res) => {     
-            entry.notes = notes;
-            sessionStorage['entry'] = JSON.stringify(entry);
-            setTextareaDisabled(true);
-            setResponse(res.data);
-
-        }).catch((err) => {
-            setResponse(err.response.data);
-        });;
-    }
-
     // Resets defaults if changes are discarded.
     const discardChange = () => {
         setTextareaDisabled(true);
         setNotes(entry.notes);
     }
 
-    // Gets alergens for this entry, if there are any.
-    const loadAllergens = () => {
-        axios(
-            {
-                method: 'get',
-                url: 'API/GetEntryAllergens',
-                params: {
-                    userID: sessionStorage.getItem('user'),
-                    entryID: entry.id
-                }
-            }
-        ).then((res) => {            
-            setAllergens(res.data);
-        }).catch((err) => {
-            setResponse(err.response.data);
-        });;
-    }
+    useEffect(() => {
+        // Initial data load
+        setNotes(entry.notes);
+        setIsArchived(Boolean(entry.isArchived));   
+        loadAllergens(entry, setAllergens, setResponse);
+    },[]);
+
 
     // Checks if user is logged in
     if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === "") {
@@ -98,14 +45,6 @@ const EntryDetail = (props) => {
         // Gets entry data from sessionStorage
         entry = JSON.parse(sessionStorage.getItem('entry'));
         entryStatic = JSON.parse(sessionStorage.getItem('entryStatic'));
-
-        // Initial data load
-        if (!dataLoaded){
-            setNotes(entry.notes);
-            setIsArchived(Boolean(entry.isArchived));   
-            loadAllergens();
-            setDataLoaded(true);
-        }
 
         date = new Intl.DateTimeFormat("en-GB", {
             year: "numeric",
@@ -148,7 +87,7 @@ const EntryDetail = (props) => {
                                 <div className="today-meal-carbs"><p>Carb<br />{entry.carbs > 0 ? entry.carbs+"g" : "N/A"}</p></div>
                                 <div className="today-meal-protein"><p>Protein<br />{entry.protein > 0 ? entry.protein+"g" : "N/A"}</p></div>  
                                 {
-                                    allergens.length > 0 ? allergens.map( (item) => <div key={item} className="allergen-box"><p>{item}</p></div>) : false
+                                    allergens.length > 0 ? allergens.map( (item, index) => <div key={index} className="allergen-box"><p>{item}</p></div>) : false
                                 }
                             </div>                     
                         </div> 
@@ -174,10 +113,10 @@ const EntryDetail = (props) => {
 
                 <div className="entry-details-buttons right">
                     {/* Button change dynamically based on options, choices and data */}
-                    { !textareaDisabled ? <input onClick={() => changeNotes()} className="btn btn-success" value="Submit Changes" readOnly/>: false}
+                    { !textareaDisabled ? <input onClick={() => changeNotes(entry, notes, setTextareaDisabled, setResponse)} className="btn btn-success" value="Submit Changes" readOnly/>: false}
                     { !textareaDisabled ? <input onClick={() => discardChange()} className="btn btn-danger" value="Discard Changes" readOnly/>: false}
                     { textareaDisabled ? <input onClick={() => setTextareaDisabled(!textareaDisabled)} className="btn btn-primary" value="Edit Notes" readOnly />: false}
-                    <input onClick={() => changeArchiveEntry()} className="btn btn-warning" value={isArchived ? "Unarchive Entry" : "Archive Entry" } readOnly/> 
+                    <input onClick={() => changeArchiveEntry(entry, isArchived, setIsArchived, setResponse)} className="btn btn-warning" value={isArchived ? "Unarchive Entry" : "Archive Entry" } readOnly/> 
                 </div>  
             </div>
             </>
