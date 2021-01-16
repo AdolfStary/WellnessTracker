@@ -3,6 +3,7 @@ import {PopUp} from './PopUp';
 import EntryCard from './EntryCard';
 import FilterOptions from './FilterOptions';
 import {getCategories, getEntries, getStatuses} from '../utility/api-calls';
+import '../css/entry-list.css';
 
 
 const EntryList = () => {

@@ -1,0 +1,38 @@
+/*
+    ////////////////////////////////////////
+    // Login
+    ////////////////////////////////////////
+*/
+
+#login {
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    margin: 2% auto;
+    width: 300px;
+    text-align: center;
+    height: auto;
+}
+
+#login form {
+    display: flex;
+    flex-flow: column;
+    margin: 5%;
+}
+
+#login label {
+    margin: 1%;
+}
+
+#login input {
+    margin: 2%;
+}
+
+#input p {
+    margin-top: 5%;
+}
+
+#input div.diabetes-checkbox {
+    display: flex;
+    flex-flow: row;
+}

@@ -1,0 +1,66 @@
+/*
+    ////////////////////////////////////////
+    // Entry Form
+    ////////////////////////////////////////
+*/
+
+#entryform form {
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    margin: 2%;
+    width: 95%;
+    text-align: center;
+}
+
+#entryform form div.main-section {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 1% auto;
+    width: 95%;
+    text-align: center;
+}
+
+#entryform form div.main-section.exercise {
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+}
+
+
+#entryform form #carbs, #fats, #protein, #bg, #insulin, #exerciseLength {
+    width: 3.25rem;
+}
+
+#entryform div.notes {
+    flex-flow: column;
+    align-items: normal;
+}
+
+#entryform div.notes label {
+    text-align: left;
+}
+
+#entryform textarea {
+    margin: auto;
+    width: 95%;
+    height: 150px;
+}
+
+#entryform div div {
+    flex-flow: column;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+#entryform .exercise {
+    text-align: center;
+}
+
+#entryform div.allergens, div.nutrition {
+    flex-flow: column;
+    align-items: stretch;
+    width: 45%;
+}

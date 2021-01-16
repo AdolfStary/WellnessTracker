@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {PopUp} from './PopUp';
 import {getCategories, getStatuses, getAllergens, submitEntry} from '../utility/api-calls';
+import '../css/make-entry.css';
 
 const MakeEntry = () => {
     

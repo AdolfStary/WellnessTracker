@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { PopUp } from './PopUp';
 import {registerUser} from '../utility/api-calls';
+import '../css/register.css';
 
 
 const Register = () => {

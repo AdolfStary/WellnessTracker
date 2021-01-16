@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {PopUp} from './PopUp';
 import {changeNotes, loadAllergens, changeArchiveEntry} from '../utility/api-calls';
+import '../css/entry-detail.css';
 
 const EntryDetail = () => {
 

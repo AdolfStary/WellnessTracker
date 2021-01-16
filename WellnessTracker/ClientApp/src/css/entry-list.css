@@ -1,0 +1,65 @@
+/*
+    ////////////////////////////////////////
+    // Entry List
+    ////////////////////////////////////////
+*/
+#entry-list form {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2%;
+}
+
+#entry-list form div {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: 1% auto;
+}
+
+#entry-card-list {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+.entry-card-link {
+    text-decoration: none;
+    color: #000000;
+    width: 48%;
+    height: 200px;
+    margin: 1% auto;
+}
+
+.entry-card-link:hover {
+    text-decoration: none;
+    color: #000000;
+
+}
+
+/*
+    ////////////////////////////////////////
+    // Tablet
+    ////////////////////////////////////////
+*/
+@media screen and (min-width: 500px) {
+    .entry-card-link {
+        width: 32%
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .entry-card-link {
+        width: 24%
+    }
+}
+
+/*
+    ////////////////////////////////////////
+    // Desktop
+    ////////////////////////////////////////
+*/
+@media screen and (min-width: 1024px) {
+    .entry-card-link {
+        width: 19%;
+    }
+
+}

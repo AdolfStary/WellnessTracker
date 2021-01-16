@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {PopUp} from './PopUp';
 import {validateUser} from '../utility/api-calls';
+import '../css/login.css';
 
 const Login = () => {
     
