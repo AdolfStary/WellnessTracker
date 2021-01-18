@@ -214,8 +214,8 @@ const getFilteredEntries = async (timeframe, showArchived) => {
     return data;
 }
 
-const getEntries = async (category, status, timeframe, notesText, showArchived, setEntryList, setResponse) => {
-    axios(
+const getEntries = async (category, status, timeframe, notesText, showArchived, setResponse) => {
+    const data = await axios(
         {
             method: 'get',
             url: 'API/GetEntries',
@@ -228,13 +228,14 @@ const getEntries = async (category, status, timeframe, notesText, showArchived, 
                 showArchived: showArchived
             }
         }
-    ).then((res) => {             
-            setEntryList(res.data);
-            setResponse("Success!");                
+    ).then((res) => {      
+        setResponse("Success!");      
+        return res;               
     }
     ).catch((err) => {
         setResponse(err.response.data);
     });
+    return data.data;
 }
 
 const getNegativeStatusAllergens = async (timeframe, showArchived) => {

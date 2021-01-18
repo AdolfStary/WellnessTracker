@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-const FilterOptions = (handleSubmit, setTimeframe, setCategory, setStatus, setNotesText, setShowArchived, timeframe, showArchived, notesText, listOfCategories, listOfStatuses) => {
+const FilterOptions = ({handleSubmit, setTimeframe, setCategory, setStatus, setNotesText, setShowArchived, timeframe, showArchived, notesText, listOfCategories, listOfStatuses}) => {
 
     return(
-        <form onSubmit={() => handleSubmit()}>
+        <form onSubmit={handleSubmit}>
 
             <div>
                 <label htmlFor='timeframe'>Time: </label>
@@ -24,8 +24,7 @@ const FilterOptions = (handleSubmit, setTimeframe, setCategory, setStatus, setNo
                 <select name='category' defaultValue='0' id='category' onChange={(e) => setCategory(e.target.value)}>
                     <option value="0">All</option>
                     {
-                       (listOfCategories !== undefined) ? listOfCategories.map( (categoryItem) => <option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</option>)
-                        : false
+                       listOfCategories && listOfCategories.map( (categoryItem) => <option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</option>)
                     }
                 </select>
             </div>
@@ -35,8 +34,7 @@ const FilterOptions = (handleSubmit, setTimeframe, setCategory, setStatus, setNo
                 <select name='status' defaultValue='0' id='status' onChange={(e) => setStatus(e.target.value)}>
                     <option value="0">All</option>
                     {
-                       (listOfStatuses !== undefined) ? listOfStatuses.map( (statusItem) => <option key={statusItem.id} value={statusItem.id}>{statusItem.name}</option>)
-                        : false
+                       listOfStatuses && listOfStatuses.map( (statusItem) => <option key={statusItem.id} value={statusItem.id}>{statusItem.name}</option>)
                     }
                 </select>
             </div>

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import '../css/entry-card.css';
+import { isDiabetic } from '../utility/operations';
 
 
 const EntryCard = ({entry, categories, statuses}) => {
@@ -49,12 +50,10 @@ const EntryCard = ({entry, categories, statuses}) => {
     }
 
     // Loads initial data
-    useEffect(() => {
-        initialData();
-    },[]);
+    useEffect(initialData,[]);
 
     return (        
-        <Link to="/EntryDetail" className="entry-card-link" onClick={() => assignClickedEntry()}>
+        <Link to="/EntryDetail" className="entry-card-link" onClick={assignClickedEntry}>
             <div className={`entry-card ${data.category}`}>
 
                 <div className={`card-head ${data.category} ${data.isPositive}`}>
@@ -65,30 +64,27 @@ const EntryCard = ({entry, categories, statuses}) => {
                 <div className="card-body">                
                     {
                         // If entry was a meal, show nutrition
-                        (data.category === "Meal") ? 
+                        (data.category === "Meal") &&
                             <div className="meal">
                                 <div className="fats">F: {entry.fats}g</div>
                                 <div className="carbs">C: {entry.carbs}g</div>
                                 <div className="protein">P: {entry.protein}g</div>                        
                             </div>
-                            : false
                     }
                     {
                         // If entry was a meal, show nutrition
-                        (data.category === "Exercise") ? 
+                        (data.category === "Exercise") && 
                             <div className="exercise">
                                 <div>{entry.exerciseLength !== 0 ? entry.exerciseLength+"m" : "N/A"}</div>                      
                             </div>
-                            : false
                     }
                     { 
                         // If person is a diabetic and they measured blood glucose or took insulin - show diabetic data
-                        (sessionStorage.getItem('isDiabetic') === "true" && (entry.bg !== 0 || entry.insulin !== 0)) ?
+                        (isDiabetic() && (entry.bg !== 0 || entry.insulin !== 0)) &&
                         <div className="diabetes">
                             <div className="bg">BG: {entry.bg}</div>
                             <div className="insulin">Dose: {entry.insulin}u</div>
                         </div>
-                        : false
                     }
                 </div>
             </div>

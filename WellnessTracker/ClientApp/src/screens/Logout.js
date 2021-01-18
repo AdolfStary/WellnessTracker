@@ -1,5 +1,5 @@
 
-const Login = () => {
+const Logout = () => {
 
     sessionStorage.clear();
     window.location = "/";
@@ -7,4 +7,4 @@ const Login = () => {
     return true;
 
 }
-export default Login;
+export default Logout;

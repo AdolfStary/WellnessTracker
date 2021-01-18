@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import Login from './components/Login';
-import Register from './components/Register';
-import Logout from './components/Logout';
-import MakeEntry from './components/MakeEntry';
-import EntryList from './components/EntryList';
-import EntryDetail from './components/EntryDetail';
-import Today from './components/Today';
-import Summary from './components/Summary';
+import { Home } from './screens/Home';
+import Login from './screens/Login';
+import Register from './screens/Register';
+import Logout from './screens/Logout';
+import MakeEntry from './screens/MakeEntry';
+import EntryList from './screens/EntryList';
+import EntryDetail from './screens/EntryDetail';
+import Today from './screens/Today';
+import Summary from './screens/Summary';
+import ProtectedRoute from './components/ProtectedRoute';
 import './css/custom.css'
 
 
@@ -21,11 +22,11 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={Home} />
             <Route path='/Login' component={Login} />
-            <Route path='/MakeEntry' component={MakeEntry} />
-            <Route path='/Notebook' component={EntryList} />
-            <Route path='/EntryDetail' component={EntryDetail} />
-            <Route path='/Today' component={Today} />
-            <Route path='/Summary' component={Summary} />
+            <ProtectedRoute path='/MakeEntry' component={MakeEntry} />
+            <ProtectedRoute path='/Notebook' component={EntryList} />
+            <ProtectedRoute path='/EntryDetail' component={EntryDetail} />
+            <ProtectedRoute path='/Today' component={Today} />
+            <ProtectedRoute path='/Summary' component={Summary} />
         <Route path='/Register' component={Register} />
         <Route path='/Logout' component={Logout} />
       </Layout>

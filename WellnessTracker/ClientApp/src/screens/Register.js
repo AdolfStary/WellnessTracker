@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
-import { PopUp } from './PopUp';
+import { PopUp } from '../components/PopUp';
 import {registerUser} from '../utility/api-calls';
 import '../css/register.css';
 
@@ -15,10 +15,9 @@ const Register = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         let userID = uuid();
-        let encodedPassword = username + password;
 
         if (confirmTerm){
-            registerUser(setResponse, userID, username, encodedPassword, isDiabetic);
+            registerUser(setResponse, userID, username, password, isDiabetic);
         }
         else setResponse("You need to read and understand the disclaimer before proceeding.");
     }
@@ -49,8 +48,5 @@ const Register = () => {
                 </div>
             </React.Fragment>
         );
-    
-
 }
-
 export default Register;

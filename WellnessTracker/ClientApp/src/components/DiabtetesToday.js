@@ -1,12 +1,13 @@
 import React from 'react';
 import {avgBG, avgInsulin, avgDailyInsulin} from '../utility/calculations';
+import {isDiabetic} from '../utility/operations';
 
 const DiabetesToday = ({entryList}) => {
 
     return(
         <React.Fragment>
         {   
-            (sessionStorage['isDiabetic'] === "true") ?
+            isDiabetic() &&
             <div className="today-diabetes">
                 <table>
                     <thead>
@@ -25,7 +26,6 @@ const DiabetesToday = ({entryList}) => {
                     </tbody>
                 </table>
             </div>
-            : false
         }   
         </React.Fragment>
     );

@@ -38,7 +38,7 @@ namespace WellnessTracker.Controllers
 
             using (EntryContext context = new EntryContext())
             {
-                password = GetHash(password);
+                password = GetHash(username+password);
                 User newUser = new User(id, username, password, isDiabetic);
                 context.Users.Add(newUser);
 
@@ -165,7 +165,7 @@ namespace WellnessTracker.Controllers
             }
 
             User user;
-            password = GetHash(password);
+            password = GetHash(username+password);
 
             using (EntryContext context = new EntryContext())
             {

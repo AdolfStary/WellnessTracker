@@ -9,7 +9,7 @@ const avgBG = (entryList) => {
             count++;
         }
     }
-    count > 0 ? result = (total / count).toFixed(2) : result = "N/A";
+    result = count > 0 ? (total / count).toFixed(2) : "N/A";
 
     return result;
 }
@@ -25,7 +25,7 @@ const avgInsulin = (listToday) => {
             count++;
         }
     }
-    count > 0 ? result = (total / count).toFixed(2)+"u" : result = "N/A";
+    result = count > 0 ? (total / count).toFixed(2)+"u" : "N/A";
 
     return result;
 }
@@ -220,73 +220,81 @@ const avgDailyProtein = (entryList) => {
     return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(0)+"g" : "N/A";
 }
 
-        // Calculates average daily meals per day, includes days where user skipped meals to give accurate data
-        const avgDailyMeals = (entryList) => {
-            let dailyTotal = 0;
-            let lastDate = "";
-            let dailyTotals = [];
-            let superTotal = 0;
+// Calculates average daily meals per day, includes days where user skipped meals to give accurate data
+const avgDailyMeals = (entryList) => {
+    let dailyTotal = 0;
+    let lastDate = "";
+    let dailyTotals = [];
+    let superTotal = 0;
+
     
-            
-            for(let item of entryList){
-                
-                if(lastDate === null) lastDate = new Date(item.time).getDate();
+    for(let item of entryList){
+        
+        if(lastDate === null) lastDate = new Date(item.time).getDate();
 
-                if (new Date(item.time).getDate() === lastDate){
-                    if (item.categoryID === -5)
-                        dailyTotal++;                   
-                }
-                else {
-                    dailyTotals.push(dailyTotal);                  
-                    lastDate = new Date(item.time).getDate();
-                    dailyTotal = 0;
-                    if (item.categoryID === -5)
-                        dailyTotal++; 
-                }
-                if (entryList.indexOf(item) === entryList.length-1)
-                    dailyTotals.push(dailyTotal);             
-            }
-
-            for(let total of dailyTotals){
-                superTotal += total;
-            }
-            return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(1) : "N/A";
+        if (new Date(item.time).getDate() === lastDate){
+            if (item.categoryID === -5)
+                dailyTotal++;                   
         }
-
-        // Calculates average daily workout time, in case of multiple workouts through day, excludes days that are not workout days. Working out daily is not beneficial so lower average due to resting days is counter productive
-        const avgDailyExercise = (entryList) => {
-            let dailyTotal = 0;
-            let lastDate = "";
-            let dailyTotals = [];
-            let superTotal = 0;
-
-            for(let item of entryList){
-                
-                if(item.exerciseLength !== 0){
-
-                    if(lastDate === null) lastDate = new Date(item.time).getDate();
-
-                    if (new Date(item.time).getDate() === lastDate){
-                        dailyTotal += item.exerciseLength;                   
-                    }
-                    else {
-                        dailyTotals.push(dailyTotal);                  
-                        lastDate = new Date(item.time).getDate();
-                        dailyTotal = 0;
-                        dailyTotal += item.exerciseLength;
-                    }
-                } 
-            }
-
-            if (dailyTotal !== 0){
-                dailyTotals.push(dailyTotal);
-            }
-
-            for(let total of dailyTotals){
-                superTotal += total;
-            }
-
-            return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(0)+"m" : "N/A";
+        else {
+            dailyTotals.push(dailyTotal);                  
+            lastDate = new Date(item.time).getDate();
+            dailyTotal = 0;
+            if (item.categoryID === -5)
+                dailyTotal++; 
         }
+        if (entryList.indexOf(item) === entryList.length-1)
+            dailyTotals.push(dailyTotal);             
+    }
 
-export {avgBG , avgInsulin, totalInsulin, totalFats, totalCarbs, totalProtein, totalMeals, totalExercise, avgDailyInsulin, avgDailyFats, avgDailyCarbs, avgDailyProtein, avgDailyMeals, avgDailyExercise};
+    for(let total of dailyTotals){
+        superTotal += total;
+    }
+    return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(1) : "N/A";
+}
+
+// Calculates average daily workout time, in case of multiple workouts through day, excludes days that are not workout days. 
+// Working out daily is not beneficial so lower average due to resting days is counter productive
+const avgDailyExercise = (entryList) => {
+    let dailyTotal = 0;
+    let lastDate = "";
+    let dailyTotals = [];
+    let superTotal = 0;
+
+    for(let item of entryList){
+        
+        if(item.exerciseLength !== 0){
+
+            if(lastDate === null) lastDate = new Date(item.time).getDate();
+
+            if (new Date(item.time).getDate() === lastDate){
+                dailyTotal += item.exerciseLength;                   
+            }
+            else {
+                dailyTotals.push(dailyTotal);                  
+                lastDate = new Date(item.time).getDate();
+                dailyTotal = 0;
+                dailyTotal += item.exerciseLength;
+            }
+        } 
+    }
+
+    if (dailyTotal !== 0){
+        dailyTotals.push(dailyTotal);
+    }
+
+    for(let total of dailyTotals){
+        superTotal += total;
+    }
+
+    return dailyTotals.length > 0 ? (superTotal/(dailyTotals.length-1)).toFixed(0)+"m" : "N/A";
+}
+
+export {avgBG, avgInsulin, 
+        totalInsulin, totalFats, 
+        totalCarbs, totalProtein, 
+        totalMeals, totalExercise, 
+        avgDailyInsulin, avgDailyFats,
+        avgDailyCarbs, avgDailyProtein, 
+        avgDailyMeals, avgDailyExercise
+};

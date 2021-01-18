@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {PopUp} from './PopUp';
+import {PopUp} from '../components/PopUp';
 import {validateUser} from '../utility/api-calls';
 import '../css/login.css';
 
@@ -13,15 +13,14 @@ const Login = () => {
     // Validates user
     const handleSubmit = (event) => {
         event.preventDefault();
-        let concatPassword = username + password;
 
-        validateUser(setUsername, setPassword, setResponse, username, concatPassword);        
+        validateUser(setUsername, setPassword, setResponse, username, password);        
     }
     
     return (
         <>
         <h2>Login</h2>
-        {response !== "" ? <PopUp message={response} /> : ""}
+        {response !== "" && <PopUp message={response} />}
         <div id="login">  
             <form onSubmit={handleSubmit}>
                 <label htmlFor='username'>Username: </label>

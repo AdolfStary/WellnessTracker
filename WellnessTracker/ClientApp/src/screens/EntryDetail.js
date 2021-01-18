@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {PopUp} from './PopUp';
+import {PopUp} from '../components/PopUp';
 import {changeNotes, loadAllergens, changeArchiveEntry} from '../utility/api-calls';
+import {isDiabetic} from '../utility/operations';
 import '../css/entry-detail.css';
 
 const EntryDetail = () => {
@@ -25,17 +26,11 @@ const EntryDetail = () => {
         setNotes(entry.notes);
         setIsArchived(Boolean(entry.isArchived));   
         loadAllergens(entry, setAllergens, setResponse);
-    },[]);
+    },[entry]);
 
 
-    // Checks if user is logged in
-    if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === "") {
-        return (
-            <p className="alert alert-danger">You do not have access to this page.</p>
-        );
-    }
     // Checks if entry data is present
-    else if (sessionStorage.getItem('entry') === null || sessionStorage.getItem('entry') === undefined)
+    if (!sessionStorage.getItem('entry') || sessionStorage.getItem('entry') === null)
     {
         return (
             <p className="alert alert-danger">Entry details are not available.</p>
@@ -59,15 +54,15 @@ const EntryDetail = () => {
             }).format(new Date(entry.time));
 
         return (
-            <>
+            <React.Fragment>
             <h2>Entry Details</h2>
 
-            {response !== "" ? <PopUp message={response} /> : ""}
+            {response !== "" && <PopUp message={response} />}
 
             <div className={`entry-details ${entryStatic.category}`}>
 
                 { /* Shows whether entry is archived */
-                    isArchived ? <p className="alert alert-danger right">Archived</p> : false 
+                    isArchived && <p className="alert alert-danger right">Archived</p>
                 }
 
                 <div className={`category ${entryStatic.category}`}> 
@@ -80,7 +75,7 @@ const EntryDetail = () => {
 
                 {
                     // If entry was a meal, show nutrition
-                    (entryStatic.category === "Meal") ? 
+                    (entryStatic.category === "Meal") && 
                         <div className="meal">
                             <h4>Nutrition</h4>
                             <div className="nutrition-details">
@@ -91,12 +86,11 @@ const EntryDetail = () => {
                                     allergens.length > 0 ? allergens.map( (item, index) => <div key={index} className="allergen-box"><p>{item}</p></div>) : false
                                 }
                             </div>                     
-                        </div> 
-                        : false
+                        </div>
                 }
                 { 
                     // If person is a diabetic and they measured blood glucose or took insulin - show diabetic data
-                    (sessionStorage.getItem('isDiabetic') === "true" && (entry.bg !== 0 || entry.insulin !== 0)) ?
+                    (isDiabetic() && (entry.bg !== 0 || entry.insulin !== 0)) &&
                     <div>
                         <h4>Diabetes</h4>
                         <div className="diabetes">                        
@@ -104,7 +98,6 @@ const EntryDetail = () => {
                             <div className="today-diabetes-avginsulin"><p>Insulin<br />{entry.insulin > 0 ? entry.insulin+"u" : "N/A"}</p></div>
                         </div>
                     </div>
-                    : false
                 }                
 
                 <div className="notes">
@@ -114,13 +107,13 @@ const EntryDetail = () => {
 
                 <div className="entry-details-buttons right">
                     {/* Button change dynamically based on options, choices and data */}
-                    { !textareaDisabled ? <input onClick={() => changeNotes(entry, notes, setTextareaDisabled, setResponse)} className="btn btn-success" value="Submit Changes" readOnly/>: false}
-                    { !textareaDisabled ? <input onClick={() => discardChange()} className="btn btn-danger" value="Discard Changes" readOnly/>: false}
-                    { textareaDisabled ? <input onClick={() => setTextareaDisabled(!textareaDisabled)} className="btn btn-primary" value="Edit Notes" readOnly />: false}
+                    { !textareaDisabled && <input onClick={() => changeNotes(entry, notes, setTextareaDisabled, setResponse)} className="btn btn-success" value="Submit Changes" readOnly/>}
+                    { !textareaDisabled && <input onClick={() => discardChange()} className="btn btn-danger" value="Discard Changes" readOnly/>}
+                    { textareaDisabled && <input onClick={() => setTextareaDisabled(!textareaDisabled)} className="btn btn-primary" value="Edit Notes" readOnly />}
                     <input onClick={() => changeArchiveEntry(entry, isArchived, setIsArchived, setResponse)} className="btn btn-warning" value={isArchived ? "Unarchive Entry" : "Archive Entry" } readOnly/> 
                 </div>  
             </div>
-            </>
+            </React.Fragment>
         );
     }
 }

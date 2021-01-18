@@ -18,4 +18,12 @@ const displaySickData = (sicknessData) => {
     );
 }
 
-export {displaySickData};
+const isDiabetic = () => {
+    return (sessionStorage.getItem('isDiabetic') === "true");
+}
+
+const isLoggedIn = () => {
+    return (sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== "");
+}
+
+export {displaySickData, isDiabetic, isLoggedIn};
